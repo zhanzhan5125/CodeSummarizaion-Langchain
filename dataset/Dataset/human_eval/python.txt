@@ -1,0 +1,1743 @@
+-----------------  idx: 0  -----------------
+Code:
+def slicify(slc, dim):
+    """
+    Force a slice to have defined start, stop, and step from a known dim.
+    Start and stop will always be positive. Step may be negative.
+
+    There is an exception where a negative step overflows the stop needs to have
+    the default value set to -1. This is the only case of a negative start/stop
+    value.
+
+    Parameters
+    ----------
+    slc : slice or int
+        The slice to modify, or int to convert to a slice
+
+    dim : tuple
+        Bound for slice
+    """
+    if isinstance(slc, slice):
+
+        # default limits
+        start = 0 if slc.start is None else slc.start
+        stop = dim if slc.stop is None else slc.stop
+        step = 1 if slc.step is None else slc.step
+        # account for negative indices
+        if start < 0: start += dim
+        if stop < 0: stop += dim
+        # account for over-flowing the bounds
+        if step > 0:
+            if start < 0: start = 0
+            if stop > dim: stop = dim
+        else:
+            if stop < 0: stop = -1
+            if start > dim: start = dim-1
+
+        return slice(start, stop, step)
+
+    elif isinstance(slc, int):
+        if slc < 0:
+            slc += dim
+        return slice(slc, slc+1, 1)
+
+    else:
+        raise ValueError("Type for slice %s not recongized" % type(slc))
+Summary 1: Normalize and adjust a slice object or integer index for a given dimension dim .
+Summary 2: Convert a slice or integer to a valid slice object based on the specified dimension .
+Summary 3: Convert a slice or an integer to a slice object, with the start and stop indices adjusted to be within the bounds of the dimension .
+Summary 4: Force a slice to have defined start stop and step from a known dim . Start and stop will always be positive . Step may be negative .
+Summary 5: Slice an array or tensor along a given dimension .
+
+-----------------  idx: 1  -----------------
+Code:
+def initialize_bars(self, sender=None, **kwargs):
+        """Calls the initializers of all bound navigation bars."""
+        for bar in self.bars.values():
+            for initializer in bar.initializers:
+                initializer(self)
+Summary 1: Initialize all the bars in the bars dictionary by calling the initializers for each bar .
+Summary 2: Initialize bars by executing their initializers with the given sender .
+Summary 3: Initialize bars .
+Summary 4: Call the initializers of all bars stored within the instance .
+Summary 5: Calls the initializers of all bound navigation bars .
+
+-----------------  idx: 2  -----------------
+Code:
+def APEValue(value, kind):
+    """APEv2 tag value factory.
+
+    Use this if you need to specify the value's type manually.  Binary
+    and text data are automatically detected by APEv2.__setitem__.
+    """
+
+    if kind in (TEXT, EXTERNAL):
+        if not isinstance(value, text_type):
+            # stricter with py3
+            if PY3:
+                raise TypeError("str only for text/external values")
+        else:
+            value = value.encode("utf-8")
+
+    if kind == TEXT:
+        return APETextValue(value, kind)
+    elif kind == BINARY:
+        return APEBinaryValue(value, kind)
+    elif kind == EXTERNAL:
+        return APEExtValue(value, kind)
+    else:
+        raise ValueError("kind must be TEXT, BINARY, or EXTERNAL")
+Summary 1: Convert the value to a valid APE value, based on the specified kind .
+Summary 2: Return the appropriate APE value object for the given kind, ensuring correct data type and encoding for text and external values .
+Summary 3: APE Value .
+Summary 4: APEv2 tag value factory .
+Summary 5: Create an APE value object based on the kind of value provided .
+
+-----------------  idx: 3  -----------------
+Code:
+def normalize(S, norm=np.inf, axis=0, threshold=None, fill=None):
+    '''Normalize an array along a chosen axis.
+
+    Given a norm (described below) and a target axis, the input
+    array is scaled so that
+
+        `norm(S, axis=axis) == 1`
+
+    For example, `axis=0` normalizes each column of a 2-d array
+    by aggregating over the rows (0-axis).
+    Similarly, `axis=1` normalizes each row of a 2-d array.
+
+    This function also supports thresholding small-norm slices:
+    any slice (i.e., row or column) with norm below a specified
+    `threshold` can be left un-normalized, set to all-zeros, or
+    filled with uniform non-zero values that normalize to 1.
+
+    Note: the semantics of this function differ from
+    `scipy.linalg.norm` in two ways: multi-dimensional arrays
+    are supported, but matrix-norms are not.
+
+
+    Parameters
+    ----------
+    S : np.ndarray
+        The matrix to normalize
+
+    norm : {np.inf, -np.inf, 0, float > 0, None}
+        - `np.inf`  : maximum absolute value
+        - `-np.inf` : mininum absolute value
+        - `0`    : number of non-zeros (the support)
+        - float  : corresponding l_p norm
+            See `scipy.linalg.norm` for details.
+        - None : no normalization is performed
+
+    axis : int [scalar]
+        Axis along which to compute the norm.
+
+    threshold : number > 0 [optional]
+        Only the columns (or rows) with norm at least `threshold` are
+        normalized.
+
+        By default, the threshold is determined from
+        the numerical precision of `S.dtype`.
+
+    fill : None or bool
+        If None, then columns (or rows) with norm below `threshold`
+        are left as is.
+
+        If False, then columns (rows) with norm below `threshold`
+        are set to 0.
+
+        If True, then columns (rows) with norm below `threshold`
+        are filled uniformly such that the corresponding norm is 1.
+
+        .. note:: `fill=True` is incompatible with `norm=0` because
+            no uniform vector exists with l0 "norm" equal to 1.
+
+    Returns
+    -------
+    S_norm : np.ndarray [shape=S.shape]
+        Normalized array
+
+    Raises
+    ------
+    ParameterError
+        If `norm` is not among the valid types defined above
+
+        If `S` is not finite
+
+        If `fill=True` and `norm=0`
+
+    See Also
+    --------
+    scipy.linalg.norm
+
+    Notes
+    -----
+    This function caches at level 40.
+
+    Examples
+    --------
+    >>> # Construct an example matrix
+    >>> S = np.vander(np.arange(-2.0, 2.0))
+    >>> S
+    array([[-8.,  4., -2.,  1.],
+           [-1.,  1., -1.,  1.],
+           [ 0.,  0.,  0.,  1.],
+           [ 1.,  1.,  1.,  1.]])
+    >>> # Max (l-infinity)-normalize the columns
+    >>> librosa.util.normalize(S)
+    array([[-1.   ,  1.   , -1.   ,  1.   ],
+           [-0.125,  0.25 , -0.5  ,  1.   ],
+           [ 0.   ,  0.   ,  0.   ,  1.   ],
+           [ 0.125,  0.25 ,  0.5  ,  1.   ]])
+    >>> # Max (l-infinity)-normalize the rows
+    >>> librosa.util.normalize(S, axis=1)
+    array([[-1.   ,  0.5  , -0.25 ,  0.125],
+           [-1.   ,  1.   , -1.   ,  1.   ],
+           [ 0.   ,  0.   ,  0.   ,  1.   ],
+           [ 1.   ,  1.   ,  1.   ,  1.   ]])
+    >>> # l1-normalize the columns
+    >>> librosa.util.normalize(S, norm=1)
+    array([[-0.8  ,  0.667, -0.5  ,  0.25 ],
+           [-0.1  ,  0.167, -0.25 ,  0.25 ],
+           [ 0.   ,  0.   ,  0.   ,  0.25 ],
+           [ 0.1  ,  0.167,  0.25 ,  0.25 ]])
+    >>> # l2-normalize the columns
+    >>> librosa.util.normalize(S, norm=2)
+    array([[-0.985,  0.943, -0.816,  0.5  ],
+           [-0.123,  0.236, -0.408,  0.5  ],
+           [ 0.   ,  0.   ,  0.   ,  0.5  ],
+           [ 0.123,  0.236,  0.408,  0.5  ]])
+
+    >>> # Thresholding and filling
+    >>> S[:, -1] = 1e-308
+    >>> S
+    array([[ -8.000e+000,   4.000e+000,  -2.000e+000,
+              1.000e-308],
+           [ -1.000e+000,   1.000e+000,  -1.000e+000,
+              1.000e-308],
+           [  0.000e+000,   0.000e+000,   0.000e+000,
+              1.000e-308],
+           [  1.000e+000,   1.000e+000,   1.000e+000,
+              1.000e-308]])
+
+    >>> # By default, small-norm columns are left untouched
+    >>> librosa.util.normalize(S)
+    array([[ -1.000e+000,   1.000e+000,  -1.000e+000,
+              1.000e-308],
+           [ -1.250e-001,   2.500e-001,  -5.000e-001,
+              1.000e-308],
+           [  0.000e+000,   0.000e+000,   0.000e+000,
+              1.000e-308],
+           [  1.250e-001,   2.500e-001,   5.000e-001,
+              1.000e-308]])
+    >>> # Small-norm columns can be zeroed out
+    >>> librosa.util.normalize(S, fill=False)
+    array([[-1.   ,  1.   , -1.   ,  0.   ],
+           [-0.125,  0.25 , -0.5  ,  0.   ],
+           [ 0.   ,  0.   ,  0.   ,  0.   ],
+           [ 0.125,  0.25 ,  0.5  ,  0.   ]])
+    >>> # Or set to constant with unit-norm
+    >>> librosa.util.normalize(S, fill=True)
+    array([[-1.   ,  1.   , -1.   ,  1.   ],
+           [-0.125,  0.25 , -0.5  ,  1.   ],
+           [ 0.   ,  0.   ,  0.   ,  1.   ],
+           [ 0.125,  0.25 ,  0.5  ,  1.   ]])
+    >>> # With an l1 norm instead of max-norm
+    >>> librosa.util.normalize(S, norm=1, fill=True)
+    array([[-0.8  ,  0.667, -0.5  ,  0.25 ],
+           [-0.1  ,  0.167, -0.25 ,  0.25 ],
+           [ 0.   ,  0.   ,  0.   ,  0.25 ],
+           [ 0.1  ,  0.167,  0.25 ,  0.25 ]])
+    '''
+
+    # Avoid div-by-zero
+    if threshold is None:
+        threshold = tiny(S)
+
+    elif threshold <= 0:
+        raise ParameterError('threshold={} must be strictly '
+                             'positive'.format(threshold))
+
+    if fill not in [None, False, True]:
+        raise ParameterError('fill={} must be None or boolean'.format(fill))
+
+    if not np.all(np.isfinite(S)):
+        raise ParameterError('Input must be finite')
+
+    # All norms only depend on magnitude, let's do that first
+    mag = np.abs(S).astype(np.float)
+
+    # For max/min norms, filling with 1 works
+    fill_norm = 1
+
+    if norm == np.inf:
+        length = np.max(mag, axis=axis, keepdims=True)
+
+    elif norm == -np.inf:
+        length = np.min(mag, axis=axis, keepdims=True)
+
+    elif norm == 0:
+        if fill is True:
+            raise ParameterError('Cannot normalize with norm=0 and fill=True')
+
+        length = np.sum(mag > 0, axis=axis, keepdims=True, dtype=mag.dtype)
+
+    elif np.issubdtype(type(norm), np.number) and norm > 0:
+        length = np.sum(mag**norm, axis=axis, keepdims=True)**(1./norm)
+
+        if axis is None:
+            fill_norm = mag.size**(-1./norm)
+        else:
+            fill_norm = mag.shape[axis]**(-1./norm)
+
+    elif norm is None:
+        return S
+
+    else:
+        raise ParameterError('Unsupported norm: {}'.format(repr(norm)))
+
+    # indices where norm is below the threshold
+    small_idx = length < threshold
+
+    Snorm = np.empty_like(S)
+    if fill is None:
+        # Leave small indices un-normalized
+        length[small_idx] = 1.0
+        Snorm[:] = S / length
+
+    elif fill:
+        # If we have a non-zero fill value, we locate those entries by
+        # doing a nan-divide.
+        # If S was finite, then length is finite (except for small positions)
+        length[small_idx] = np.nan
+        Snorm[:] = S / length
+        Snorm[np.isnan(Snorm)] = fill_norm
+    else:
+        # Set small values to zero by doing an inf-divide.
+        # This is safe (by IEEE-754) as long as S is finite.
+        length[small_idx] = np.inf
+        Snorm[:] = S / length
+
+    return Snorm
+Summary 1: Normalize an array along a chosen axis .
+Summary 2: Normalize an array S along a chosen axis with configurable thresholding and filling behavior for small norms .
+Summary 3: Normalize the input array S along the specified axis using the specified norm and threshold values, and optionally fill the small values with a designated fill value .
+Summary 4: Normalize the input matrix S by rescaling its elements to have a maximum absolute value of 1, or a specified norm .
+Summary 5: Normalize an array .
+
+-----------------  idx: 4  -----------------
+Code:
+def update_(self, conf_dict, conf_arg=True):
+        """Update values of configuration options with dict.
+
+        Args:
+            conf_dict (dict): dict of dict indexed with section and option
+                names.
+            conf_arg (bool): if True, only options that can be set in a config
+                file are updated.
+        """
+        for section, secdict in conf_dict.items():
+            self[section].update_(secdict, conf_arg)
+Summary 1: Update the configuration dictionary with the given configuration dictionary .
+Summary 2: Update the configuration with a dictionary of sections and options .
+Summary 3: Update values of configuration options with dict .
+Summary 4: Update configuration with values from a dictionary, recursively traversing through sections and subsections .
+Summary 5: Update the configuration sections with entries from a dictionary, recursively if `conf_arg` is True .
+
+-----------------  idx: 5  -----------------
+Code:
+def _execute_network_run(self, traj, network, network_dict, component_list,
+                             analyser_list, pre_run=False):
+        """Generic `execute_network_run` function, handles experimental runs as well as pre-runs.
+
+        See also :func:`~pypet.brian2.network.NetworkRunner.execute_network_run` and
+         :func:`~pypet.brian2.network.NetworkRunner.execute_network_pre_run`.
+
+        """
+
+        # Initially extract the `subrun_list`
+        subrun_list = self._extract_subruns(traj, pre_run=pre_run)
+
+        # counter for subruns
+        subrun_number = 0
+
+        # Execute all subruns in order
+        while len(subrun_list) > 0:
+
+            # Get the next subrun
+            current_subrun = subrun_list.pop(0)
+
+            # 1. Call `add` of all normal components
+            for component in component_list:
+                component.add_to_network(traj, network, current_subrun, subrun_list,
+                                         network_dict)
+
+            # 2. Call `add` of all analyser components
+            for analyser in analyser_list:
+                analyser.add_to_network(traj, network, current_subrun, subrun_list,
+                                        network_dict)
+
+            # 3. Call `add` of the network runner itself
+            self.add_to_network(traj, network, current_subrun, subrun_list,
+                                network_dict)
+
+            # 4. Run the network
+            self._logger.info('STARTING subrun `%s` (#%d) lasting %s.' %
+                             (current_subrun.v_name, subrun_number, str(current_subrun.f_get())))
+            network.run(duration=current_subrun.f_get(), report=self._report,
+                              report_period=self._report_period)
+
+            # 5. Call `analyse` of all analyser components
+            for analyser in analyser_list:
+                analyser.analyse(traj, network, current_subrun, subrun_list,
+                                 network_dict)
+
+            # 6. Call `remove` of the network runner itself
+            self.remove_from_network(traj, network, current_subrun, subrun_list,
+                                     network_dict)
+
+            # 7. Call `remove` for all analyser components
+            for analyser in analyser_list:
+                analyser.remove_from_network(traj, network, current_subrun, subrun_list,
+                                             network_dict)
+
+            # 8. Call `remove` for all normal components
+            for component in component_list:
+                component.remove_from_network(traj, network, current_subrun, subrun_list,
+                                              network_dict)
+
+
+            subrun_number += 1
+Summary 1: Execute a network run for subruns of a given trajectory, adding components and analysers to the network before running and removing them after each subrun .
+Summary 2: Generic execute_network_run function handles experimental runs as well as pre - runs .
+Summary 3: Execute a sequence of network activities based on trajectory subruns, including components and analysers addition, network run, and subsequent analysis and cleanup .
+Summary 4: Execute a simulation using a given network, trajectory, and analysis objects .
+Summary 5: Execute the network run for each subrun in the trajectory, adding and removing components and analysers as needed .
+
+-----------------  idx: 6  -----------------
+Code:
+def get_block_size(self, token, resolution=None):
+        """
+        Gets the block-size for a given token at a given resolution.
+
+        Arguments:
+            token (str): The token to inspect
+            resolution (int : None): The resolution at which to inspect data.
+                If none is specified, uses the minimum available.
+
+        Returns:
+            int[3]: The xyz blocksize.
+        """
+        cdims = self.get_metadata(token)['dataset']['cube_dimension']
+        if resolution is None:
+            resolution = min(cdims.keys())
+        return cdims[str(resolution)]
+Summary 1: Gets the block - size for a given token at a given resolution .
+Summary 2: Return the block size of the given token at the given resolution .
+Summary 3: Return the size of the block based on the resolution provided or the minimum resolution available .
+Summary 4: Retrieve block size for a given dataset token at the specified resolution .
+Summary 5: Get the block size of the dataset based on the provided resolution .
+
+-----------------  idx: 7  -----------------
+Code:
+def get_parent(self, path):
+        '''Get the parent entity of the entity pointed by the given path.
+
+        Args:
+            path (str): The path of the entity whose parent is needed
+
+        Returns:
+            A JSON object of the parent entity if found.
+
+        Raises:
+            StorageArgumentException: Invalid arguments
+            StorageForbiddenException: Server response code 403
+            StorageNotFoundException: Server response code 404
+            StorageException: other 400-600 error codes
+        '''
+
+        self.__validate_storage_path(path, projects_allowed=False)
+        path_steps = [step for step in path.split('/') if step]
+        del path_steps[-1]
+        parent_path = '/{0}'.format('/'.join(path_steps))
+        return self.api_client.get_entity_by_query(path=parent_path)
+Summary 1: Retrieve the parent entity given a storage path and validate it, excluding projects .
+Summary 2: Retrieve the parent entity of a given storage path from the API client .
+Summary 3: Return the parent entity of the given path by removing the last step and using the resulting path to query the API .
+Summary 4: Get the parent of a given path .
+Summary 5: Get the parent entity of the entity pointed by the given path .
+
+-----------------  idx: 8  -----------------
+Code:
+def load_plugins(dirs):
+    """Attempts to load plugins from a list of directories."""
+
+    dirs = [os.path.expanduser(d) for d in dirs]
+
+    for directory in dirs:
+        if os.path.isdir(directory):
+            streamlink.load_plugins(directory)
+        else:
+            log.warning("Plugin path {0} does not exist or is not "
+                        "a directory!", directory)
+Summary 1: Load plugins from the specified directories .
+Summary 2: Load Streamlink plugins from the given directories .
+Summary 3: Attempts to load plugins from a list of directories .
+Summary 4: Load plugins from specified directories and log a warning if the plugin path doesn't exist or isn't a directory .
+Summary 5: Load plugins from specified directories, logging a warning if a directory does not exist or is not a directory .
+
+-----------------  idx: 9  -----------------
+Code:
+def add_virtual_columns_rotation(self, x, y, xnew, ynew, angle_degrees, propagate_uncertainties=False):
+        """Rotation in 2d.
+
+        :param str x: Name/expression of x column
+        :param str y: idem for y
+        :param str xnew: name of transformed x column
+        :param str ynew:
+        :param float angle_degrees: rotation in degrees, anti clockwise
+        :return:
+        """
+        x = _ensure_string_from_expression(x)
+        y = _ensure_string_from_expression(y)
+        theta = np.radians(angle_degrees)
+        matrix = np.array([[np.cos(theta), -np.sin(theta)], [np.sin(theta), np.cos(theta)]])
+        m = matrix_name = x + "_" + y + "_rot"
+        for i in range(2):
+            for j in range(2):
+                self.set_variable(matrix_name + "_%d%d" % (i, j), matrix[i, j].item())
+        self[xnew] = self._expr("{m}_00 * {x} + {m}_01 * {y}".format(**locals()))
+        self[ynew] = self._expr("{m}_10 * {x} + {m}_11 * {y}".format(**locals()))
+        if propagate_uncertainties:
+            self.propagate_uncertainties([self[xnew], self[ynew]])
+Summary 1: Adds columns for rotated coordinates to a DataFrame .
+Summary 2: Rotation in 2d .
+Summary 3: Add virtual columns for rotation transformation using the given expressions and angle in degrees, optionally propagating uncertainties .
+Summary 4: Add virtual columns to the dataset by applying a rotation matrix to the existing columns .
+Summary 5: Add virtual columns for rotation of two columns .
+
+-----------------  idx: 10  -----------------
+Code:
+def history_previous(self, substring='', as_prefix=True):
+        """ If possible, set the input buffer to a previous history item.
+
+        Parameters:
+        -----------
+        substring : str, optional
+            If specified, search for an item with this substring.
+        as_prefix : bool, optional
+            If True, the substring must match at the beginning (default).
+
+        Returns:
+        --------
+        Whether the input buffer was changed.
+        """
+        index = self._history_index
+        replace = False
+        while index > 0:
+            index -= 1
+            history = self._get_edited_history(index)
+            if (as_prefix and history.startswith(substring)) \
+                or (not as_prefix and substring in history):
+                replace = True
+                break
+
+        if replace:
+            self._store_edits()
+            self._history_index = index
+            self.input_buffer = history
+
+        return replace
+Summary 1: Navigate to the previous entry in the command history that matches the given substring (using prefix match or substring search) and return True if replaced .
+Summary 2: Return True if the previous history item is replaced with the input buffer, False otherwise .
+Summary 3: Search backward in history for a command that matches the given substring and replace the input buffer with it if found .
+Summary 4: If possible set the input buffer to a previous history item .
+Summary 5: Return the previous command from the command history that matches the given substring, either as a prefix or as a partial match, and replace the current input buffer with the found command .
+
+-----------------  idx: 11  -----------------
+Code:
+def completely_parse_reader(parser: Parser[Input, Output], reader: Reader[Input]) -> Result[Output]:
+    """Consume reader and return Success only on complete consumption.
+
+    This is a helper function for ``parse`` methods, which return ``Success``
+    when the input is completely consumed and ``Failure`` with an appropriate
+    message otherwise.
+
+    Args:
+        parser: The parser doing the consuming
+        reader: The input being consumed
+
+    Returns:
+        A parsing ``Result``
+    """
+    result = (parser << eof).consume(reader)
+
+    if isinstance(result, Continue):
+        return Success(result.value)
+    else:
+        used = set()
+        unique_expected = []
+        for expected_lambda in result.expected:
+            expected = expected_lambda()
+            if expected not in used:
+                used.add(expected)
+                unique_expected.append(expected)
+
+        return Failure(result.farthest.expected_error(' or '.join(unique_expected)))
+Summary 1: Completely parse a reader using a parser .
+Summary 2: Parse the input using the given parser and return the result, or return a failure with an error message indicating the expected input .
+Summary 3: Parse the entire reader input using the parser and return success or a formatted failure .
+Summary 4: Completely parse the reader using the given parser and return the result as either a success or failure .
+Summary 5: Consume reader and return Success only on complete consumption .
+
+-----------------  idx: 12  -----------------
+Code:
+def check_file_output(filename, force):
+    """Checks if file already exists and ask the user if it should
+    be overwritten if it does."""
+
+    log.debug("Checking file output")
+
+    if os.path.isfile(filename) and not force:
+        if sys.stdin.isatty():
+            answer = console.ask("File {0} already exists! Overwrite it? [y/N] ",
+                                 filename)
+
+            if answer.lower() != "y":
+                sys.exit()
+        else:
+            log.error("File {0} already exists, use --force to overwrite it.".format(filename))
+            sys.exit()
+
+    return FileOutput(filename)
+Summary 1: Checks if a file exists and prompts for overwrite if force is not enabled; exits on denial or lack of tty .
+Summary 2: Check if the file exists and ask for permission to overwrite it if it does, and return a FileOutput object if it doesn't exist or if the user chooses to overwrite it .
+Summary 3: Check and handle file output; if the file already exists, prompt the user for confirmation or exit depending on the context and `force` parameter .
+Summary 4: Checks if file already exists and ask the user if it should be overwritten if it does .
+Summary 5: Check if the file output exists and if it does, ask the user if they want to overwrite it .
+
+-----------------  idx: 13  -----------------
+Code:
+def state_set(self, state, use_active_range=False):
+        """Sets the internal state of the df
+
+        Example:
+
+        >>> import vaex
+        >>> df = vaex.from_scalars(x=1, y=2)
+        >>> df
+          #    x    y        r
+          0    1    2  2.23607
+        >>> df['r'] = (df.x**2 + df.y**2)**0.5
+        >>> state = df.state_get()
+        >>> state
+        {'active_range': [0, 1],
+        'column_names': ['x', 'y', 'r'],
+        'description': None,
+        'descriptions': {},
+        'functions': {},
+        'renamed_columns': [],
+        'selections': {'__filter__': None},
+        'ucds': {},
+        'units': {},
+        'variables': {},
+        'virtual_columns': {'r': '(((x ** 2) + (y ** 2)) ** 0.5)'}}
+        >>> df2 = vaex.from_scalars(x=3, y=4)
+        >>> df2.state_set(state)  # now the virtual functions are 'copied'
+        >>> df2
+          #    x    y    r
+          0    3    4    5
+
+        :param state: dict as returned by :meth:`DataFrame.state_get`.
+        :param bool use_active_range: Whether to use the active range or not.
+        """
+        self.description = state['description']
+        if use_active_range:
+            self._index_start, self._index_end = state['active_range']
+        self._length_unfiltered = self._index_end - self._index_start
+        if 'renamed_columns' in state:
+            for old, new in state['renamed_columns']:
+                self._rename(old, new)
+        for name, value in state['functions'].items():
+            self.add_function(name, vaex.serialize.from_dict(value))
+        if 'column_names' in state:
+            # we clear all columns, and add them later on, since otherwise self[name] = ... will try
+            # to rename the columns (which is unsupported for remote dfs)
+            self.column_names = []
+            self.virtual_columns = collections.OrderedDict()
+            for name, value in state['virtual_columns'].items():
+                self[name] = self._expr(value)
+                # self._save_assign_expression(name)
+            self.column_names = state['column_names']
+        else:
+            # old behaviour
+            self.virtual_columns = collections.OrderedDict()
+            for name, value in state['virtual_columns'].items():
+                self[name] = self._expr(value)
+        self.variables = state['variables']
+        import astropy  # TODO: make this dep optional?
+        units = {key: astropy.units.Unit(value) for key, value in state["units"].items()}
+        self.units.update(units)
+        for name, selection_dict in state['selections'].items():
+            # TODO: make selection use the vaex.serialize framework
+            if selection_dict is None:
+                selection = None
+            else:
+                selection = selections.selection_from_dict(selection_dict)
+            self.set_selection(selection, name=name)
+Summary 1: Set the state of the DataFrame .
+Summary 2: This function sets the state of the current object by reading a dictionary containing the state information .
+Summary 3: Sets the internal state of the df
+Summary 4: Set the state of the object according to the provided state dictionary, including updating descriptions, active range, renamed columns, functions, virtual columns, variables, units, and selections .
+Summary 5: Set the current state of the object with options for active range, renaming columns, adding functions, and handling units and selections .
+
+-----------------  idx: 14  -----------------
+Code:
+def _find_player_url(response):
+    """
+    Finds embedded player url in HTTP response.
+
+    :param response: Response object.
+    :returns: Player url (str).
+    """
+    url = ''
+    matches = _player_re.search(response.text)
+    if matches:
+        tmp_url = matches.group(0).replace('&amp;', '&')
+        if 'hash' not in tmp_url:
+            # there's no hash in the URL, try to find it
+            matches = _hash_re.search(response.text)
+            if matches:
+                url = tmp_url + '&hash=' + matches.group(1)
+        else:
+            url = tmp_url
+
+    return 'http://ceskatelevize.cz/' + url
+Summary 1: Find player URL .
+Summary 2: Find the player URL in the response and return the complete URL by appending it to the base URL .
+Summary 3: Find the player URL from the response text by searching for the player ID and the hash value, and return the full URL .
+Summary 4: Retrieve and format the player URL from the response text .
+Summary 5: Finds embedded player url in HTTP response .
+
+-----------------  idx: 15  -----------------
+Code:
+def run_and_check(self, session, prepped_request, extra_options):
+        """
+        Grabs extra options like timeout and actually runs the request,
+        checking for the result
+
+        :param session: the session to be used to execute the request
+        :type session: requests.Session
+        :param prepped_request: the prepared request generated in run()
+        :type prepped_request: session.prepare_request
+        :param extra_options: additional options to be used when executing the request
+            i.e. {'check_response': False} to avoid checking raising exceptions on non 2XX
+            or 3XX status codes
+        :type extra_options: dict
+        """
+        extra_options = extra_options or {}
+
+        try:
+            response = session.send(
+                prepped_request,
+                stream=extra_options.get("stream", False),
+                verify=extra_options.get("verify", True),
+                proxies=extra_options.get("proxies", {}),
+                cert=extra_options.get("cert"),
+                timeout=extra_options.get("timeout"),
+                allow_redirects=extra_options.get("allow_redirects", True))
+
+            if extra_options.get('check_response', True):
+                self.check_response(response)
+            return response
+
+        except requests.exceptions.ConnectionError as ex:
+            self.log.warn(str(ex) + ' Tenacity will retry to execute the operation')
+            raise ex
+Summary 1: Send a prepared request with extra options and handle the response with a potential retry on ConnectionError .
+Summary 2: Run a request and check the response .
+Summary 3: Execute a request with specified session, prepped request, and extra options, checking the response if specified, and handling connection errors by logging a warning and raising the error .
+Summary 4: Retry the request with the specified options if a connection error occurs, and check the response if necessary .
+Summary 5: Grabs extra options like timeout and actually runs the request checking for the result
+
+-----------------  idx: 16  -----------------
+Code:
+async def get_player(self) -> Player:
+        """Get information about the users current playback.
+
+        Returns
+        -------
+        player : Player
+            A player object representing the current playback.
+        """
+        self._player = player = Player(self.__client, self, await self.http.current_player())
+        return player
+Summary 1: Get the player object associated with the current session .
+Summary 2: Return the player object by creating a new Player instance and assigning it to self._player .
+Summary 3: Asynchronously retrieve and return the current player object .
+Summary 4: Initialize and return a new `Player` object for the current user .
+Summary 5: Get information about the users current playback .
+
+-----------------  idx: 17  -----------------
+Code:
+def get_editor(filepath):
+		"""
+		Give preference to an XML_EDITOR or EDITOR defined in the
+		environment. Otherwise use notepad on Windows and edit on other
+		platforms.
+		"""
+		default_editor = ['edit', 'notepad'][sys.platform.startswith('win32')]
+		return os.environ.get(
+			'XML_EDITOR',
+			os.environ.get('EDITOR', default_editor),
+		)
+Summary 1: Retrieve the system's preferred editor for XML files, defaulting to 'edit' or 'notepad' based on the platform .
+Summary 2: Get the preferred editor for opening a file based on the system platform and environmental variables .
+Summary 3: Give preference to an XML_EDITOR or EDITOR defined in the environment . Otherwise use notepad on Windows and edit on other platforms .
+Summary 4: Get the system's default text editor to use with the xml module .
+Summary 5: Return the editor to use for the given filepath, based on the environment variables EDITOR and XML_EDITOR .
+
+-----------------  idx: 18  -----------------
+Code:
+def _not_reentrant(func):
+        """Decorator that prevents callbacks from calling into methods that are
+        not reentrant
+        """
+        def wrap(self, *args, **kws):
+            if self._callback_lock and self._callback_lock.in_callback:
+                m = "Connection %s cannot be invoked from a callback!" % func
+                raise RuntimeError(m)
+            return func(self, *args, **kws)
+        return wrap
+Summary 1: Wrapper function to check if a connection is being invoked from a callback, raising a RuntimeError if so .
+Summary 2: Raise a runtime error if the function is called while in a callback, preventing reentrancy .
+Summary 3: Decorator that prevents callbacks from calling into methods that are not reentrant
+Summary 4: Create a decorator that prevents a function from being called reentrantly during a callback .
+Summary 5: Prevent re-entrancy .
+
+-----------------  idx: 19  -----------------
+Code:
+def request_pin(self):
+        ''' Method to request a PIN from ecobee for authorization '''
+        url = 'https://api.ecobee.com/authorize'
+        params = {'response_type': 'ecobeePin',
+                  'client_id': self.api_key, 'scope': 'smartWrite'}
+        try:
+            request = requests.get(url, params=params)
+        except RequestException:
+            logger.warn("Error connecting to Ecobee.  Possible connectivity outage."
+                        "Could not request pin.")
+            return
+        self.authorization_code = request.json()['code']
+        self.pin = request.json()['ecobeePin']
+        logger.error('Please authorize your ecobee developer app with PIN code '
+              + self.pin + '\nGoto https://www.ecobee.com/consumerportal'
+              '/index.html, click\nMy Apps, Add application, Enter Pin'
+              ' and click Authorize.\nAfter authorizing, call request_'
+              'tokens() method.')
+Summary 1: Request a PIN code from the Ecobee API for authorization of the developer app .
+Summary 2: Obtain a PIN and authorization code from Ecobee for app authorization .
+Summary 3: Request a PIN code to authorize the Ecobee developer app .
+Summary 4: Request a PIN from Ecobee API .
+Summary 5: Method to request a PIN from ecobee for authorization
+
+-----------------  idx: 20  -----------------
+Code:
+def _validate_initial_unitary(self):
+        """Validate an initial unitary matrix"""
+        # If initial unitary isn't set we don't need to validate
+        if self._initial_unitary is None:
+            return
+        # Check unitary is correct length for number of qubits
+        shape = np.shape(self._initial_unitary)
+        required_shape = (2 ** self._number_of_qubits,
+                          2 ** self._number_of_qubits)
+        if shape != required_shape:
+            raise BasicAerError('initial unitary is incorrect shape: ' +
+                                '{} != 2 ** {}'.format(shape, required_shape))
+Summary 1: Validate an initial unitary matrix
+Summary 2: Validate the initial unitary matrix .
+Summary 3: Validate that the initial unitary has the correct square shape for the given number of qubits .
+Summary 4: Validate the shape of the initial unitary matrix based on the number of qubits .
+Summary 5: Validate the initial unitary matrix of the quantum circuit .
+
+-----------------  idx: 21  -----------------
+Code:
+def get_kernel_loop_nest(self):
+        """Return kernel loop nest including any preceding pragmas and following swaps."""
+        loop_nest = [s for s in self.kernel_ast.block_items
+                     if type(s) in [c_ast.For, c_ast.Pragma, c_ast.FuncCall]]
+        assert len(loop_nest) >= 1, "Found to few for statements in kernel"
+        return loop_nest
+Summary 1: Return kernel loop nest including any preceding pragmas and following swaps .
+Summary 2: Return a list of all the for statements, pragmas, and function calls in the kernel .
+Summary 3: Get the loop nest from the kernel AST, which includes for statements, pragmas, and function calls .
+Summary 4: Get kernel loop nest .
+Summary 5: Retrieve the loop nest structure consisting of For loops, Pragmas, and FuncCalls from the kernel's AST .
+
+-----------------  idx: 22  -----------------
+Code:
+def idxmax(self,skipna=True, axis=0):
+        """
+        Get the index of the max value in a column or row
+
+        :param bool skipna: If True (default), then NAs are ignored during the search. Otherwise presence
+            of NAs renders the entire result NA.
+        :param int axis: Direction of finding the max index. If 0 (default), then the max index is searched columnwise, and the
+            result is a frame with 1 row and number of columns as in the original frame. If 1, then the max index is searched
+            rowwise and the result is a frame with 1 column, and number of rows equal to the number of rows in the original frame.
+        :returns: either a list of max index values per-column or an H2OFrame containing max index values
+                  per-row from the original frame.
+        """
+        return H2OFrame._expr(expr=ExprNode("which.max", self, skipna, axis))
+Summary 1: Return the index of the maximum value in the H2OFrame, optionally skipping missing values and along a specific axis .
+Summary 2: Get the index of the max value in a column or row
+Summary 3: Return the index of the maximum value in the H2OFrame .
+Summary 4: Return the index of the maximum value along an axis .
+Summary 5: Return the index label of the maximum value along the specified axis, with an option to skip NA/null values .
+
+-----------------  idx: 23  -----------------
+Code:
+def del_files(self, source):
+    '''Delete files on S3'''
+    src_files = []
+    for obj in self.s3walk(source):
+      if not obj['is_dir']: # ignore directories
+        src_files.append(obj['name'])
+
+    pool = ThreadPool(ThreadUtil, self.opt)
+    pool.batch_delete(src_files)
+    pool.join()
+Summary 1: Delete files at the specified source using multi-threading .
+Summary 2: Delete files on S3
+Summary 3: Delete files in S3 bucket .
+Summary 4: Delete non-directory files from a given S3 source using a thread pool for batch deletion .
+Summary 5: Delete a list of files from S3 .
+
+-----------------  idx: 24  -----------------
+Code:
+def clear_api_path_map_cache(self):
+        """Clear out cache for api_path_map."""
+        self._api_path_cache = None
+        for api_provider in self.api_providers:
+            if six.get_method_self(
+                api_provider.clear_api_path_map_cache,
+            ) is not None:
+                api_provider.clear_api_path_map_cache()
+Summary 1: Clear the API path map cache and call the `clear_api_path_map_cache` method for each API provider if available .
+Summary 2: Clear the API path map cache in the current instance and all associated API providers .
+Summary 3: Clear the cache of the API path map for all API providers .
+Summary 4: Clear out cache for api_path_map .
+Summary 5: Clear the cache of the API path map .
+
+-----------------  idx: 25  -----------------
+Code:
+def tokens_required(service_list):
+    """
+    Ensure the user has the necessary tokens for the specified services
+    """
+    def decorator(func):
+        @wraps(func)
+        def inner(request, *args, **kwargs):
+            for service in service_list:
+                if service not in request.session["user_tokens"]:
+                    return redirect('denied')
+            return func(request, *args, **kwargs)
+        return inner
+    return decorator
+Summary 1: Decorate a function to check if the user has the required tokens for the services in the list .
+Summary 2: Check if the user has the required tokens to access the requested page .
+Summary 3: Ensure the user has the necessary tokens for the specified services
+Summary 4: Decorator that checks if the user has the required tokens for accessing a service before executing the function .
+Summary 5: Create a decorator that checks if a user has the required tokens for services before accessing a view .
+
+-----------------  idx: 26  -----------------
+Code:
+def glance(*arg):
+    """
+    Glance annotation for adding function to process glance notification.
+
+    if event_type include wildcard, will put {pattern: function} into process_wildcard dict
+    else will put {event_type: function} into process dict
+
+    :param arg: event_type of notification
+    """
+    check_event_type(Openstack.Glance, *arg)
+    event_type = arg[0]
+
+    def decorator(func):
+        if event_type.find("*") != -1:
+            event_type_pattern = pre_compile(event_type)
+            glance_customer_process_wildcard[event_type_pattern] = func
+        else:
+            glance_customer_process[event_type] = func
+        log.info("add function {0} to process event_type:{1}".format(func.__name__, event_type))
+
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            func(*args, **kwargs)
+
+        return wrapper
+
+    return decorator
+Summary 1: Glance decorator .
+Summary 2: Register a function to process events related to Openstack Glance, with the ability to handle wildcard event types .
+Summary 3: Decorate a function to handle events of a specific type in the Openstack.Glance service .
+Summary 4: Glance annotation for adding function to process glance notification .
+Summary 5: Register a function to handle specific OpenStack Glance events either by exact match or wildcard pattern .
+
+-----------------  idx: 27  -----------------
+Code:
+def user(self, user_name):
+        """Get the user data by URL"""
+
+        user = None
+
+        if user_name in self._users:
+            return self._users[user_name]
+
+        url_user = self.__get_url("~" + user_name)
+
+        logger.info("Getting info for %s" % (url_user))
+
+        try:
+            raw_user = self.__send_request(url_user)
+            user = raw_user
+        except requests.exceptions.HTTPError as e:
+            if e.response.status_code in [404, 410]:
+                logger.warning("Data is not available - %s", url_user)
+                user = '{}'
+            else:
+                raise e
+
+        self._users[user_name] = user
+
+        return user
+Summary 1: Get user info .
+Summary 2: Get the user data by URL
+Summary 3: Return the user object for the given user name, or None if the user is not found .
+Summary 4: Retrieve and cache user data by username, returning `None` for non-existent users .
+Summary 5: Retrieve user information by user name with caching mechanism .
+
+-----------------  idx: 28  -----------------
+Code:
+def pre_save(self, model_instance, add):
+        """Return field's value just before saving."""
+        file = super(VersatileImageField, self).pre_save(model_instance, add)
+        self.update_ppoi_field(model_instance)
+        return file
+Summary 1: Update the PPOI field of the model instance before saving .
+Summary 2: Update the ppoi field before saving the model instance .
+Summary 3: Execute actions before saving a VersatileImageField, including updating its PPOI (primary point of interest) field .
+Summary 4: Perform pre-save operations for a versatile image field on a model instance, such as updating the primary point of interest and returning the processed file .
+Summary 5: Return field s value just before saving .
+
+-----------------  idx: 29  -----------------
+Code:
+def set_style(self, style):
+        """ Sets the style to the specified Pygments style.
+        """
+        if isinstance(style, basestring):
+            style = get_style_by_name(style)
+        self._style = style
+        self._clear_caches()
+Summary 1: Set the style of an object and clear any related caches .
+Summary 2: Set the style of the widget .
+Summary 3: Set the style of the object to the specified style .
+Summary 4: Apply the specified style and clear related caches .
+Summary 5: Sets the style to the specified Pygments style .
+
+-----------------  idx: 30  -----------------
+Code:
+def _build_server_data():
+    """
+    Returns a dictionary containing information about the server environment.
+    """
+    # server environment
+    server_data = {
+        'host': socket.gethostname(),
+        'pid': os.getpid()
+    }
+
+    # argv does not always exist in embedded python environments
+    argv = getattr(sys, 'argv', None)
+    if argv:
+         server_data['argv'] = argv
+
+    for key in ['branch', 'root']:
+        if SETTINGS.get(key):
+            server_data[key] = SETTINGS[key]
+
+    return server_data
+Summary 1: Build a dictionary containing server data, including the hostname, PID, and any additional data specified in the SETTINGS dictionary .
+Summary 2: Build server data .
+Summary 3: Returns a dictionary containing information about the server environment .
+Summary 4: Construct a dictionary containing server-related data including hostname, process ID, command-line arguments, and specific settings .
+Summary 5: Build and return server data dictionary including host, process ID, command line arguments (if available), and custom settings (if provided) .
+
+-----------------  idx: 31  -----------------
+Code:
+def _set_channels(self):
+        """Sets the main channels for the pipeline
+
+        This method will parse de the :attr:`~Process.processes` attribute
+        and perform the following tasks for each process:
+
+            - Sets the input/output channels and main input forks and adds
+              them to the process's
+              :attr:`flowcraft.process.Process._context`
+              attribute (See
+              :func:`~NextflowGenerator.set_channels`).
+            - Automatically updates the main input channel of the first
+              process of each lane so that they fork from the user provide
+              parameters (See
+              :func:`~NextflowGenerator._update_raw_input`).
+            - Check for the presence of secondary channels and adds them to the
+              :attr:`~NextflowGenerator.secondary_channels` attribute.
+
+        Notes
+        -----
+        **On the secondary channel setup**: With this approach, there can only
+        be one secondary link start for each type of secondary link. For
+        instance, If there are two processes that start a secondary channel
+        for the ``SIDE_max_len`` channel, only the last one will be recorded,
+        and all receiving processes will get the channel from the latest
+        process. Secondary channels can only link if the source process if
+        downstream of the sink process in its "forking" path.
+        """
+
+        logger.debug("=====================")
+        logger.debug("Setting main channels")
+        logger.debug("=====================")
+
+        for i, p in enumerate(self.processes):
+
+            # Set main channels for the process
+            logger.debug("[{}] Setting main channels with pid: {}".format(
+                p.template, i))
+            p.set_channels(pid=i)
+
+            # If there is no parent lane, set the raw input channel from user
+            logger.debug("{} {} {}".format(p.parent_lane, p.input_type, p.template))
+            if not p.parent_lane and p.input_type:
+                self._update_raw_input(p)
+
+            self._update_extra_inputs(p)
+
+            self._update_secondary_channels(p)
+
+            logger.info(colored_print(
+                "\tChannels set for {} \u2713".format(p.template)))
+Summary 1: Set the main channels for each process in the list of processes .
+Summary 2: Set the main channels for each process .
+Summary 3: Sets the main channels for the pipeline
+Summary 4: Set up the main channels for each process and update their inputs if necessary .
+Summary 5: Set main channels for each process, updating raw input, extra inputs, and secondary channels if necessary .
+
+-----------------  idx: 32  -----------------
+Code:
+def get_relationship_info(tree, media, image_sizes):
+    """
+    There is a separate file holds the targets to links as well as the targets
+    for images. Return a dictionary based on the relationship id and the
+    target.
+    """
+    if tree is None:
+        return {}
+    result = {}
+    # Loop through each relationship.
+    for el in tree.iter():
+        el_id = el.get('Id')
+        if el_id is None:
+            continue
+        # Store the target in the result dict.
+        target = el.get('Target')
+        if any(
+                target.lower().endswith(ext) for
+                ext in IMAGE_EXTENSIONS_TO_SKIP):
+            continue
+        if target in media:
+            image_size = image_sizes.get(el_id)
+            target = convert_image(media[target], image_size)
+        # cgi will replace things like & < > with &amp; &lt; &gt;
+        result[el_id] = cgi.escape(target)
+
+    return result
+Summary 1: Get the relationship information from the tree, media, and image sizes .
+Summary 2: Create a dictionary mapping element IDs to escaped media targets, excluding specified image extensions .
+Summary 3: Get relationship information from a tree structure, filtering out specific image extensions and converting images if necessary .
+Summary 4: There is a separate file holds the targets to links as well as the targets for images . Return a dictionary based on the relationship id and the target .
+Summary 5: Get relationship info from tree and media .
+
+-----------------  idx: 33  -----------------
+Code:
+def _build_common_attributes(self, operation_policy_name=None):
+        '''
+         Build a list of common attributes that are shared across
+         symmetric as well as asymmetric objects
+        '''
+        common_attributes = []
+
+        if operation_policy_name:
+            common_attributes.append(
+                self.attribute_factory.create_attribute(
+                    enums.AttributeType.OPERATION_POLICY_NAME,
+                    operation_policy_name
+                )
+            )
+
+        return common_attributes
+Summary 1: Return a list of attributes that are common to all operations in the current policy .
+Summary 2: Build a list of common attributes that are shared across symmetric as well as asymmetric objects
+Summary 3: Construct a list of common attributes with optional operation policy name attribute .
+Summary 4: Build a list of common attributes with an optional operation policy name attribute .
+Summary 5: Build common attributes for the operation .
+
+-----------------  idx: 34  -----------------
+Code:
+def enable_gtk(self, app=None):
+        """Enable event loop integration with PyGTK.
+
+        Parameters
+        ----------
+        app : ignored
+           Ignored, it's only a placeholder to keep the call signature of all
+           gui activation methods consistent, which simplifies the logic of
+           supporting magics.
+
+        Notes
+        -----
+        This methods sets the PyOS_InputHook for PyGTK, which allows
+        the PyGTK to integrate with terminal based applications like
+        IPython.
+        """
+        import gtk
+        try:
+            gtk.set_interactive(True)
+            self._current_gui = GUI_GTK
+        except AttributeError:
+            # For older versions of gtk, use our own ctypes version
+            from IPython.lib.inputhookgtk import inputhook_gtk
+            self.set_inputhook(inputhook_gtk)
+            self._current_gui = GUI_GTK
+Summary 1: Enable event loop integration with PyGTK .
+Summary 2: Enable GTK as the current GUI framework with support for interactive mode and IPython integration .
+Summary 3: Enable GTK for the current session .
+Summary 4: Enable GTK integration within the current IPython session .
+Summary 5: Enable the GTK GUI in IPython .
+
+-----------------  idx: 35  -----------------
+Code:
+def compile_sympy_accesses(self, sources=True, destinations=True):
+        """
+        Return a dictionary of lists of sympy accesses, for each variable.
+
+        Use *source* and *destination* to filter output
+        """
+        sympy_accesses = defaultdict(list)
+        # Compile sympy accesses
+        for var_name in self.variables:
+            if sources:
+                for r in self.sources.get(var_name, []):
+                    if r is None:
+                        continue
+                    sympy_accesses[var_name].append(self.access_to_sympy(var_name, r))
+            if destinations:
+                for w in self.destinations.get(var_name, []):
+                    if w is None:
+                        continue
+                    sympy_accesses[var_name].append(self.access_to_sympy(var_name, w))
+
+        return sympy_accesses
+Summary 1: Compile sympy accesses .
+Summary 2: Compile a mapping of variable names to SymPy expressions representing their sources and destinations accesses if specified .
+Summary 3: Return a dictionary of lists of sympy accesses for each variable .
+Summary 4: Return a dictionary of symbolic accesses for each variable in the program, where the keys are the variable names and the values are lists of symbolic access expressions .
+Summary 5: Compile and return a dictionary of sympy accesses for each variable, including sources and/or destinations depending on the provided parameters .
+
+-----------------  idx: 36  -----------------
+Code:
+def get(self, worker_id):
+        ''' Return status report '''
+        code = 200
+
+        if worker_id == 'all':
+            report = {'workers': [{
+                'id': job,
+                'report': self._inspect_worker(job)}
+                for job in self.jobs]
+            }
+
+        elif worker_id in self.jobs:
+            report = {
+                'id': worker_id,
+                'report': self._inspect_worker(worker_id)
+            }
+
+        else:
+            report = {'error': 'job {} unknown'.format(worker_id)}
+            code = 404
+
+        return flask.jsonify(report), code
+Summary 1: Return a JSON response with the report of the specified worker, or an error message if the worker is not found .
+Summary 2: Return status report
+Summary 3: Get worker status .
+Summary 4: Retrieve and return status report of a specified worker or all workers as JSON, with appropriate HTTP code .
+Summary 5: Get a worker's report based on the provided worker id or return an error message and status code if the worker id is not found .
+
+-----------------  idx: 37  -----------------
+Code:
+def average(self, n=0):
+        """Average latest n values or all values"""
+        assert n >= 0
+        for key in self.val_history:
+            values = np.array(self.val_history[key][-n:])
+            nums = np.array(self.n_history[key][-n:])
+            avg = np.sum(values * nums) / np.sum(nums)
+            self.output[key] = avg
+        self.ready = True
+Summary 1: Get the average of the last n values in the history .
+Summary 2: Calculate and store the average values of tracked data from the specified number of historical data points .
+Summary 3: Calculate the average value of the last n items in the history and store the result in the output dictionary .
+Summary 4: Average latest n values or all values
+Summary 5: Calculate and store the weighted average of the tracked values over the last n entries .
+
+-----------------  idx: 38  -----------------
+Code:
+def get_table_location(self, database_name, table_name):
+        """
+        Get the physical location of the table
+
+        :param database_name: Name of hive database (schema) @table belongs to
+        :type database_name: str
+        :param table_name: Name of hive table
+        :type table_name: str
+        :return: str
+        """
+
+        table = self.get_table(database_name, table_name)
+
+        return table['StorageDescriptor']['Location']
+Summary 1: Retrieve storage location for a specified table within a database .
+Summary 2: Get the physical location of the table
+Summary 3: Return the location of a table given its database name and table name .
+Summary 4: Get the location of a table in HDFS .
+Summary 5: Return the location of the table in the database .
+
+-----------------  idx: 39  -----------------
+Code:
+def set_compiler_channels(self, channel_list, operator="mix"):
+        """General method for setting the input channels for the status process
+
+        Given a list of status channels that are gathered during the pipeline
+        construction, this method will automatically set the input channel
+        for the status process. This makes use of the ``mix`` channel operator
+        of nextflow for multiple channels::
+
+            STATUS_1.mix(STATUS_2,STATUS_3,...)
+
+        This will set the ``status_channels`` key for the ``_context``
+        attribute of the process.
+
+        Parameters
+        ----------
+        channel_list : list
+            List of strings with the final name of the status channels
+        operator : str
+            Specifies the operator used to join the compiler channels.
+            Available options are 'mix'and 'join'.
+        """
+
+        if not channel_list:
+            raise eh.ProcessError("At least one status channel must be "
+                                  "provided to include this process in the "
+                                  "pipeline")
+
+        if len(channel_list) == 1:
+            logger.debug("Setting only one status channel: {}".format(
+                channel_list[0]))
+            self._context = {"compile_channels": channel_list[0]}
+
+        else:
+
+            first_status = channel_list[0]
+
+            if operator == "mix":
+                lst = ",".join(channel_list[1:])
+
+                s = "{}.mix({})".format(first_status, lst)
+
+            elif operator == "join":
+
+                s = first_status
+                for ch in channel_list[1:]:
+                    s += ".join({})".format(ch)
+
+                s += ".map{ ot -> [ ot[0], ot[1..-1] ] }"
+
+            logger.debug("Status channel string: {}".format(s))
+
+            self._context = {"compile_channels": s}
+Summary 1: Set the compiler channels for the process .
+Summary 2: Set context for compiler channels with specified operation .
+Summary 3: Set the compiler channels based on the provided channel list and operator .
+Summary 4: General method for setting the input channels for the status process
+Summary 5: Set the compiler channels .
+
+-----------------  idx: 40  -----------------
+Code:
+def chain_check(cls, timestamp: int) -> bool:
+        """
+        Given a record timestamp, verify the chain integrity.
+
+        :param timestamp: UNIX time / POSIX time / Epoch time
+        :return: 'True' if the timestamp fits the chain. 'False' otherwise.
+        """
+
+        # Creation is messy.
+        # You want genius, you get madness; two sides of the same coin.
+        # ... I'm sure this can be cleaned up. However, let's test it first.
+
+        record = cls.get_record(timestamp)
+
+        if isinstance(record, NistBeaconValue) is False:
+            # Don't you dare try to play me
+            return False
+
+        prev_record = cls.get_previous(record.timestamp)
+        next_record = cls.get_next(record.timestamp)
+
+        if prev_record is None and next_record is None:
+            # Uh, how did you manage to do this?
+            # I'm not even mad, that's amazing.
+            return False
+
+        if (
+                isinstance(prev_record, NistBeaconValue) and
+                isinstance(next_record, NistBeaconValue)
+        ):
+            # Majority case, somewhere in the middle of the chain
+            # True if:
+            #   - All three records have proper signatures
+            #   - The requested record's previous output equals previous
+            #   - The next possible record's previous output equals the record
+            return (
+                record.valid_signature and
+                prev_record.valid_signature and
+                next_record.valid_signature and
+                record.previous_output_value == prev_record.output_value and
+                next_record.previous_output_value == record.output_value
+            )
+
+        if (
+                prev_record is None and
+                isinstance(next_record, NistBeaconValue)
+        ):
+            # Edge case, this was potentially the first record of all time
+            return (
+                record.valid_signature and
+                next_record.valid_signature and
+                cls._INIT_RECORD == record and
+                next_record.previous_output_value == record.output_value
+            )
+
+        if (
+                isinstance(prev_record, NistBeaconValue) and
+                next_record is None
+        ):
+            # Edge case, this was potentially the latest and greatest
+            return (
+                record.valid_signature and
+                prev_record.valid_signature and
+                record.previous_output_value == prev_record.output_value
+            )
+Summary 1: Given a record timestamp verify the chain integrity .
+Summary 2: Check if the chain of NIST beacon values is valid .
+Summary 3: Check if the given timestamp is a valid chain in the NIST beacon .
+Summary 4: Check the integrity and relationships of NistBeaconValue records in a chain given a timestamp .
+Summary 5: Checks the integrity of a record in a blockchain by validating signatures and ensuring continuity with adjacent records .
+
+-----------------  idx: 41  -----------------
+Code:
+def delete_lower(script, layer_num=None):
+    """ Delete all layers below the specified one.
+
+    Useful for MeshLab ver 2016.12, whcih will only output layer 0.
+    """
+    if layer_num is None:
+        layer_num = script.current_layer()
+    if layer_num != 0:
+        change(script, 0)
+    for i in range(layer_num):
+        delete(script, 0)
+    return None
+Summary 1: Delete all the layers below the current layer .
+Summary 2: Delete all layers below the specified one .
+Summary 3: Delete all lower layers in the current script .
+Summary 4: Delete all layers below the specified layer number or the current layer .
+Summary 5: Deletes layers below the specified 'layer_num' in a script, reordering to the base layer if needed .
+
+-----------------  idx: 42  -----------------
+Code:
+def get_operation_status(self, request_id):
+        '''
+        Returns the status of the specified operation. After calling an
+        asynchronous operation, you can call Get Operation Status to determine
+        whether the operation has succeeded, failed, or is still in progress.
+
+        request_id:
+            The request ID for the request you wish to track.
+        '''
+        _validate_not_none('request_id', request_id)
+        return self._perform_get(
+            '/' + self.subscription_id + '/operations/' + _str(request_id),
+            Operation)
+Summary 1: Returns the status of the specified operation . After calling an asynchronous operation you can call Get Operation Status to determine whether the operation has succeeded failed or is still in progress .
+Summary 2: Retrieve the status of a specific operation using its request ID within a subscription context .
+Summary 3: Retrieve the status of a specific operation based on the provided request ID .
+Summary 4: Get the status of an operation with the specified request ID .
+Summary 5: Get the status of an operation .
+
+-----------------  idx: 43  -----------------
+Code:
+def authorize(self, callback=None, state=None, **kwargs):
+        """
+        Returns a redirect response to the remote authorization URL with
+        the signed callback given.
+
+        :param callback: a redirect url for the callback
+        :param state: an optional value to embed in the OAuth request.
+                      Use this if you want to pass around application
+                      state (e.g. CSRF tokens).
+        :param kwargs: add optional key/value pairs to the query string
+        """
+        params = dict(self.request_token_params) or {}
+        params.update(**kwargs)
+
+        if self.request_token_url:
+            token = self.generate_request_token(callback)[0]
+            url = '%s?oauth_token=%s' % (
+                self.expand_url(self.authorize_url), url_quote(token)
+            )
+            if params:
+                url += '&' + url_encode(params)
+        else:
+            assert callback is not None, 'Callback is required for OAuth2'
+
+            client = self.make_client()
+
+            if 'scope' in params:
+                scope = params.pop('scope')
+            else:
+                scope = None
+
+            if isinstance(scope, str):
+                # oauthlib need unicode
+                scope = _encode(scope, self.encoding)
+
+            if 'state' in params:
+                if not state:
+                    state = params.pop('state')
+                else:
+                    # remove state in params
+                    params.pop('state')
+
+            if callable(state):
+                # state can be function for generate a random string
+                state = state()
+
+            session['%s_oauthredir' % self.name] = callback
+            url = client.prepare_request_uri(
+                self.expand_url(self.authorize_url),
+                redirect_uri=callback,
+                scope=scope,
+                state=state,
+                **params
+            )
+        return redirect(url)
+Summary 1: This function generates an authorization URL for the user to grant access to their account on the service .
+Summary 2: Initiate authorization process by redirecting to the provider's authorization URL with appropriate parameters .
+Summary 3: Returns a redirect response to the remote authorization URL with the signed callback given .
+Summary 4: Authorize the user to access protected resources on the server .
+Summary 5: Authorize and redirect to the specified URL for OAuth2 authentication .
+
+-----------------  idx: 44  -----------------
+Code:
+def get_variantid(variant_obj, family_id):
+    """Create a new variant id.
+
+    Args:
+        variant_obj(dict)
+        family_id(str)
+
+    Returns:
+        new_id(str): The new variant id
+    """
+    new_id = parse_document_id(
+        chrom=variant_obj['chromosome'],
+        pos=str(variant_obj['position']),
+        ref=variant_obj['reference'],
+        alt=variant_obj['alternative'],
+        variant_type=variant_obj['variant_type'],
+        case_id=family_id,
+    )
+    return new_id
+Summary 1: Return a new variant ID by parsing the variant object and family ID .
+Summary 2: Get a variant ID based on the variant object and the family ID .
+Summary 3: Generate a unique variant id based on the given variant object and family id .
+Summary 4: Create a new variant id .
+Summary 5: Generate a new variant identifier using the variant object's details and a family ID .
+
+-----------------  idx: 45  -----------------
+Code:
+def _run_module(self):
+        """Run module specified at the command-line."""
+        if self.module_to_run:
+            # Make sure that the module gets a proper sys.argv as if it were
+            # run using `python -m`.
+            save_argv = sys.argv
+            sys.argv = [sys.executable] + self.extra_args
+            try:
+                self.shell.safe_run_module(self.module_to_run,
+                                           self.shell.user_ns)
+            finally:
+                sys.argv = save_argv
+Summary 1: Execute a specified module with additional arguments and restore `sys.argv` afterwards .
+Summary 2: Run a specified module within the shell's namespace using the safe_run_module method .
+Summary 3: Run the specified module in the IPython shell .
+Summary 4: Run a module .
+Summary 5: Run module specified at the command - line .
+
+-----------------  idx: 46  -----------------
+Code:
+def message_user(user, message, level=constants.INFO):
+    """
+    Send a message to a particular user.
+
+    :param user: User instance
+    :param message: Message to show
+    :param level: Message level
+    """
+    # We store a list of messages in the cache so we can have multiple messages
+    # queued up for a user.
+    user_key = _user_key(user)
+    messages = cache.get(user_key) or []
+    messages.append((message, level))
+    cache.set(user_key, messages)
+Summary 1: Cache a message with a specified level for a user .
+Summary 2: Send a message to a particular user .
+Summary 3: Add a message for a specific user along with its level (default is `INFO`) .
+Summary 4: Add a message to the user's message cache .
+Summary 5: Save a message for a user in the cache .
+
+-----------------  idx: 47  -----------------
+Code:
+def _make_dynamic_magic(self,magic):
+        """Return a function `fun` that will execute `magic` on active frontend.
+
+        Parameters
+        ----------
+        magic : string
+            string that will be executed as is when the returned function is called
+
+        Returns
+        -------
+        fun : function
+            function with no parameters, when called will execute `magic` on the
+            current active frontend at call time
+
+        See Also
+        --------
+        populate_all_magic_menu : generate the "All Magics..." menu
+
+        Notes
+        -----
+        `fun` executes `magic` in active frontend at the moment it is triggered,
+        not the active frontend at the moment it was created.
+
+        This function is mostly used to create the "All Magics..." Menu at run time.
+        """
+        # need two level nested function to be sure to pass magic
+        # to active frontend **at run time**.
+        def inner_dynamic_magic():
+            self.active_frontend.execute(magic)
+        inner_dynamic_magic.__name__ = "dynamics_magic_s"
+        return inner_dynamic_magic
+Summary 1: Return a function that executes the given magic command using the active frontend .
+Summary 2: Return a function fun that will execute magic on active frontend .
+Summary 3: Create a dynamic magic function .
+Summary 4: Create a wrapper function that executes a dynamic magic command .
+Summary 5: Create and return a dynamic magic function named "dynamics_magic_s" that executes the provided magic code on the active frontend .
+
+-----------------  idx: 48  -----------------
+Code:
+def position(self):
+    """Gets the position of the text the ParseNode processed. If the ParseNode does not have its
+    own position, it looks to its first child for its position.
+
+    'Value Nodes' (terminals) must have their own position, otherwise this method will throw an
+    exception when it tries to get the position property of the string child.
+    """
+    pos = self._position
+    if pos is None and self.children:
+      ch1 = self.children[0]
+      if isinstance(ch1, ParseNode):
+        pos = ch1.position
+    return pos
+Summary 1: Return the position of a parse node or its first child if the node's position is not set .
+Summary 2: Return the position of the current node, or the position of the first child node if the current node has no position and has children .
+Summary 3: Get the position of the node .
+Summary 4: Return the position of the current node, falling back to the position of its first child if not set .
+Summary 5: Gets the position of the text the ParseNode processed . If the ParseNode does not have its own position it looks to its first child for its position .
+
+-----------------  idx: 49  -----------------
+Code:
+def makePlot(pdf=False, png=False):
+  """
+  Plot relative parallax errors as a function of distance for stars of a given spectral type.
+
+  Parameters
+  ----------
+
+  args - command line arguments
+  """
+  logdistancekpc = np.linspace(-1,np.log10(20.0),100)
+  sptVabsAndVmini=OrderedDict([('K0V',(5.58,0.87)), ('G5V',(4.78,0.74)), ('G0V',(4.24,0.67)),
+    ('F5V',(3.50,0.50)), ('F0V',(2.98,0.38)), ('RC',(0.8,1.0))])
+  lines={}
+
+  fig=plt.figure(figsize=(10,6.5))
+  currentAxis=plt.gca()
+
+  for spt in sptVabsAndVmini.keys():
+    vmag=sptVabsAndVmini[spt][0]+5.0*logdistancekpc+10.0
+    indices=(vmag>14) & (vmag<16)
+    gmag=vmag+gminvFromVmini(sptVabsAndVmini[spt][1])
+    parerrors=parallaxErrorSkyAvg(gmag,sptVabsAndVmini[spt][1])
+    relparerrors=parerrors*10**logdistancekpc/1000.0
+    plt.loglog(10**logdistancekpc, relparerrors,'--k',lw=1)
+    plt.loglog(10**logdistancekpc[indices], relparerrors[indices],'-',label=spt)
+  plt.xlim(0.1,20.0)
+  plt.ylim(0.001,0.5)
+  plt.text(0.9, 0.05,'Colours indicate $14<V<16$',
+     horizontalalignment='right',
+     verticalalignment='bottom',
+     transform = currentAxis.transAxes)
+  plt.legend(loc=2)
+  plt.xlabel('distance [kpc]')
+  plt.ylabel('$\\sigma_\\varpi/\\varpi$')
+  plt.grid(which='both')
+  
+  if (args['pdfOutput']):
+    plt.savefig('RelativeParallaxErrorsVsDist.pdf')
+  elif (args['pngOutput']):
+    plt.savefig('RelativeParallaxErrorsVsDist.png')
+  else:
+    plt.show()
+Summary 1: Generates a logarithmic plot of relative parallax errors vs .
+Summary 2: Create a plot showing the relative parallax errors versus distance in kiloparsecs .
+Summary 3: Plot relative parallax errors as a function of distance for stars of a given spectral type .
+Summary 4: Generate a plot .
+Summary 5: This function generates a plot of the relative parallax errors as a function of distance, with different colors for different spectral types .
+

@@ -1,0 +1,1083 @@
+-----------------  idx: 0  -----------------
+Code:
+static int stfsm_prepare_rwe_seqs_default(struct stfsm *fsm)
+{
+	uint32_t flags = fsm->info->flags;
+	int ret;
+
+	/* Configure 'READ' sequence */
+	ret = stfsm_search_prepare_rw_seq(fsm, &fsm->stfsm_seq_read,
+					  default_read_configs);
+	if (ret) {
+		dev_err(fsm->dev,
+			"failed to prep READ sequence with flags [0x%08x]\n",
+			flags);
+		return ret;
+	}
+
+	/* Configure 'WRITE' sequence */
+	ret = stfsm_search_prepare_rw_seq(fsm, &fsm->stfsm_seq_write,
+					  default_write_configs);
+	if (ret) {
+		dev_err(fsm->dev,
+			"failed to prep WRITE sequence with flags [0x%08x]\n",
+			flags);
+		return ret;
+	}
+
+	/* Configure 'ERASE_SECTOR' sequence */
+	stfsm_prepare_erasesec_seq(fsm, &stfsm_seq_erase_sector);
+
+	return 0;
+}
+Summary 1: Prepare a READ WRITE ERASE default sequences .
+Summary 2: prepares read, write, and erase sequences for the ST FSM (Flash State Machine) .
+Summary 3: This function prepares the read and write sequences for the stfsm state machine .
+Summary 4: Prepares the default read/write sequences for the ST FSM flash memory driver .
+Summary 5: Prepares the READ/WRITE/ERASE sequences for the FSM .
+
+-----------------  idx: 1  -----------------
+Code:
+static int skfp_close(struct net_device *dev)
+{
+	struct s_smc *smc = netdev_priv(dev);
+	skfddi_priv *bp = &smc->os;
+
+	CLI_FBI();
+	smt_reset_defaults(smc, 1);
+	card_stop(smc);
+	mac_drv_clear_tx_queue(smc);
+	mac_drv_clear_rx_queue(smc);
+
+	netif_stop_queue(dev);
+	/* Deregister (free) IRQ */
+	free_irq(dev->irq, dev);
+
+	skb_queue_purge(&bp->SendSkbQueue);
+	bp->QueueSkb = MAX_TX_QUEUE_LEN;
+
+	return 0;
+}				// skfp_close
+Summary 1: closes a network device, performs various cleanup tasks .
+Summary 2: stops the network interface by stopping the card, clearing the TX and RX queues, and freeing the IRQ .
+Summary 3: closes the socket interface of the device .
+Summary 4: shuts down the specified FDDI network interface .
+Summary 5: This routine closes the adapter and brings it to a safe state .
+
+-----------------  idx: 2  -----------------
+Code:
+void run_crash_ipi_callback(struct pt_regs *regs)
+{
+	if (crash_ipi_issued)
+		crash_nmi_callback(0, regs);
+}
+Summary 1: This function is called when a crash IPI is issued, and it calls the crash_nmi_callback function with the current register state .
+Summary 2: Executes the crash NMI callback if a crash IPI was issued .
+Summary 3: Runs the crash NMI callback if a crash IPI has been issued .
+Summary 4: Check if the crash dumping IPI got issued and if so call its callback directly .
+Summary 5: This function is called when a crash IPI is delivered to the CPU .
+
+-----------------  idx: 3  -----------------
+Code:
+static inline void copy_init_fpstate_to_fpregs(void)
+{
+	fpregs_lock();
+
+	if (use_xsave())
+		copy_kernel_to_xregs(&init_fpstate.xsave, -1);
+	else if (static_cpu_has(X86_FEATURE_FXSR))
+		copy_kernel_to_fxregs(&init_fpstate.fxsave);
+	else
+		copy_kernel_to_fregs(&init_fpstate.fsave);
+
+	if (boot_cpu_has(X86_FEATURE_OSPKE))
+		copy_init_pkru_to_fpregs();
+
+	fpregs_mark_activate();
+	fpregs_unlock();
+}
+Summary 1: copies the initial floating-point (FP) state to the floating-point registers .
+Summary 2: Clear FPU registers by setting them up from the init fpstate .
+Summary 3: Initializes the FPU (Floating Point Unit) register state with the default values from `init_fpstate` .
+Summary 4: copies the initial floating-point state to the floating-point registers .
+Summary 5: Copies the initial x87 FPU state to the current FPU state .
+
+-----------------  idx: 4  -----------------
+Code:
+static void udf_do_extend_final_block(struct inode *inode,
+				      struct extent_position *last_pos,
+				      struct kernel_long_ad *last_ext,
+				      uint32_t final_block_len)
+{
+	struct super_block *sb = inode->i_sb;
+	uint32_t added_bytes;
+
+	added_bytes = final_block_len -
+		      (last_ext->extLength & (sb->s_blocksize - 1));
+	last_ext->extLength += added_bytes;
+	UDF_I(inode)->i_lenExtents += added_bytes;
+
+	udf_write_aext(inode, last_pos, &last_ext->extLocation,
+			last_ext->extLength, 1);
+}
+Summary 1: extends the final block of a UDF filesystem .
+Summary 2: Extends the length of the final block of a file to a specified size within UDF filesystem .
+Summary 3: Extends the final block of an inode by adding the specified number of bytes, updating the inode's length and the extent table .
+Summary 4: extends the final block of an UDF file .
+Summary 5: Extend the final block of the file to final_block_len bytes .
+
+-----------------  idx: 5  -----------------
+Code:
+bool StrToMask6(IP *mask, char *str)
+{
+	// Validate arguments
+	if (mask == NULL || str == NULL)
+	{
+		return false;
+	}
+
+	if (str[0] == '/')
+	{
+		str++;
+	}
+
+	if (IsNum(str))
+	{
+		UINT n = ToInt(str);
+
+		if (n <= 128)
+		{
+			IntToSubnetMask6(mask, n);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else
+	{
+		if (StrToIP(mask, str) == false)
+		{
+			return false;
+		}
+		else
+		{
+			return IsIP6(mask);
+		}
+	}
+}
+Summary 1: Converts a string representation of an IPv6 subnet mask to an IP structure .
+Summary 2: Convert the string to an IPv6 mask .
+Summary 3: Converts a string representation of an IPv6 mask or prefix length to an IP structure and validates it .
+Summary 4: converts a string representation of an IPv6 subnet mask to an IP structure .
+Summary 5: Converts a string representation of an IPv6 address or a subnet mask to an IPv6 address or a subnet mask .
+
+-----------------  idx: 6  -----------------
+Code:
+void warn_msg(char *file, const char *function, int line, char *message, ...)
+{
+
+   va_list ap;
+   char warnmsg[ERROR_MSG_LEN + 1];
+
+
+   va_start(ap, message);
+   vsnprintf(warnmsg, ERROR_MSG_LEN, message, ap);
+   va_end(ap);
+
+   DEBUG_MSG("WARNING: [%s:%s:%d] %s \n", file, function, line, warnmsg);
+
+   fprintf(stdout, "WARNING: [%s:%s:%d]\n\n %s \n\n", file, function, line, warnmsg);
+
+}
+Summary 1: Prints a warning message to the console and a debug log .
+Summary 2: Logs a formatted warning message with the file name, function name, and line number info .
+Summary 3: print a warning message no exit .
+Summary 4: Prints a warning message to the console, including the file, function, line number, and the formatted message .
+Summary 5: prints a warning message with file, function, line number and a formatted message .
+
+-----------------  idx: 7  -----------------
+Code:
+static int via_reinit_one(struct pci_dev *pdev)
+{
+	struct ata_host *host = pci_get_drvdata(pdev);
+	int rc;
+
+	rc = ata_pci_device_do_resume(pdev);
+	if (rc)
+		return rc;
+
+	via_fixup(pdev, host->private_data);
+
+	ata_host_resume(host);
+	return 0;
+}
+Summary 1: reinit after resume .
+Summary 2: This function reinitializes one PCI device that has been suspended .
+Summary 3: Reinitializes the given PCI device and its associated ATA host after resuming from a low power state .
+Summary 4: Reinitialize a VIA ATA controller after a suspend .
+Summary 5: reinitializes a VIA host controller .
+
+-----------------  idx: 8  -----------------
+Code:
+static inline unsigned int pm_num_pages(unsigned int mem_size,
+					unsigned int pg_size)
+{
+	unsigned int n = mem_size / pg_size;
+
+	return n - n % 24;
+}
+Summary 1: Calculates the number of pages in a memory buffer .
+Summary 2: calculates the number of pages in a memory region, given the memory size and page size .
+Summary 3: calculates the number of pages for a given memory size and page size, rounding down to the nearest multiple of 24 .
+Summary 4: Calculates the number of pages of size 'pg_size' required for 'mem_size', aligned down to the nearest multiple of 24 .
+Summary 5: calculate the number of pages of the payload memory .
+
+-----------------  idx: 9  -----------------
+Code:
+static int bitmap_pos_to_ord(const unsigned long *buf, unsigned int pos, unsigned int nbits)
+{
+	if (pos >= nbits || !test_bit(pos, buf))
+		return -1;
+
+	return __bitmap_weight(buf, pos);
+}
+Summary 1: converts the position of a bit in a bitmap to its ordinal value .
+Summary 2: Converts a bit position in a bitmap to its ordinal representation, returning its index or -1 if not set or out of bounds .
+Summary 3: find ordinal of set bit at given position in bitmap .
+Summary 4: Converts a position in a bitmask to its rank in the bitmask .
+Summary 5: returns the ordinal position of the specified bit in the bitmap, or -1 if the bit is not set .
+
+-----------------  idx: 10  -----------------
+Code:
+mch_nodetype(char_u *name)
+{
+    if (STRICMP(name, "AUX") == 0
+	    || STRICMP(name, "CON") == 0
+	    || STRICMP(name, "CLOCK$") == 0
+	    || STRICMP(name, "NUL") == 0
+	    || STRICMP(name, "PRN") == 0
+	    || ((STRNICMP(name, "COM", 3) == 0
+		    || STRNICMP(name, "LPT", 3) == 0)
+		&& VIM_ISDIGIT(name[3])
+		&& name[4] == NUL))
+	return NODE_WRITABLE;
+    /* TODO: NODE_OTHER? */
+    return NODE_NORMAL;
+}
+Summary 1: checks if the given name is a valid node name for the current filesystem .
+Summary 2: Determines if a filename refers to a special file type such as a device or reserved name in Windows .
+Summary 3: Checks if the given file name is a special file or device, and returns a flag indicating whether it is writable .
+Summary 4: Check what name is NODE_NORMAL file or directory or does n t exist NODE_WRITABLE writable device socket fifo etc .
+Summary 5: determines the nodetype of a given name This function checks if the given name corresponds to a certain set of reserved names, and returns the appropriate node type .
+
+-----------------  idx: 11  -----------------
+Code:
+HAL_StatusTypeDef HAL_MDIOS_EnableEvents(MDIOS_HandleTypeDef *hmdios)
+{
+  /* Process Locked */
+  __HAL_LOCK(hmdios);
+
+  /* Enable MDIOS interrupts: Register Write, Register Read and Error ITs */
+  __HAL_MDIOS_ENABLE_IT(hmdios, (MDIOS_IT_WRITE | MDIOS_IT_READ | MDIOS_IT_ERROR));
+
+  /* Process Unlocked */
+  __HAL_UNLOCK(hmdios);
+
+  return HAL_OK;
+}
+Summary 1: enables the MDIOS events This function enables the MDIOS write, read, and error events by setting the corresponding bits in the MDIOS interrupt mask register .
+Summary 2: Enables the MDIO events on the specified MDIOS handle .
+Summary 3: Enables MDIOS events and returns the status .
+Summary 4: Enables write, read, and error interrupts for the MDIOS handle .
+Summary 5: Enables Events for MDIOS peripheral .
+
+-----------------  idx: 12  -----------------
+Code:
+static int lio_get_regs_len(struct net_device *dev)
+{
+	struct lio *lio = GET_LIO(dev);
+	struct octeon_device *oct = lio->oct_dev;
+
+	switch (oct->chip_id) {
+	case OCTEON_CN23XX_PF_VID:
+		return OCT_ETHTOOL_REGDUMP_LEN_23XX;
+	case OCTEON_CN23XX_VF_VID:
+		return OCT_ETHTOOL_REGDUMP_LEN_23XX_VF;
+	default:
+		return OCT_ETHTOOL_REGDUMP_LEN;
+	}
+}
+Summary 1: Return register dump len .
+Summary 2: returns the length of the register dump for the specified device .
+Summary 3: Determines and returns the appropriate register dump length based on the chip ID of the network device's associated Octeon device .
+Summary 4: Returns the length of the register dump for the given network device, based on the chip ID of the Octeon device associated with the device .
+Summary 5: Get the length of the register dump for the given device .
+
+-----------------  idx: 13  -----------------
+Code:
+static TCGv_i64 gen_mulu_i64_i32(TCGv_i32 a, TCGv_i32 b)
+{
+    TCGv_i32 lo = tcg_temp_new_i32();
+    TCGv_i32 hi = tcg_temp_new_i32();
+    TCGv_i64 ret;
+
+    tcg_gen_mulu2_i32(lo, hi, a, b);
+    tcg_temp_free_i32(a);
+    tcg_temp_free_i32(b);
+
+    ret = tcg_temp_new_i64();
+    tcg_gen_concat_i32_i64(ret, lo, hi);
+    tcg_temp_free_i32(lo);
+    tcg_temp_free_i32(hi);
+
+    return ret;
+}
+Summary 1: Generates the 64-bit result of an unsigned multiplication between two 32-bit integers .
+Summary 2: Generates a 64-bit integer value by multiplying two 32-bit integer values and concatenating the low and high 32-bit parts .
+Summary 3: generates the product of two 32-bit integers and returns the result as a 64-bit integer .
+Summary 4: 32x32 64 multiply .
+Summary 5: Generates a 64-bit product of two 32-bit values .
+
+-----------------  idx: 14  -----------------
+Code:
+static __le32 *rt2800usb_get_txwi(struct queue_entry *entry)
+{
+	if (entry->queue->qid == QID_BEACON)
+		return (__le32 *) (entry->skb->data);
+	else
+		return (__le32 *) (entry->skb->data + TXINFO_DESC_SIZE);
+}
+Summary 1: retrieves the TXWI (transmit wireless information) pointer for a given queue entry, adjusting for beacon frames .
+Summary 2: TX descriptor initialization .
+Summary 3: returns a pointer to the transmit Wi-Fi Information (TXWI) structure based on the queue ID of the given entry .
+Summary 4: Returns a pointer to the TXWI (Transmit Wireless Information) structure in the given queue entry, which is used to transmit data to the device .
+Summary 5: Get the TXWI from the skb data .
+
+-----------------  idx: 15  -----------------
+Code:
+int mp_imgfmt_select_best_list(int *dst, int num_dst, int src)
+{
+    int best = 0;
+    for (int n = 0; n < num_dst; n++)
+        best = best ? mp_imgfmt_select_best(best, dst[n], src) : dst[n];
+    return best;
+}
+Summary 1: selects the best image format from a list by comparing it with the source image format .
+Summary 2: Selects the best image format matching the source from a list of destination formats .
+Summary 3: Selects the best image format from a list of possible formats based on the given source format .
+Summary 4: selects the best image format from a list of formats .
+Summary 5: Same as mp_imgfmt_select_best but with a list of dst formats .
+
+-----------------  idx: 16  -----------------
+Code:
+static void spi_nor_init_params(struct spi_nor *nor)
+{
+	spi_nor_info_init_params(nor);
+
+	spi_nor_manufacturer_init_params(nor);
+
+	if ((nor->info->flags & (SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ)) &&
+	    !(nor->info->flags & SPI_NOR_SKIP_SFDP))
+		spi_nor_sfdp_init_params(nor);
+
+	spi_nor_post_sfdp_fixups(nor);
+
+	spi_nor_late_init_params(nor);
+}
+Summary 1: initializes the parameters for the SPI NOR flash device .
+Summary 2: Initializes the parameters of the SPI NOR flash device .
+Summary 3: Initializes the SPI NOR flash parameters based on the chip's capabilities and SFDP data, if available .
+Summary 4: initializes parameters for SPI NOR flash device including information, manufacturer, SFDP (Serial Flash Discoverable Parameters), and post-SFDP fixups .
+Summary 5: Initialize the flash s parameters and settings .
+
+-----------------  idx: 17  -----------------
+Code:
+static int snd_trident_sis_init(struct snd_trident *trident)
+{
+	int err;
+
+	if ((err = snd_trident_sis_reset(trident)) < 0)
+		return err;
+
+	snd_trident_stop_all_voices(trident);
+
+	/* initialize S/PDIF */
+	outl(trident->spdif_bits, TRID_REG(trident, SI_SPDIF_CS));
+
+	return 0;
+}
+Summary 1: initialize the Trident soundcard with the SIS chipset .
+Summary 2: initializes the Trident audio chip by resetting it and setting the SPDIF bits .
+Summary 3: initializes the SIS registers of a Trident sound card .
+Summary 4: Initializes the Trident sound card with SiS codec, resetting it and stopping all voices before setting SPDIF control .
+Summary 5: initialize sis7018 chip .
+
+-----------------  idx: 18  -----------------
+Code:
+void radeon_wb_fini(struct radeon_device *rdev)
+{
+	radeon_wb_disable(rdev);
+	if (rdev->wb.wb_obj) {
+		if (!radeon_bo_reserve(rdev->wb.wb_obj, false)) {
+			radeon_bo_kunmap(rdev->wb.wb_obj);
+			radeon_bo_unpin(rdev->wb.wb_obj);
+			radeon_bo_unreserve(rdev->wb.wb_obj);
+		}
+		radeon_bo_unref(&rdev->wb.wb_obj);
+		rdev->wb.wb = NULL;
+		rdev->wb.wb_obj = NULL;
+	}
+}
+Summary 1: finalizes the writeback (WB) structure in the Radeon device .
+Summary 2: Disable Writeback and free memory .
+Summary 3: frees the writeback buffer object and unmaps the memory associated with it .
+Summary 4: frees the writeback memory of the GPU .
+Summary 5: performs the cleanup and deallocation of Writeback Memory Buffer (WB) related resources for the specified Radeon device .
+
+-----------------  idx: 19  -----------------
+Code:
+uint8_t lv_led_get_bright(const lv_obj_t * led)
+{
+    LV_ASSERT_OBJ(led, LV_OBJX_NAME);
+
+    lv_led_ext_t * ext = lv_obj_get_ext_attr(led);
+    return ext->bright;
+}
+Summary 1: Retrieves the current brightness level of an LED object .
+Summary 2: returns the brightness value of the specified LED object .
+Summary 3: Returns the brightness of a LED object .
+Summary 4: Get the brightness of a LEd object .
+Summary 5: Get the brightness of an LED object .
+
+-----------------  idx: 20  -----------------
+Code:
+discard_stack_value(struct config_generic *gconf, config_var_value *val)
+{
+	switch (gconf->vartype)
+	{
+		case PGC_BOOL:
+		case PGC_INT:
+		case PGC_REAL:
+		case PGC_ENUM:
+			/* no need to do anything */
+			break;
+		case PGC_STRING:
+			set_string_field((struct config_string *) gconf,
+							 &(val->val.stringval),
+							 NULL);
+			break;
+	}
+	set_extra_field(gconf, &(val->extra), NULL);
+}
+Summary 1: Discards or resets the value of a configuration variable, including any additional fields associated with it .
+Summary 2: This function discards the value of a configuration variable, setting it to NULL or an empty string depending on its type .
+Summary 3: Discards the value of a stack variable .
+Summary 4: Support for discarding a no longer needed value in a stack entry .
+Summary 5: Discards a configuration value, releasing associated string memory if necessary .
+
+-----------------  idx: 21  -----------------
+Code:
+void OpenSSL_Lock(int mode, int n, const char *file, int line)
+{
+#if OPENSSL_VERSION_NUMBER < 0x10100000L || defined(LIBRESSL_VERSION_NUMBER)
+	LOCK *lock = ssl_lock_obj[n];
+
+	if (mode & CRYPTO_LOCK)
+	{
+		// Lock
+		Lock(lock);
+	}
+	else
+	{
+		// Unlock
+		Unlock(lock);
+	}
+#endif
+}
+Summary 1: Lock function for OpenSSL .
+Summary 2: provides a lock for OpenSSL functions, with different modes for locking or unlocking .
+Summary 3: Locks the OpenSSL library .
+Summary 4: locks a mutex in OpenSSL, used to protect shared resources .
+Summary 5: Manages the locking mechanism for OpenSSL operations based on version compatibility .
+
+-----------------  idx: 22  -----------------
+Code:
+void *NewUserCertAuthData(X *x)
+{
+	AUTHUSERCERT *a;
+
+	a = ZeroMalloc(sizeof(AUTHUSERCERT));
+	a->UserX = CloneX(x);
+
+	return a;
+}
+Summary 1: allocates a new AUTHUSERCERT structure and sets its UserX field to a copy of the input X structure .
+Summary 2: Creates a new AUTHUSERCERT structure .
+Summary 3: Create an authentication data for user certification .
+Summary 4: Initializes and returns a pointer to a new user certificate authentication data structure with a cloned certificate .
+Summary 5: creates and returns a new AUTHUSERCERT structure where the UserX field is a clone of the provided X structure .
+
+-----------------  idx: 23  -----------------
+Code:
+int get_packet_pattern(
+    unsigned char *packet,
+    int packet_size)
+{
+    int fill_value;
+    int i;
+
+    if (packet_size <= 0) {
+        return -1;
+    }
+
+    fill_value = packet[0];
+    for (i = 1; i < packet_size; i++) {
+        if (packet[i] != fill_value) {
+            return -1;
+        }
+    }
+
+    return fill_value;
+}
+Summary 1: This function checks if the contents of a packet are all the same value, and if so, returns that value .
+Summary 2: Determines if a packet is a constant pattern .
+Summary 3: Checks if the packet is filled with a single byte value and returns it, or -1 if not uniform .
+Summary 4: determine if all bytes in a packet have the same value, and returns that value if true .
+Summary 5: Check that all the bytes in the body of the packet have the same value .
+
+-----------------  idx: 24  -----------------
+Code:
+static void ivtvfb_restore(struct ivtv *itv)
+{
+	struct osd_info *oi = itv->osd_info;
+	int i;
+
+	ivtvfb_set_var(itv, &oi->fbvar_cur);
+	ivtvfb_blank(oi->blank_cur, &oi->ivtvfb_info);
+	for (i = 0; i < 256; i++) {
+		write_reg(i, 0x02a30);
+		write_reg(oi->palette_cur[i], 0x02a34);
+	}
+	write_reg(oi->pan_cur, 0x02a0c);
+}
+Summary 1: restores the framebuffer state and palette for an ivtv device .
+Summary 2: Restore hardware after firmware restart .
+Summary 3: Restores the original state of the ivtv framebuffer .
+Summary 4: restores the original framebuffer settings and palette of the IVTV device .
+Summary 5: restores the state of the ivtvfb by setting the variable, blanking the display, and writing register values .
+
+-----------------  idx: 25  -----------------
+Code:
+void lv_mbox_set_text(lv_obj_t * mbox, const char * txt)
+{
+    LV_ASSERT_OBJ(mbox, LV_OBJX_NAME);
+    LV_ASSERT_STR(txt);
+
+    lv_mbox_ext_t * ext = lv_obj_get_ext_attr(mbox);
+    lv_label_set_text(ext->text, txt);
+
+    mbox_realign(mbox);
+}
+Summary 1: Sets the text of a message box .
+Summary 2: sets the text of a message box object .
+Summary 3: Set the text of the message box .
+Summary 4: Sets the text of a message box and realigns its content .
+Summary 5: sets the text content of a message box widget .
+
+-----------------  idx: 26  -----------------
+Code:
+static bool should_drop_cmd(struct input_ctx *ictx, struct mp_cmd *cmd)
+{
+    struct cmd_queue *queue = &ictx->cmd_queue;
+    return queue_count_cmds(queue) >= ictx->opts->key_fifo_size;
+}
+Summary 1: drops commands if the queue is full .
+Summary 2: Determines if a command should be dropped based on the number of commands in the input context's command queue and the specified key FIFO size .
+Summary 3: Checks if a command should be dropped based on if the command queue has reached its size limit .
+Summary 4: Checks if the command queue size is greater than or equal to the maximum allowed size for the key fifo .
+Summary 5: could lead to situations where recovery would take too long .
+
+-----------------  idx: 27  -----------------
+Code:
+static irqreturn_t tsi721_bdma_msix(int irq, void *ptr)
+{
+	struct tsi721_bdma_chan *bdma_chan = ptr;
+
+	if (bdma_chan->active)
+		tasklet_hi_schedule(&bdma_chan->tasklet);
+	return IRQ_HANDLED;
+}
+Summary 1: interrupt service routine for the TSI721 BDMA controller .
+Summary 2: Schedules high-priority tasklet for active BDMA channel upon MSI-X interrupt .
+Summary 3: tsi721_omsg_msix MSI X interrupt handler for BDMA channels .
+Summary 4: Handles the MSI-X interrupt for the TSI721 BDMA channel by scheduling a high priority tasklet if the channel is active .
+Summary 5: Handles MSI-X interrupts for the TSI721 BDMA channel .
+
+-----------------  idx: 28  -----------------
+Code:
+dockerContLogReqsAdd(docker_cont_log_instances_t *pThis,
+		docker_cont_logs_inst_t *pContLogsReqInst)
+{
+	DEFiRet;
+	if (!pContLogsReqInst) {
+		return RS_RET_ERR;
+	}
+
+	uchar *keyName = (uchar*)strdup((char*)pContLogsReqInst->id);
+
+	if (keyName) {
+		docker_cont_logs_inst_t *pFind;
+		if (RS_RET_NOT_FOUND == dockerContLogReqsGet(pThis, &pFind, (void*)keyName)) {
+			if (!hashtable_insert(pThis->ht_container_log_insts, keyName, pContLogsReqInst)) {
+				ABORT_FINALIZE(RS_RET_ERR);
+			}
+			keyName = NULL;
+		}
+	}
+finalize_it:
+	free(keyName);
+	RETiRet;
+}
+Summary 1: Adds a Docker container log request instance to the log instances container .
+Summary 2: Adds a container log request to the list of requests for a given container .
+Summary 3: Adds a container log request instance to the container log request instances hash table .
+Summary 4: NOTE not thread safe .
+Summary 5: Adds a new container logs request instance to the Docker container logs requests management structure if it does not exist already .
+
+-----------------  idx: 29  -----------------
+Code:
+static void kvmppc_e500_recalc_shadow_pid(struct kvmppc_vcpu_e500 *vcpu_e500)
+{
+	preempt_disable();
+	vcpu_e500->vcpu.arch.shadow_pid = kvmppc_e500_get_sid(vcpu_e500,
+			get_cur_as(&vcpu_e500->vcpu),
+			get_cur_pid(&vcpu_e500->vcpu),
+			get_cur_pr(&vcpu_e500->vcpu), 1);
+	vcpu_e500->vcpu.arch.shadow_pid1 = kvmppc_e500_get_sid(vcpu_e500,
+			get_cur_as(&vcpu_e500->vcpu), 0,
+			get_cur_pr(&vcpu_e500->vcpu), 1);
+	preempt_enable();
+}
+Summary 1: Recalculates the shadow process ID for the e500 virtual CPU .
+Summary 2: Updates the shadow PID values in the KVM E500 VCPU structure based on current AS, PID, and PR settings .
+Summary 3: Recalculates the shadow PID and shadow PID1 values for the given vCPU .
+Summary 4: Map guest pid to shadow .
+Summary 5: Recalculates the shadow process ID for the given vCPU .
+
+-----------------  idx: 30  -----------------
+Code:
+ice_process_skb_fields(struct ice_ring *rx_ring,
+		       union ice_32b_rx_flex_desc *rx_desc,
+		       struct sk_buff *skb, u8 ptype)
+{
+	ice_rx_hash(rx_ring, rx_desc, skb, ptype);
+
+	/* modifies the skb - consumes the enet header */
+	skb->protocol = eth_type_trans(skb, rx_ring->netdev);
+
+	ice_rx_csum(rx_ring, skb, rx_desc, ptype);
+}
+Summary 1: processes the fields of a received packet in the ice driver by performing RX hash, setting the packet protocol, and performing RX checksum .
+Summary 2: Populate skb header fields from Rx descriptor .
+Summary 3: Processes the fields of an incoming packet .
+Summary 4: Processes the fields of the received skb, including the hash, protocol, and checksum .
+Summary 5: Processes packet fields for the received skb, including hashing, setting the protocol, and checksum offloading .
+
+-----------------  idx: 31  -----------------
+Code:
+static int rxrpc_vet_description_s(const char *desc)
+{
+	unsigned long num;
+	char *p;
+
+	num = simple_strtoul(desc, &p, 10);
+	if (*p != ':' || num > 65535)
+		return -EINVAL;
+	num = simple_strtoul(p + 1, &p, 10);
+	if (*p || num < 1 || num > 255)
+		return -EINVAL;
+	return 0;
+}
+Summary 1: Verifies that a string is a valid RXRPC service description .
+Summary 2: This function checks the format of a description string and returns an error if it is not in the expected format .
+Summary 3: Validates an RxRPC security descriptor, ensuring it meets the format of "port:securityIndex" .
+Summary 4: validates the description string for a certain protocol and returns an error if it does not meet the required format .
+Summary 5: Vet the description for an RxRPC server key .
+
+-----------------  idx: 32  -----------------
+Code:
+static const char *newport_startup(void)
+{
+	int i;
+
+	npregs->cset.config = NPORT_CFG_GD0;
+
+	if (newport_wait(npregs))
+		goto out_unmap;
+
+	npregs->set.xstarti = TESTVAL;
+	if (npregs->set._xstart.word != XSTI_TO_FXSTART(TESTVAL))
+		goto out_unmap;
+
+	for (i = 0; i < MAX_NR_CONSOLES; i++)
+		font_data[i] = FONT_DATA;
+
+	newport_reset();
+	newport_get_revisions();
+	newport_get_screensize();
+	newport_has_init = 1;
+
+	return "SGI Newport";
+
+out_unmap:
+	return NULL;
+}
+Summary 1: Ca n t be __init do_take_over_console may call it later .
+Summary 2: performs startup initialization for the Newport graphics driver .
+Summary 3: initializes the SGI Newport graphics card .
+Summary 4: Initializes the Newport graphics system and returns the device name if successful .
+Summary 5: Initializes the Newport graphics card and sets up the necessary data structures for further operations .
+
+-----------------  idx: 33  -----------------
+Code:
+static void print_res(const char *name, double val,
+		      const char *txt_unit, const char *txt_short, const char *txt_long)
+{
+	if (!name)
+		name = "main,";
+
+	if (!g->p.show_quiet)
+		printf(" %-30s %15.3f, %-15s %s\n", name, val, txt_unit, txt_short);
+	else
+		printf(" %14.3f %s\n", val, txt_long);
+}
+Summary 1: Prints resource usage statistics with the option for a more terse or verbose output based on the quiet flag .
+Summary 2: prints the resolution of the video .
+Summary 3: Prints a resource usage value with a label, a value, a unit, a short description, and a long description .
+Summary 4: Print a short or long result depending on the verbosity setting .
+Summary 5: prints the result with different formats based on the given arguments .
+
+-----------------  idx: 34  -----------------
+Code:
+int ocfs2_journal_wipe(struct ocfs2_journal *journal, int full)
+{
+	int status;
+
+	BUG_ON(!journal);
+
+	status = jbd2_journal_wipe(journal->j_journal, full);
+	if (status < 0) {
+		mlog_errno(status);
+		goto bail;
+	}
+
+	status = ocfs2_journal_toggle_dirty(journal->j_osb, 0, 0);
+	if (status < 0)
+		mlog_errno(status);
+
+bail:
+	return status;
+}
+Summary 1: full flag tells us whether we clear out all blocks or if we just mark the journal clean .
+Summary 2: wipes the OCFS2 journal, marking it as clean .
+Summary 3: Clears a journal, optionally wiping it fully, and updates its dirty state .
+Summary 4: This function wipes the journal by calling the jbd2_journal_wipe function and then toggles the dirty flag of the journal to 0 .
+Summary 5: Wipes the journal .
+
+-----------------  idx: 35  -----------------
+Code:
+SystemAttributeByName(const char *attname)
+{
+	int			j;
+
+	for (j = 0; j < (int) lengthof(SysAtt); j++)
+	{
+		const FormData_pg_attribute *att = SysAtt[j];
+
+		if (strcmp(NameStr(att->attname), attname) == 0)
+			return att;
+	}
+
+	return NULL;
+}
+Summary 1: finds a system attribute in PostgreSQL by its name .
+Summary 2: finds the system attribute with the specified name in the system attribute array .
+Summary 3: Retrieves system attribute details by matching the provided attribute name .
+Summary 4: Retrieves a system attribute by name .
+Summary 5: If the given name is a system attribute name return a Form_pg_attribute pointer for a prototype definition .
+
+-----------------  idx: 36  -----------------
+Code:
+void AppLayerParserStateSetFlag(AppLayerParserState *pstate, uint8_t flag)
+{
+    SCEnter();
+    pstate->flags |= flag;
+    SCReturn;
+}
+Summary 1: sets a specific flag in the application layer parser state .
+Summary 2: coccinelle AppLayerParserStateSetFlag 2 2 APP_LAYER_PARSER_ .
+Summary 3: sets a flag in the parser state This function sets a flag in the parser state, which can be used to indicate that a certain condition has been met .
+Summary 4: Sets a flag in the AppLayerParserState struct .
+Summary 5: sets a flag in the application layer parser state .
+
+-----------------  idx: 37  -----------------
+Code:
+static int kirkwood_cpuidle_probe(struct platform_device *pdev)
+{
+	ddr_operation_base = devm_platform_ioremap_resource(pdev, 0);
+	if (IS_ERR(ddr_operation_base))
+		return PTR_ERR(ddr_operation_base);
+
+	return cpuidle_register(&kirkwood_idle_driver, NULL);
+}
+Summary 1: Initializes and registers the Kirkwood CPU idle driver .
+Summary 2: Initialize CPU idle by registering the idle states .
+Summary 3: Initializes Kirkwood CPU idle driver by mapping the required resources and registering the CPU idle driver .
+Summary 4: Registers the Kirkwood CPU idle driver .
+Summary 5: This function probes the Kirkwood CPU idle driver and registers it with the CPU idle framework .
+
+-----------------  idx: 38  -----------------
+Code:
+static inline void check_ring_tx_db(struct adapter *adap, struct sge_txq *q)
+{
+#if USE_GTS
+	clear_bit(TXQ_LAST_PKT_DB, &q->flags);
+	if (test_and_set_bit(TXQ_RUNNING, &q->flags) == 0) {
+		set_bit(TXQ_LAST_PKT_DB, &q->flags);
+		t3_write_reg(adap, A_SG_KDOORBELL,
+			     F_SELEGRCNTX | V_EGRCNTX(q->cntxt_id));
+	}
+#else
+	wmb();			/* write descriptors before telling HW */
+	t3_write_reg(adap, A_SG_KDOORBELL,
+		     F_SELEGRCNTX | V_EGRCNTX(q->cntxt_id));
+#endif
+}
+Summary 1: check and potentially ring a Tx queue s doorbell .
+Summary 2: Updates the doorbell register for a given SGE queue .
+Summary 3: Notifies the adapter of new transmit descriptors added to the ring under the control of USE_GTS flag .
+Summary 4: This function checks the TX ring doorbell register and updates it if necessary, ensuring that the TX ring is properly configured for transmission .
+Summary 5: This function checks and updates the doorbell of a transmit queue in the adapter .
+
+-----------------  idx: 39  -----------------
+Code:
+static void freeset(struct parse *p, cset *cs) {
+	int i;
+	cset *top = &p->g->sets[p->g->ncsets];
+	size_t css = (size_t)p->g->csetsize;
+
+	for (i = 0; i < css; i++) {
+		CHsub (cs, i);
+	}
+	if (cs == top - 1) { /* recover only the easy case */
+		p->g->ncsets--;
+	}
+}
+Summary 1: Releases the allocated character set in the parser's group and adjusts the sets count if it's the last set in the group .
+Summary 2: free a now unused set .
+Summary 3: frees a character set allocated by set() function .
+Summary 4: Frees a specific character set .
+Summary 5: frees a set of characters from memory .
+
+-----------------  idx: 40  -----------------
+Code:
+lcp_input(int unit, u_char *p, int len)
+{
+  fsm *f = &lcp_fsm[unit];
+
+  fsm_input(f, p, len);
+}
+Summary 1: Handles input for the LCP (Link Control Protocol) layer .
+Summary 2: Processes an LCP packet by passing it to the finite state machine (FSM) for the given unit .
+Summary 3: Input LCP packet .
+Summary 4: LCP input function .
+Summary 5: calls the fsm_input function with the specified unit, pointer to the packet data, and length of the packet data .
+
+-----------------  idx: 41  -----------------
+Code:
+mp_err mp_from_sbin(mp_int *a, const uint8_t *buf, size_t size)
+{
+   mp_err err;
+
+   /* read magnitude */
+   if ((err = mp_from_ubin(a, buf + 1, size - 1u)) != MP_OKAY) {
+      return err;
+   }
+
+   /* first byte is 0 for positive, non-zero for negative */
+   a->sign = (buf[0] != (uint8_t)0) ? MP_NEG : MP_ZPOS;
+
+   return MP_OKAY;
+}
+Summary 1: Initializes a multi-precision integer from a signed binary buffer, setting the correct sign .
+Summary 2: Converts a signed binary value to a multiple precision integer .
+Summary 3: This function converts a big-endian byte array to a multiple precision integer .
+Summary 4: read signed bin big endian first byte is 0 positive or 1 negative .
+Summary 5: Converts a big-endian unsigned binary integer to an mp_int .
+
+-----------------  idx: 42  -----------------
+Code:
+void doubleClick(MMMouseButton button)
+{
+
+#if defined(IS_MACOSX)
+
+	/* Double click for Mac. */
+	const CGPoint currentPos = CGPointFromMMPoint(getMousePos());
+	const CGEventType mouseTypeDown = MMMouseToCGEventType(true, button);
+	const CGEventType mouseTypeUP = MMMouseToCGEventType(false, button);
+
+	CGEventRef event = CGEventCreateMouseEvent(NULL, mouseTypeDown, currentPos, kCGMouseButtonLeft);
+
+	/* Set event to double click. */
+	CGEventSetIntegerValueField(event, kCGMouseEventClickState, 2);
+
+	CGEventPost(kCGHIDEventTap, event);
+
+	CGEventSetType(event, mouseTypeUP);
+	CGEventPost(kCGHIDEventTap, event);
+
+	CFRelease(event);
+
+#else
+
+	/* Double click for everything else. */
+	clickMouse(button);
+	microsleep(200);
+	clickMouse(button);
+
+#endif
+}
+Summary 1: Simulates a double click on the left mouse button .
+Summary 2: Simulates a double-click event on the specified mouse button, taking into account the operating system .
+Summary 3: Simulates a double-click on the mouse .
+Summary 4: Emulates a double click action with the specified mouse button on macOS, or falls back to sequential single clicks on other systems .
+Summary 5: Special function for sending double clicks needed for Mac OS X .
+
+-----------------  idx: 43  -----------------
+Code:
+static inline void ipw_write_reg32(struct ipw_priv *a, u32 b, u32 c)
+{
+	IPW_DEBUG_IO("%s %d: write_indirect32(0x%08X, 0x%08X)\n", __FILE__,
+		     __LINE__, (u32) (b), (u32) (c));
+	_ipw_write_reg32(a, b, c);
+}
+Summary 1: 32 bit indirect write for SRAM reg above 4K with debug wrapper .
+Summary 2: Write a 32-bit value to an indirect register .
+Summary 3: Writes a 32-bit value `c` to the specified register `b` in device's IPW hardware .
+Summary 4: writes a 32-bit value to a register in the device This function writes a 32-bit value to a register in the device using the _ipw_write_reg32 function .
+Summary 5: Writes a 32-bit register value to the hardware device using an indirect method .
+
+-----------------  idx: 44  -----------------
+Code:
+static void add_ip(void *digit, u_int n)
+{
+   struct digit *buf = digit;
+   
+   buf->n++;
+   buf->values[buf->n - 1] = (u_char) n;
+}
+Summary 1: fill the digit structure with data .
+Summary 2: increments the value of the digit by 1 and sets the new value to n .
+Summary 3: Adds an IP address to a list of IP addresses .
+Summary 4: Adds an IP address digit to a buffer .
+Summary 5: Increments the count and adds an IP value to a digit buffer .
+
+-----------------  idx: 45  -----------------
+Code:
+int bladerf_open(struct bladerf **dev, const char *dev_id)
+{
+    struct bladerf_devinfo devinfo;
+    int status;
+
+    *dev = NULL;
+
+    /* Populate dev-info from string */
+    status = str2devinfo(dev_id, &devinfo);
+    if (!status) {
+        status = bladerf_open_with_devinfo(dev, &devinfo);
+    }
+
+    return status;
+}
+Summary 1: opens a connection to a BladeRF device specified by the provided device ID .
+Summary 2: Opens a bladeRF device based on the provided device identifier .
+Summary 3: Opens a BladerF device using the specified device identifier, and returns a pointer to the device handle .
+Summary 4: Opens a BladeRF device with the specified device ID .
+Summary 5: dev path becomes device specifier string osmosdr like .
+
+-----------------  idx: 46  -----------------
+Code:
+static u8 IN_TO_REG(unsigned val)
+{
+	unsigned nval = clamp_val(val, ASB100_IN_MIN, ASB100_IN_MAX);
+	return (nval + 8) / 16;
+}
+Summary 1: IN 1 1000 V 0V to 4 08V REG 16mV bit .
+Summary 2: Converts an input voltage value to a register value with clamping within defined min and max limits .
+Summary 3: Converts an input voltage value to a register value .
+Summary 4: converts a value from the range [ASB100_IN_MIN, ASB100_IN_MAX] to a value in the range [0, 255] by clamping the value to the range and then scaling it up by a factor of 16 and adding 8 .
+Summary 5: Converts an input value to the corresponding register value for the ASB100 power supply .
+
+-----------------  idx: 47  -----------------
+Code:
+static void kvm_setup_pv_ipi(void)
+{
+	apic->send_IPI_mask = kvm_send_ipi_mask;
+	apic->send_IPI_mask_allbutself = kvm_send_ipi_mask_allbutself;
+	pr_info("KVM setup pv IPIs\n");
+}
+Summary 1: sets up the APIC IPI functions for KVM, allowing the hypervisor to send interrupts to the virtual CPUs .
+Summary 2: Sets up inter-processor interrupts (IPIs) for paravirtualization in KVM .
+Summary 3: Sets up the kernel virtual machine's (KVM) processor virtualization (PV) inter-processor interrupt (IPI) handling .
+Summary 4: Set the IPI entry points .
+Summary 5: Initializes KVM paravirtualized inter-processor interrupt (IPI) handling .
+
+-----------------  idx: 48  -----------------
+Code:
+static int nodes_in_socket(int nr_cores)
+{
+    int nodes;
+
+    nodes = DIV_ROUND_UP(nr_cores, MAX_CORES_IN_NODE);
+
+   /* Hardware does not support config with 3 nodes, return 4 in that case */
+    return (nodes == 3) ? 4 : nodes;
+}
+Summary 1: Figure out the number of nodes required to build this config .
+Summary 2: returns the number of nodes in a socket based on the number of cores .
+Summary 3: Calculates and adjusts the number of nodes based on the number of cores per socket, rounding up and normalizing 3 to 4 .
+Summary 4: Calculates the number of nodes in a socket based on the number of cores, with a maximum of 4 nodes per socket .
+Summary 5: calculates the number of nodes in a system based on the number of cores .
+
+-----------------  idx: 49  -----------------
+Code:
+static int __init media_devnode_init(void)
+{
+	int ret;
+
+	pr_info("Linux media interface: v0.10\n");
+	ret = alloc_chrdev_region(&media_dev_t, 0, MEDIA_NUM_DEVICES,
+				  MEDIA_NAME);
+	if (ret < 0) {
+		pr_warn("unable to allocate major\n");
+		return ret;
+	}
+
+	ret = bus_register(&media_bus_type);
+	if (ret < 0) {
+		unregister_chrdev_region(media_dev_t, MEDIA_NUM_DEVICES);
+		pr_warn("bus_register failed\n");
+		return -EIO;
+	}
+
+	return 0;
+}
+Summary 1: Initialise media for linux .
+Summary 2: Initializes media device node, allocating character device region and registering media bus .
+Summary 3: initializes the media device node .
+Summary 4: initializes the Linux media interface and registers a character device region to enable media device node creation .
+Summary 5: initializes the media device node This function initializes the media device node by allocating a major number for the device, registering the bus type, and creating the device nodes .
+
