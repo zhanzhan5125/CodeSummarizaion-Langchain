@@ -263,7 +263,6 @@ mch_nodetype(char_u *name)
 		&& VIM_ISDIGIT(name[3])
 		&& name[4] == NUL))
 	return NODE_WRITABLE;
-    /* TODO: NODE_OTHER? */
     return NODE_NORMAL;
 }
 Summary 1: checks if the given name is a valid node name for the current filesystem .
