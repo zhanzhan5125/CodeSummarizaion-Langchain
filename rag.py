@@ -1,105 +1,117 @@
-import sys
-import chromadb
 import os
-import json
+from langchain_core.documents import Document
+from langchain_chroma import Chroma
 from langchain_openai import OpenAIEmbeddings
 from util.remove_comments import remove_comments_and_docstrings
+import json
 
 
-# os.environ["OPENAI_API_KEY"] = "your-api-key"  # 请替换为你的实际API密钥
-# os.environ["OPENAI_BASE_URL"] = "your-base-url"  # 请替换为你的实际API密钥
-
-
-# 对文本矢量化并存储在本地
-def create_db():
-    # 创建ChromaDB客户端
-    client = chromadb.PersistentClient(path="./database")
-
-    # 创建或获取名为"code_summary"的集合
-    collection = client.get_or_create_collection(name="code_summary")
-
-    # language = ['c', 'java', 'python']
-    language = ['c']
-    directory = "./dataset/Dataset"
-    # load data
-    for lang in language:
-        # data_file = directory + '/' + lang + '.jsonl'
-        data_file = directory + '/c.jsonl'
-        codes = []
-        comments = []
-        length = 0
-        with open(data_file, "r", encoding="utf-8") as f:
-            print("opening file ", data_file)
-            for line in f:
-                length += 1
-                line = line.strip()
-                js = json.loads(line)
-                if lang == 'c':
-                    codes.append(remove_comments_and_docstrings(source=js['function'], lang=lang))
-                    comment = js['summary']
-                    if comment.endswith('.'):
-                        comment = comment[:-1]
-                    comment = comment + ' .'
-                    comments.append(comment)
-                else:
-                    codes.append(remove_comments_and_docstrings(source=js['code'], lang=lang))
-                    comments.append(' '.join(js['docstring_tokens']))
-
-        embedding_function = OpenAIEmbeddings(
-            model="text-embedding-3-large",
-            api_key="sk-dK2wyH9nxA3Sf9BEVrRbvmEZyQjUX8wzXMgPCrPtwAgUZ2ux",
-            base_url="https://xiaoai.plus/v1"
-        )
-        code_embeddings = []
-        # embedding_file_path = os.path.join('./', f"embedding_{lang}.jsonl")  # 文件名可以根据索引生成
-        for idx, code in enumerate(codes):
-            print(f"code {idx} is embedding......")
-            embedding = embedding_function.embed_documents(code)
-            # embedding 是一个二维列表（比如 [embedding1]）
-            # with open(embedding_file_path, 'w') as f:
-            #     f.write(str(embedding))
-            code_embeddings.append(embedding[0])  # 这里使用 [0] 来获取一维嵌入
-            print("=======embedding DONE=========")
-        # summary_embeddings = [embedding_function.embed_documents(s) for s in comments]
-
-        # 添加数据到集合
-        collection.add(
-            documents=codes,
-            metadatas=[{"summary": s, "language": lang} for s in comments],
-            embeddings=code_embeddings,
-            ids=[str(i) for i in range(length)]
-        )
-        print(f"********* language {lang} saved,totally {length} ********")
-
-
-def query_n(code, lang, n):
-    # 查询与给定代码片段相似的摘要，并且只查找指定语言的代码
-    embedding_function = OpenAIEmbeddings(
+# ========================== 数据准备与数据库构建 ==========================
+def create_db_langchain():
+    """ 使用 LangChain 的 Chroma 集成构建数据库 """
+    # 初始化嵌入模型
+    embedding_model = OpenAIEmbeddings(
         model="text-embedding-3-large",
         api_key="sk-dK2wyH9nxA3Sf9BEVrRbvmEZyQjUX8wzXMgPCrPtwAgUZ2ux",
         base_url="https://xiaoai.plus/v1"
     )
 
-    query_code = code
-    query_embedding = embedding_function.embed_query(query_code)
+    # 加载数据并转换为 LangChain 的 Document 格式
+    documents = []
+    metadatas = []
 
-    # 创建或连接到已有的 Chroma 客户端
-    client = chromadb.PersistentClient(path="./database")
-    collection = client.get_or_create_collection(name="code_summary")
+    language = ['c', 'java', 'python']
+    # language = ['c']
+    directory = "./dataset/Dataset"
 
-    # 执行相似度搜索，并加上过滤条件，只查找与指定语言匹配的代码
-    results = collection.query(
-        query_embeddings=[query_embedding],
-        n_results=n,  # 返回最相似的 n 个结果
-        where={"language": lang}  # 过滤条件：只查询语言为指定 lang 的文档
+    for lang in language:
+        data_file = directory + '/' + lang + '.jsonl'
+        with open(data_file, "r", encoding="utf-8") as f:
+            print(f"Loading data from {data_file}")
+            for line in f:
+                js = json.loads(line.strip())
+
+                # 预处理代码（移除注释）
+                raw_code = js['function'] if lang == 'c' else js['code']
+                processed_code = remove_comments_and_docstrings(source=raw_code, lang=lang)
+
+                # 处理注释
+                comment = js['summary'] if lang == 'c' else ' '.join(js['docstring_tokens'])
+                if lang == 'c' and comment.endswith('.'):
+                    comment = comment[:-1] + ' .'  # 保持你的原始处理逻辑
+
+                # 构建 LangChain Document 对象
+                doc = Document(
+                    page_content=processed_code,  # 代码作为主要内容
+                    metadata={
+                        "summary": comment,
+                        "language": lang
+                    }
+                )
+                documents.append(doc)
+
+    # 使用 LangChain 的 Chroma 集成自动处理嵌入和存储
+    vector_db = Chroma.from_documents(
+        documents=documents,
+        embedding=embedding_model,
+        persist_directory="./database",  # 指定持久化目录
+        collection_name="code_summary"
     )
-    # 提取并整理为所需的格式
-    similar_samples = []
-    # 遍历每一组 documents 和对应的 metadata
-    for doc_list, metadata_list in zip(results['documents'], results['metadatas']):
-        for doc, metadata in zip(doc_list, metadata_list):
-            code = doc
-            comment = metadata.get('summary', '')
-            similar_samples.append({"code": code, "comment": comment})
+    print("Database created with LangChain integration!")
 
-    return similar_samples
+
+# ========================== 查询模块 ==========================
+class CodeRetriever:
+    def __init__(self, k):
+        # 初始化数据库连接
+        self.embedding_model = OpenAIEmbeddings(
+            model="text-embedding-3-large",
+            api_key="sk-dK2wyH9nxA3Sf9BEVrRbvmEZyQjUX8wzXMgPCrPtwAgUZ2ux",
+            base_url="https://xiaoai.plus/v1"
+        )
+
+        self.vector_db = Chroma(
+            persist_directory="./database",
+            embedding_function=self.embedding_model,
+            collection_name="code_summary"
+        )
+
+        # 配置检索器（带过滤条件）
+        self.retriever = self.vector_db.as_retriever(
+            search_kwargs={
+                "k": k,
+                "filter": {"language": "c"}  # 示例默认过滤条件
+            }
+        )
+
+    def query_samples(self, code: str, lang: str = "c", n: int = 3) -> list[dict]:
+        # 动态更新过滤条件
+        self.retriever.search_kwargs["filter"]["language"] = lang
+        self.retriever.search_kwargs["k"] = n
+
+        # 执行检索
+        docs = self.retriever.invoke(code)
+
+        print(docs)
+
+        # 格式化为统一输出
+        return [
+            {
+                "code": doc.page_content,
+                "comment": doc.metadata["summary"]
+            } for doc in docs
+        ]
+
+
+# ========================== 使用示例 ==========================
+if __name__ == "__main__":
+    # 重建数据库（只需运行一次）
+    # create_db_langchain()
+
+    # 初始化检索器
+    retriever = CodeRetriever(k=3)
+
+    # 测试查询
+    test_code = "def network_up"
+    results = retriever.query_samples(test_code, lang="python", n=2)
+    print("Retrieved samples:", results)
