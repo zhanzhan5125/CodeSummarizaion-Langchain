@@ -1,117 +1,145 @@
-import os
 from langchain_core.documents import Document
 from langchain_chroma import Chroma
 from langchain_openai import OpenAIEmbeddings
-from util.remove_comments import remove_comments_and_docstrings
+from langchain_community.retrievers import BM25Retriever
 import json
 
 
 # ========================== 数据准备与数据库构建 ==========================
-def create_db_langchain():
+def create_db_langchain(language):
     """ 使用 LangChain 的 Chroma 集成构建数据库 """
     # 初始化嵌入模型
     embedding_model = OpenAIEmbeddings(
         model="text-embedding-3-large",
-        api_key="sk-dK2wyH9nxA3Sf9BEVrRbvmEZyQjUX8wzXMgPCrPtwAgUZ2ux",
+        api_key="sk-UFaswAeaNrZTadFgf3rTOWg0veOmWZ5T180CPLTILwjvgnXV",
         base_url="https://xiaoai.plus/v1"
     )
-
-    # 加载数据并转换为 LangChain 的 Document 格式
-    documents = []
-    metadatas = []
-
-    language = ['c', 'java', 'python']
-    # language = ['c']
-    directory = "./dataset/Dataset"
-
-    for lang in language:
-        data_file = directory + '/' + lang + '.jsonl'
-        with open(data_file, "r", encoding="utf-8") as f:
-            print(f"Loading data from {data_file}")
-            for line in f:
-                js = json.loads(line.strip())
-
-                # 预处理代码（移除注释）
-                raw_code = js['function'] if lang == 'c' else js['code']
-                processed_code = remove_comments_and_docstrings(source=raw_code, lang=lang)
-
-                # 处理注释
-                comment = js['summary'] if lang == 'c' else ' '.join(js['docstring_tokens'])
-                if lang == 'c' and comment.endswith('.'):
-                    comment = comment[:-1] + ' .'  # 保持你的原始处理逻辑
-
-                # 构建 LangChain Document 对象
-                doc = Document(
-                    page_content=processed_code,  # 代码作为主要内容
-                    metadata={
-                        "summary": comment,
-                        "language": lang
-                    }
-                )
-                documents.append(doc)
-
     # 使用 LangChain 的 Chroma 集成自动处理嵌入和存储
-    vector_db = Chroma.from_documents(
-        documents=documents,
-        embedding=embedding_model,
+    vector_db = Chroma(
         persist_directory="./database",  # 指定持久化目录
-        collection_name="code_summary"
+        collection_name=language,
+        embedding_function=embedding_model
     )
     print("Database created with LangChain integration!")
+    return vector_db
+
+#
+# # ========================== 添加数据 ==========================
+# def add_data(data_file, lang, ignore):
+#     # 加载数据并转换为 LangChain 的 Document 格式
+#     vector_db = create_db_langchain(lang)
+#     documents = []
+#
+#     # language = ['java', 'python']
+#     language = ['python']
+#
+#     for lang in language:
+#         data_dir = f"./Dataset/{lang}/train"
+#         data_file_path = os.path.join(data_dir, data_file)
+#         with open(data_file_path, "r", encoding="utf-8") as f:
+#             print(f"Loading data from {data_file}")
+#             for idx, line in enumerate(f, start=1):
+#                 if idx in ignore: continue
+#                 js = json.loads(line.strip())
+#                 code = remove_comments_and_docstrings(source=js['code'], lang=lang)
+#                 comment = ' '.join(js['docstring_tokens'])
+#                 data = {'code': code, 'comment': comment, 'repo': js['repo'], 'path': js['path'],
+#                         'func': js['func_name']}
+#                 # 构建 LangChain Document 对象
+#                 doc = Document(
+#                     page_content=code,  # 代码作为主要内容
+#                     metadata={
+#                         "data": json.dumps(data)
+#                     }
+#                 )
+#                 documents.append(doc)
+#
+#     print("Starting embedding")
+#     vector_db.add_documents(documents=documents)
+#     print("Finished embedding")
+#
+#
+# # ========================== 删除某数据模块 ==========================
+# def delete_by_content_and_metadata(del_list, lang):
+#     # 初始化 Chroma 实例（复用已有数据库配置）
+#     chroma_db = create_db_langchain(lang)
+#     # 获取集合中所有文档ID
+#     existing_data = chroma_db.get()  # 返回包含 ids/documents/metadatas 的字典
+#     matching_ids = []
+#     print(existing_data)
+#     for doc_id, meta in zip(existing_data["ids"], existing_data["metadatas"]):
+#         data = json.loads(meta["data"])
+#         if data["code"] in del_list:
+#             matching_ids.append(doc_id)
+#
+#     print(f"Deleting {len(matching_ids)} documents")
+#     if matching_ids:
+#         chroma_db.delete(ids=matching_ids)
+#
+#
+# def chroma_size(lang):
+#     # 初始化 Chroma 实例（复用已有数据库配置）
+#     chroma_db = create_db_langchain(lang)
+#     # 获取底层 Chroma 客户端和集合
+#     collection = chroma_db.client.get_collection(lang)
+#     print(f"Still exist {collection.count()} documents")
+#     print(json.loads(chroma_db.get()["metadatas"][0]['data']))
+
+
+def build_bm25(n, lang):
+    chroma_db = create_db_langchain(lang)
+    existing_data = chroma_db.get()
+    documents = []
+    for content, meta in zip(existing_data["documents"], existing_data["metadatas"]):
+        documents.append(Document(page_content=content, metadata=meta))
+    bm25 = BM25Retriever.from_documents(documents, k=n)
+    return bm25
 
 
 # ========================== 查询模块 ==========================
 class CodeRetriever:
-    def __init__(self, k):
+    def __init__(self, k, lang):
         # 初始化数据库连接
         self.embedding_model = OpenAIEmbeddings(
             model="text-embedding-3-large",
-            api_key="sk-dK2wyH9nxA3Sf9BEVrRbvmEZyQjUX8wzXMgPCrPtwAgUZ2ux",
-            base_url="https://xiaoai.plus/v1"
+            api_key="sk-UFaswAeaNrZTadFgf3rTOWg0veOmWZ5T180CPLTILwjvgnXV",
+            base_url="https://xiaoai.plus/v1",
+            # api_key='sk-ASEYrFoHwCdfmCJa67CfA6C2E9F0446b97Bd1103Fd7c1aE7',
+            # base_url="https://api.mjdjourney.cn/v1",
+            # timeout=30
         )
 
         self.vector_db = Chroma(
             persist_directory="./database",
             embedding_function=self.embedding_model,
-            collection_name="code_summary"
+            collection_name=lang
         )
 
         # 配置检索器（带过滤条件）
-        self.retriever = self.vector_db.as_retriever(
+        self.embedding = self.vector_db.as_retriever(
             search_kwargs={
-                "k": k,
-                "filter": {"language": "c"}  # 示例默认过滤条件
+                "k": k
             }
         )
+        self.bm25 = build_bm25(k, lang)
 
-    def query_samples(self, code: str, lang: str = "c", n: int = 3) -> list[dict]:
+    def query_samples(self, data, method):
+        docs = []
+        code = data['code']
         # 动态更新过滤条件
-        self.retriever.search_kwargs["filter"]["language"] = lang
-        self.retriever.search_kwargs["k"] = n
-
         # 执行检索
-        docs = self.retriever.invoke(code)
-
-        print(docs)
-
+        if method == 'embedding':
+            docs = self.embedding.invoke(code)
+        elif method == 'bm25':
+            docs = self.bm25.invoke(code)
         # 格式化为统一输出
-        return [
+        if len(docs) == 0:
+            print("No documents found")
+
+        examples = [
             {
                 "code": doc.page_content,
-                "comment": doc.metadata["summary"]
+                "data": json.loads(doc.metadata["data"])
             } for doc in docs
         ]
-
-
-# ========================== 使用示例 ==========================
-if __name__ == "__main__":
-    # 重建数据库（只需运行一次）
-    # create_db_langchain()
-
-    # 初始化检索器
-    retriever = CodeRetriever(k=3)
-
-    # 测试查询
-    test_code = "def network_up"
-    results = retriever.query_samples(test_code, lang="python", n=2)
-    print("Retrieved samples:", results)
+        return examples

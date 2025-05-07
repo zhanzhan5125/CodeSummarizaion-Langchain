@@ -1,19 +1,26 @@
-官方网站：https://apifox.com/apidoc/project-4798344/doc-5314696
+官方网站：https://xiaoai.plus
 
 用量查询：https://query.xiaoai.plus/
 
 教程合集：https://flowus.cn/share/de98cb21-3c6d-4561-b6ac-648daa2bacda
 
 
+claude-3.5 = claude-3-5-sonnet-20240620
+gpt-4: gpt-4-1106-preview
+gpt-3.5: gpt-3.5-turbo
+
 ######BASE_URL#######
 https://xiaoai.plus/v1
 
-######GPT4######
-gpt-4: gpt-4-1106-preview
-sk-dK2wyH9nxA3Sf9BEVrRbvmEZyQjUX8wzXMgPCrPtwAgUZ2ux
-
-######GPT3.5######
-gpt-3.5: gpt-3.5-turbo
-sk-KPyLwEJBvLc6MYkgsiYIXT5l1L8GKOJn7aXrwmagns4mnaV9
+sk-UFaswAeaNrZTadFgf3rTOWg0veOmWZ5T180CPLTILwjvgnXV
 
 
+
+######BASE_URL#######
+https://api.mjdjourney.cn/v1
+
+
+######Claude专用#############
+sk-s7LCrJ8DONsBK9vv92Cf64Aa0cF74f6bAaF9727cBa01002f
+
+sk-ASEYrFoHwCdfmCJa67CfA6C2E9F0446b97Bd1103Fd7c1aE7
