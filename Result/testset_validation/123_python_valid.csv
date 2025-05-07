@@ -1,0 +1,122 @@
+4,3.6188247019564113,"Comment summarizes code's purpose. Minor details missing but main function clear. Concise, no redundancy. Almost perfect, slight room for improvement."
+4,4.010689768284266,"Code checks child nodes, gathers namespaces. Comment summarizes well but lacks detail on attribute handling. Not perfect, but clear."
+3,2.953831244094636,"Comment is correct but lacks context, e.g., method purpose or when it's used. Not fully comprehensive but not incorrect."
+4,4.109550800583846,"Comment summarizes code purpose. Minor details omitted but main function clear. Concise, no redundancy. Almost perfect, slight room for improvement."
+4,4.014786884682719,Code returns misses per cache level. Comment clear but lacks mention of division by first_dim_factor.
+4,3.6255781721291576,Comment summarizes code's function (stochastic encoding). Minor details missing but overall clear. Not overly verbose.
+4,4.050422407979692,"Read code, understood it retrieves context's ancestry. Comment matches functionality, clear, concise. Minor details omitted, not affecting overall understanding."
+3,2.907077025074849,"Comment summarizes function but omits details like caching, S3 download, and file extension handling."
+3,2.782000448882452,Comment is correct but vague. Doesn't detail key-value handling or specific option effects. Lacks conciseness on option specifics.
+4,3.713077139876664,"Comment summarizes code's function. Minor details missing, but main purpose clear. Concise, no logical errors, slightly lacks detail."
+4,3.570171532257809,"Code processes dataset. Comment summarizes well but omits outcome transformation detail. Not perfect, but clear and concise."
+3,2.509227431937598,"Read code, identifies function's purpose. Comment summarizes but misses details like error handling. Not fully comprehensive, but main idea conveyed."
+3,3.074657430742,"Comment summarizes action (plotting) but lacks detail on error bars, fit function, or matplotlib requirement."
+4,3.2481422552534664,"Comment summarizes code well, but doesn't mention transformation to lowercase or removal of prefix, which could be important."
+3,3.0028000384657214,Comment summarizes function but lacks detail on parameters and their default values. Correct but not fully comprehensive.
+4,3.8824656486115487,"Comment summarizes code well, but doesn't mention exception for clarity. Concise, no redundancy, slight lack of detail."
+3,3.3685259190391736,"Comment is concise, correct but lacks detail on input structure and potential RuntimeError exception."
+3,2.97859173753801,"Code identifies beats in audio. Comment summarizes but omits details like HPSS, tempo, frames. Correct but not fully comprehensive."
+4,3.9871672492419776,"Comment summarizes function well, includes parameters and exception. Lacks detail on request method and response handling. Not fully concise."
+4,3.482661252007193,"Comment summarizes code purpose. Minor details omitted, but main function clear. Concise, no redundancy. Not perfect, slight ambiguity in 'root of current package'."
+4,4.030730273210302,"Comment summarizes function well, but doesn't mention conditional checks or IP conversion. Slightly lacks detail but is mostly clear."
+4,3.939968674523457,"Comment is concise, correct, but lacks detail on the variety of blueprints registered."
+4,4.077549102081404,"Comment describes function and error case. Minor clarity issue with 'Equivalent to' part, but overall concise and correct."
+5,4.46232065153898,"Comment accurately describes code function. It's concise, correct, and clear. No redundant information."
+4,3.874634014092096,"Code checks if distribution is in user site. Comment is clear, concise, but omits normalization detail."
+3,2.870961583734585,Comment summarizes code's purpose. Lacks detail on implementation and softmax application. Correct but not fully comprehensive.
+3,2.744869375503417,"Comment summarizes code function but lacks detail on 'raw' and 'output' handling. Not incorrect, but not fully comprehensive."
+3,2.8234208275762067,"Comment is concise, but lacks detail on image processing steps like decoding and dtype conversion."
+3,2.5586986127275138,"Comment summarizes function but omits details about cls_name parameter and empty cases. Not fully comprehensive, but main idea conveyed."
+4,3.9863941808559655,"Comment summarizes function well, but doesn't mention validation or error handling. Slightly lacks completeness."
+3,3.271134216879285,"Comment summarizes function but lacks detail on conditions and view specifics. Not incorrect, but not fully comprehensive."
+3,3.385951577303547,Comment summarizes code function but lacks clarity on 'left alone' and 'source code text'. Somewhat concise.
+4,3.856446111776621,"Comment summarizes main action but omits details like output, metrics, and docker usage. Still, it's clear and correct."
+4,4.271804005762242,"Comment summarizes the code's purpose. Minor grammar issue ('doesn t'), but meaning is clear. Concise and correct."
+4,3.892366722564224,"Comment summarizes code purpose well, but lacks mention of locals formatting and bytecode decoding. Slightly less than fully comprehensive."
+3,3.18344645700422,"Comment is concise, but lacks detail on how summary and description are extracted. Correctness is assumed."
+4,3.2158665116368628,"Comment explains function purpose and usage. Minor details omitted, but main functionality covered. Clear and concise."
+3,3.057316108905731,"Comment is concise, somewhat clear, but lacks detail on conditions and formatting. Assumes knowledge of IOPub."
+3,3.102074084332086,"Comment describes recursive search, but code doesn't show recursion. Accurate about listing modules. Lacks clarity on MODULE_INIT_FILE role."
+3,3.1282352423558883,Comment summarizes purpose but lacks detail on key event handling and conditions. Not fully comprehensive.
+3,2.844663527449893,"Comment summarizes function but omits details like prompt_number handling. Not fully comprehensive, but main idea conveyed."
+4,3.8973282484694862,"Comment summarizes function well, but doesn't mention error handling which returns 0. Slightly less comprehensive."
+5,4.637411114641874,Comment matches code function and parameters. Correct and concise. No redundant info. Explains purpose and parameters clearly.
+4,4.044675926929614,"Comment summarizes code well, mentioning robot movement and crashes. Slightly lacks detail on how crashes are handled, but still clear."
+4,4.031935588012162,"Comment summarizes code purpose. Minor detail missing about 'site-packages', but main function clear. Concise, no redundancy."
+5,4.833942882546291,"Code checks table existence. Comment concise, correct. Matches code function. No redundancy. Comprehensiveness high."
+4,3.8703833287307376,"Comment is clear, concise, and correct. Missing context on 'index' and 'thermostats' array, but main action described well."
+4,3.76735276689522,"Comment summarizes function well, but omits parameters and inclusion_states detail. Still, it's clear and concise."
+3,3.339189997723262,Comment summarizes main action but lacks detail on conditional logic and version-specific behavior.
+4,3.594016372165581,"Comment is concise, correct, but lacks detail on handling exceptions or file locking which are key points."
+3,2.538306221381383,"Comment summarizes function but omits details about parameters and checks. Not fully comprehensive, but gives a general idea."
+4,3.5910201396990296,"Comment summarizes code purpose. Minor details omitted, but main functionality clear. Concise, no redundancy. Almost perfect, slight room for improvement."
+4,4.086048769152271,"Comment summarizes the function well, but doesn't mention 'as_text' option. Otherwise, clear and concise."
+4,4.404769683480825,"Comment summarizes code well, but doesn't mention renaming or incrementing filename. Slightly lacks detail."
+3,2.733668433012112,Comment is correct but vague. Doesn't mention conditional output or specific details. Adequate for quick understanding.
+4,4.13458770104624,"Comment summarizes function well, but doesn't mention list() call or dict_is_subset check explicitly. Still, it's clear and concise."
+3,3.3520809609073163,Comment summarizes code but lacks clarity on 'full mapping' and process details. Not entirely concise or clear.
+4,4.027514866208118,"Comment summarizes code well, minor typo 'Santizes' instead of 'Sanitizes', but meaning is clear and concise."
+4,3.9611773871511207,"Read code, identifies signal handling. Comment matches code function but lacks detail on 'print_method' and 'pass_along' effects."
+5,4.766335251109317,"Comment matches code function, is correct and concise. No redundant info."
+4,4.039148719160619,"Comment summarizes function well, but doesn't mention coordinate pointers or dimension. Mostly clear and concise."
+3,2.859225316467481,Comment summarizes function but lacks detail on error handling and caching. Correct but not fully comprehensive.
+4,3.5323500216342514,"Comment summarizes code's function. Minor details missing, like UNC path handling. Still, clear and concise. Almost perfect."
+4,3.947559396625961,"Comment explains function purpose and parameters. Minor clarity issues, but overall comprehensive. Not perfectly concise, but no major redundancy."
+3,2.771744342998064,Comment describes purpose but not how headers are handled (regex). Slightly misleading (not a list). Average comprehensiveness.
+4,3.906453141088962,"Comment is clear, concise, and mostly accurate. Misses details about 'types' and 'methods' parameters but captures main functionality."
+4,3.99519316284005,"Comment summarizes code's function (generating points on hypersphere). Minor details omitted (normal distribution, seed), but main purpose clear."
+3,3.36375200943036,Comment summarizes code purpose but lacks detail on how it's determined. Correct but not fully concise or complete.
+4,3.309659717466052,Code registers a function to run before each request. Comment is clear and correct but slightly verbose.
+3,3.052781965586046,"Read code, identified bidirectional GRU. Comment brief, lacks detail on sequence handling, layers, but correctly identifies CuDNN GRU. Not fully comprehensive."
+4,3.975225330965346,"Comment summarizes function. Minor details missing, but main purpose clear. Concise, no redundancy. Almost perfect."
+3,3.234833111118941,Comment summarizes code purpose but lacks clarity on type conversion and omits key details like handling different class names.
+4,4.033478529665144,"Comment is clear, concise, and correct. Misses 'async' detail, but not critical for understanding main action."
+3,3.1491486846748105,Comment summarizes code purpose but omits deprecation warning detail. Correct but not fully comprehensive.
+4,3.977531970324923,Code replaces part of URL for archiving. Comment explains purpose but not 'how'. Slightly lacks 'how' detail for full score.
+4,3.712939981513359,Code removes a websocket subscriber from list and events. Comment is concise and correct but lacks detail on event removal.
+4,3.451976335615234,"Comment summarizes the function's purpose. Minor details missing but main idea clear. Concise, no redundancy, slight lack of detail."
+3,2.7714910316533103,Code defines plot method. Comment describes plotting but omits details about metric handling and algo checks. Somewhat comprehensive.
+3,2.7205676729513306,Comment summarizes code function but lacks detail on version check and get_ipython replacement. Not fully comprehensive.
+4,3.8675480931847854,"Comment summarizes code purpose. Minor detail missing about non-zero condition. Otherwise, clear and concise."
+4,3.495880548659005,Code adds modules to skip list. Comment explains purpose but omits traceback modification. Clear but not fully comprehensive.
+4,3.99226377041338,"Comment summarizes code function. Minor details missing, but overall clear. Not perfect due to lack of detail on 'sizes', 'validate_args'."
+5,4.819015874206143,Comment matches code function. Correct and concise. No redundant info. Explains code purpose clearly.
+4,3.6446011064504376,"Comment describes plotting function and diagnostic use. Minor details missing, but main purpose clear. Concise and correct."
+4,4.097355614415986,"Comment explains PUT function, creation, and header setting. Misses 'request' method details. Concise, minor detail omission."
+4,3.511420197334172,"Comment summarizes code's purpose. Minor details missing, but main function clear. Correct and concise, but lacks exception handling mention."
+3,2.820681855518008,"Comment is concise, but lacks detail on process and purpose of dot product in this context."
+4,3.8969939046416617,"Comment summarizes main action (decode data). Includes conditional flushing. Lacks error handling detail. Concise, no redundancy. Almost complete."
+4,3.8109177488849504,"Comment summarizes main action but omits details like pagination, error handling, and tweet data extraction."
+3,2.518065659329524,"Comment is concise, but lacks detail on error handling and yEnc specifics. Correctness is good, not fully comprehensive."
+4,4.1376306933339535,"Code creates AST nodes for attributes. Comment concise, correct, but 'recursive' could confuse without code context."
+4,3.735669354531357,"Comment summarizes code well, mentions temp file, but omits encoding handling. Slightly less concise due to extra note."
+4,3.744930926142319,"Comment summarizes function well but omits error handling and logging, which are part of function's behavior."
+3,3.002885927578941,Comment is concise and correct but lacks detail on JSON loading and return structure. Adequate for quick understanding.
+4,4.33521027222967,"Code returns learning rates. Comment concise, correct, but doesn't mention exception. Almost perfect, slight detail missing."
+4,3.958271283859935,"Code deletes a team by name. Comment concise, correct, but lacks detail on error handling. Almost perfect."
+3,2.9960671854309138,"Comment is concise, correct but lacks detail on error handling and setting currency/source."
+4,4.299471598882195,"Comment summarizes code's purpose. Minor details omitted, but main function clear. Concise, correct, but could mention return value for full clarity."
+4,3.921128086267893,"Comment summarizes function well, but 'held buttons' is vague. Could mention 'self.move' for clarity. Otherwise, concise and correct."
+4,3.845754173721259,"Comment summarizes code's purpose. Minor details omitted, but main function clear. Concise, no redundancy, slight lack of detail for full score."
+3,2.94852669411688,"Comment summarizes code but lacks detail on conditions and process. Not incorrect, but not fully comprehensive."
+3,2.7087795610403145,Comment summarizes the function but omits error handling and guest update details. Not fully comprehensive.
+4,4.510052105429634,Code imports parse_version or falls back to LooseVersion. Comment summarizes well but doesn't mention fallback explicitly.
+3,2.6089026542959006,"Read code, identifies sum of MVNs. Comment brief, lacks detail on conditions and error. Partially comprehensive."
+5,4.963813904065,"Comment matches code function, correctly and concisely describes the crz gate application with control and target qubits."
+3,3.1023578732316985,Code maps types to xsd. Comment summarizes but lacks detail on conditions and return value. Correct but not fully comprehensive.
+4,3.815020521417308,"Comment summarizes code's function. Minor detail on ChangedInMarshmallow3Warning missing. Otherwise, clear and concise."
+4,3.681797495791126,Comment summarizes function well but omits wildcard handling and file existence check details.
+4,3.477674193506656,"Comment summarizes function well, but lacks clarity on 's' and 'iterset' usage. No logical errors. Slightly unclear but mostly concise."
+5,4.807193451683392,Code handles server ping by logging and sending PONG. Comment accurately and concisely describes the function.
+4,3.921836739831356,Comment explains creation and initialization of instance. Minor clarity issues but overall comprehensive. Deducted 1 point for slight ambiguity.
+4,3.947818753791833,"Code parses JSON from API response. Comment concise, correct, but doesn't mention yielding items. Minor detail missing."
+4,4.030118203618528,Code sets rate limit handling. Comment clear but doesn't mention 'value' determines enable/disable. Minor detail missing.
+3,3.1372206605423734,"Read code, identifies text processing. Comment summarizes but misses default handling for cursor/justification. Not fully comprehensive, but main idea conveyed."
+3,3.260180077883974,Comment summarizes action but lacks detail on data types and structure. Correct but not fully concise.
+4,4.141475239044207,"Comment is concise, correct, but 'absract' typo slightly reduces clarity. Otherwise, summarizes code purpose well."
+3,3.0479337441798395,"Comment mentions IPython shell but lacks detail on config setup or warning. Not fully comprehensive, but main idea conveyed."
+4,3.7000633559126577,"Comment summarizes function well, excludes _id_ index mention. Could clarify 'current indexes' means all unless collection specified."
+4,4.044390353285522,"Comment summarizes code well, but doesn't mention redraw request. Slightly lacks full scope, still concise and correct."
+3,3.2594090746868045,Comment summarizes code function but omits error handling and object creation details. Not fully comprehensive but main action described.
+3,2.709053446175103,"Comment mentions NeuralVariable, input/output types. Lacks detail on error handling, init, and compute_tensor. Not fully comprehensive, but correct."
+4,3.697556233752443,"Comment summarizes code well, but doesn't mention error handling or S3 mapping specifics. Slightly lacks detail."

@@ -1,0 +1,633 @@
+[Validation] ---- [200_python_test.jsonl]
+------------------[1]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.43457043}, {'token': '3', 'bytes': [51], 'logprob': -1.2199041}, {'token': '2', 'bytes': [50], 'logprob': -3.046732}, {'token': '5', 'bytes': [53], 'logprob': -4.652071}, {'token': '1', 'bytes': [49], 'logprob': -8.865507}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes code's purpose. Minor details missing but main function clear. Concise, no redundancy. Almost perfect, slight room for improvement.", 'weighted': 3.6188247019564113}
+------------------[2]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.03781619}, {'token': '5', 'bytes': [53], 'logprob': -3.7322724}, {'token': '3', 'bytes': [51], 'logprob': -4.335391}, {'token': '2', 'bytes': [50], 'logprob': -9.517732}, {'token': '1', 'bytes': [49], 'logprob': -13.917233}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Code checks child nodes, gathers namespaces. Comment summarizes well but lacks detail on attribute handling. Not perfect, but clear.', 'weighted': 4.010689768284266}
+------------------[3]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.8437757}, {'token': '2', 'bytes': [50], 'logprob': -1.2907763}, {'token': '4', 'bytes': [52], 'logprob': -1.3966208}, {'token': '1', 'bytes': [49], 'logprob': -3.5689764}, {'token': '5', 'bytes': [53], 'logprob': -3.9574938}]
+FINAL {'Comprehensiveness': '3', 'Thought process': "Comment is correct but lacks context, e.g., method purpose or when it's used. Not fully comprehensive but not incorrect.", 'weighted': 2.9538312440946357}
+------------------[4]--------------------
+TOP_LOGPROBS [{'token': '1', 'bytes': [49], 'logprob': -0.33534363}, {'token': '2', 'bytes': [50], 'logprob': -1.256984}, {'token': '3', 'bytes': [51], 'logprob': -7.837795}, {'token': '4', 'bytes': [52], 'logprob': -13.401341}, {'token': '5', 'bytes': [53], 'logprob': -15.222806}]
+FINAL {'Comprehensiveness': '1', 'Thought process': 'Comment misleading, not about PDF compression. Code sets compression flag. Incorrect context. Lacks clarity and correctness.', 'weighted': 1.285304844421038}
+------------------[5]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.06177741}, {'token': '1', 'bytes': [49], 'logprob': -3.2641776}, {'token': '3', 'bytes': [51], 'logprob': -3.840029}, {'token': '4', 'bytes': [52], 'logprob': -8.603609}, {'token': '5', 'bytes': [53], 'logprob': -12.772732}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is vague, doesn't explain method's functionality or handling of shapes and broadcasting. Lacks detail on error checking and RDD operations.", 'weighted': 1.9836394881587214}
+------------------[6]--------------------
+TOP_LOGPROBS [{'token': '1', 'bytes': [49], 'logprob': -0.023668064}, {'token': '2', 'bytes': [50], 'logprob': -3.7598379}, {'token': '3', 'bytes': [51], 'logprob': -9.253954}, {'token': '0', 'bytes': [48], 'logprob': -13.022936}, {'token': '4', 'bytes': [52], 'logprob': -13.136045}]
+FINAL {'Comprehensiveness': '1', 'Thought process': "Comment 'Helper for' is too vague, doesn't describe function or its use. Lacks correctness and conciseness.", 'weighted': 1.0234799462948947}
+------------------[7]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.15245315}, {'token': '5', 'bytes': [53], 'logprob': -2.0749729}, {'token': '3', 'bytes': [51], 'logprob': -4.155619}, {'token': '2', 'bytes': [50], 'logprob': -8.726161}, {'token': '1', 'bytes': [49], 'logprob': -12.959382}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Comment summarizes code purpose. Minor details omitted but main function clear. Concise, no redundancy. Almost perfect, slight room for improvement.', 'weighted': 4.109550800583846}
+------------------[8]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.24675463}, {'token': '5', 'bytes': [53], 'logprob': -2.0960665}, {'token': '3', 'bytes': [51], 'logprob': -2.4794912}, {'token': '2', 'bytes': [50], 'logprob': -4.467883}, {'token': '1', 'bytes': [49], 'logprob': -7.6813307}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Code returns misses per cache level. Comment clear but lacks mention of division by first_dim_factor.', 'weighted': 4.014786884682719}
+------------------[9]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.44072372}, {'token': '3', 'bytes': [51], 'logprob': -1.1371596}, {'token': '2', 'bytes': [50], 'logprob': -3.524958}, {'token': '5', 'bytes': [53], 'logprob': -5.117726}, {'token': '1', 'bytes': [49], 'logprob': -8.271067}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes code's function (stochastic encoding). Minor details missing but overall clear. Not overly verbose.", 'weighted': 3.6255781721291576}
+------------------[10]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.10811355}, {'token': '3', 'bytes': [51], 'logprob': -2.4103749}, {'token': '1', 'bytes': [49], 'logprob': -4.420997}, {'token': '4', 'bytes': [52], 'logprob': -7.312671}, {'token': '5', 'bytes': [53], 'logprob': -12.788421}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Read code. Comment misses 'token' handling and deepcopy. Not fully accurate. Score: 2 for partial information.", 'weighted': 2.079100577457185}
+------------------[11]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.08837438}, {'token': '1', 'bytes': [49], 'logprob': -2.5015213}, {'token': '3', 'bytes': [51], 'logprob': -5.9456835}, {'token': '4', 'bytes': [52], 'logprob': -12.362336}, {'token': '5', 'bytes': [53], 'logprob': -15.832229}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is too vague, doesn't mention conditions or error handling. Lacks detail on method's functionality.", 'weighted': 1.9206655252803806}
+------------------[12]--------------------
+TOP_LOGPROBS [{'token': '1', 'bytes': [49], 'logprob': -0.5343128}, {'token': '2', 'bytes': [50], 'logprob': -0.8822399}, {'token': '3', 'bytes': [51], 'logprob': -9.525471}, {'token': '4', 'bytes': [52], 'logprob': -15.913139}, {'token': '5', 'bytes': [53], 'logprob': -17.635477}]
+FINAL {'Comprehensiveness': '1', 'Thought process': "Comment 'Set a hold' is too vague, doesn't explain parameters or hold type. Lacks detail, not comprehensive.", 'weighted': 1.414001167449767}
+------------------[13]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.26853853}, {'token': '3', 'bytes': [51], 'logprob': -1.5274}, {'token': '1', 'bytes': [49], 'logprob': -4.3546553}, {'token': '4', 'bytes': [52], 'logprob': -5.1948366}, {'token': '5', 'bytes': [53], 'logprob': -11.290034}]
+FINAL {'Comprehensiveness': '2', 'Thought process': 'Comment mentions sorting and uniqueness, not present in code. Correct about intersection but lacks clarity on method used.', 'weighted': 2.2153799507930585}
+------------------[14]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.07621007}, {'token': '5', 'bytes': [53], 'logprob': -2.7813263}, {'token': '3', 'bytes': [51], 'logprob': -4.481884}, {'token': '2', 'bytes': [50], 'logprob': -9.126064}, {'token': '1', 'bytes': [49], 'logprob': -13.762331}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Read code, understood it retrieves context's ancestry. Comment matches functionality, clear, concise. Minor details omitted, not affecting overall understanding.", 'weighted': 4.050422407979692}
+------------------[15]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.43655998}, {'token': '2', 'bytes': [50], 'logprob': -1.5002215}, {'token': '4', 'bytes': [52], 'logprob': -2.038193}, {'token': '1', 'bytes': [49], 'logprob': -8.396084}, {'token': '5', 'bytes': [53], 'logprob': -8.659855}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment summarizes function but omits details like caching, S3 download, and file extension handling.', 'weighted': 2.907077025074849}
+------------------[16]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.34297052}, {'token': '3', 'bytes': [51], 'logprob': -1.6209627}, {'token': '5', 'bytes': [53], 'logprob': -2.6980789}, {'token': '2', 'bytes': [50], 'logprob': -3.689555}, {'token': '1', 'bytes': [49], 'logprob': -8.06993}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment matches code functionality. Describes parameters well. Could mention 'copy_object' method for clarity. No logical errors. Slightly verbose.", 'weighted': 3.8187141150715305}
+------------------[17]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.6091123}, {'token': '2', 'bytes': [50], 'logprob': -1.0923886}, {'token': '4', 'bytes': [52], 'logprob': -2.1291642}, {'token': '1', 'bytes': [49], 'logprob': -6.655621}, {'token': '5', 'bytes': [53], 'logprob': -7.547148}]
+FINAL {'Comprehensiveness': '3', 'Thought process': "Comment is correct but vague. Doesn't detail key-value handling or specific option effects. Lacks conciseness on option specifics.", 'weighted': 2.7820004488824517}
+------------------[18]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.31448436}, {'token': '3', 'bytes': [51], 'logprob': -1.4505622}, {'token': '2', 'bytes': [50], 'logprob': -3.5343235}, {'token': '5', 'bytes': [53], 'logprob': -5.094289}, {'token': '1', 'bytes': [49], 'logprob': -9.368522}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes code's function. Minor details missing, but main purpose clear. Concise, no logical errors, slightly lacks detail.", 'weighted': 3.713077139876664}
+------------------[19]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.06845327}, {'token': '1', 'bytes': [49], 'logprob': -2.7623124}, {'token': '3', 'bytes': [51], 'logprob': -5.8058286}, {'token': '4', 'bytes': [52], 'logprob': -11.87587}, {'token': '5', 'bytes': [53], 'logprob': -15.843174}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is too vague, doesn't mention gene parts or formatting. Correct but not detailed enough.", 'weighted': 1.939878138358965}
+------------------[20]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.51005447}, {'token': '3', 'bytes': [51], 'logprob': -0.95287025}, {'token': '4', 'bytes': [52], 'logprob': -4.3768187}, {'token': '1', 'bytes': [49], 'logprob': -6.630765}, {'token': '5', 'bytes': [53], 'logprob': -10.82524}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is vague, doesn't mention error handling or scalar conversion. Lacks detail on computation steps and conditions for derivatives.", 'weighted': 2.4095031409392464}
+------------------[21]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.5259244}, {'token': '3', 'bytes': [51], 'logprob': -0.9794461}, {'token': '2', 'bytes': [50], 'logprob': -3.5363843}, {'token': '5', 'bytes': [53], 'logprob': -5.461389}, {'token': '1', 'bytes': [49], 'logprob': -9.169426}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Code processes dataset. Comment summarizes well but omits outcome transformation detail. Not perfect, but clear and concise.', 'weighted': 3.570171532257809}
+------------------[22]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.68370414}, {'token': '3', 'bytes': [51], 'logprob': -0.7364118}, {'token': '4', 'bytes': [52], 'logprob': -4.161907}, {'token': '1', 'bytes': [49], 'logprob': -7.100006}, {'token': '5', 'bytes': [53], 'logprob': -10.6682415}]
+FINAL {'Comprehensiveness': '3', 'Thought process': "Read code, identifies function's purpose. Comment summarizes but misses details like error handling. Not fully comprehensive, but main idea conveyed.", 'weighted': 2.509227431937598}
+------------------[23]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.43606102}, {'token': '4', 'bytes': [52], 'logprob': -1.5513126}, {'token': '2', 'bytes': [50], 'logprob': -1.9756995}, {'token': '5', 'bytes': [53], 'logprob': -6.3582964}, {'token': '1', 'bytes': [49], 'logprob': -6.8549376}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment summarizes action (plotting) but lacks detail on error bars, fit function, or matplotlib requirement.', 'weighted': 3.074657430742}
+------------------[24]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.19099896}, {'token': '3', 'bytes': [51], 'logprob': -1.8949403}, {'token': '1', 'bytes': [49], 'logprob': -4.148925}, {'token': '4', 'bytes': [52], 'logprob': -4.8644114}, {'token': '5', 'bytes': [53], 'logprob': -10.11012}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment mentions context manager, changing value, but lacks clarity on 'ns' and 'basilisp.core'. Not concise.", 'weighted': 2.1500989994322337}
+------------------[25]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.34378535}, {'token': '3', 'bytes': [51], 'logprob': -1.2482958}, {'token': '4', 'bytes': [52], 'logprob': -5.9276934}, {'token': '1', 'bytes': [49], 'logprob': -6.680867}, {'token': '5', 'bytes': [53], 'logprob': -12.075992}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is too vague. Doesn't mention conditions or exceptions. Lacks detail on 'recursive' and 'predicate' parameters.", 'weighted': 2.291084302985035}
+------------------[26]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.0985619}, {'token': '3', 'bytes': [51], 'logprob': -2.4674356}, {'token': '1', 'bytes': [49], 'logprob': -4.857473}, {'token': '4', 'bytes': [52], 'logprob': -6.659681}, {'token': '5', 'bytes': [53], 'logprob': -12.109552}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is too vague. Doesn't mention authentication, CRC check, or success criteria. Lacks detail on process.", 'weighted': 2.0796091899173645}
+------------------[27]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.687817}, {'token': '3', 'bytes': [51], 'logprob': -1.4447311}, {'token': '2', 'bytes': [50], 'logprob': -1.5560154}, {'token': '1', 'bytes': [49], 'logprob': -3.3230348}, {'token': '5', 'bytes': [53], 'logprob': -4.240088}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes code well, but doesn't mention transformation to lowercase or removal of prefix, which could be important.", 'weighted': 3.2481422552534664}
+------------------[28]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.6410651}, {'token': '4', 'bytes': [52], 'logprob': -1.4456363}, {'token': '2', 'bytes': [50], 'logprob': -1.4491363}, {'token': '5', 'bytes': [53], 'logprob': -6.242471}, {'token': '1', 'bytes': [49], 'logprob': -6.9579062}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment summarizes function but lacks detail on parameters and their default values. Correct but not fully comprehensive.', 'weighted': 3.0028000384657214}
+------------------[29]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.1538067}, {'token': '3', 'bytes': [51], 'logprob': -2.0858974}, {'token': '5', 'bytes': [53], 'logprob': -4.2354984}, {'token': '2', 'bytes': [50], 'logprob': -5.5539265}, {'token': '1', 'bytes': [49], 'logprob': -10.800743}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes code well, but doesn't mention exception for clarity. Concise, no redundancy, slight lack of detail.", 'weighted': 3.8824656486115487}
+------------------[30]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.58838975}, {'token': '4', 'bytes': [52], 'logprob': -0.90454614}, {'token': '2', 'bytes': [50], 'logprob': -3.2537131}, {'token': '5', 'bytes': [53], 'logprob': -6.630483}, {'token': '1', 'bytes': [49], 'logprob': -9.177583}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment is concise, correct but lacks detail on input structure and potential RuntimeError exception.', 'weighted': 3.3685259190391736}
+------------------[31]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.2679437}, {'token': '2', 'bytes': [50], 'logprob': -2.0547059}, {'token': '4', 'bytes': [52], 'logprob': -2.2372353}, {'token': '1', 'bytes': [49], 'logprob': -9.316356}, {'token': '5', 'bytes': [53], 'logprob': -9.497275}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Code identifies beats in audio. Comment summarizes but omits details like HPSS, tempo, frames. Correct but not fully comprehensive.', 'weighted': 2.97859173753801}
+------------------[32]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.02434077}, {'token': '3', 'bytes': [51], 'logprob': -3.996505}, {'token': '5', 'bytes': [53], 'logprob': -5.1801176}, {'token': '2', 'bytes': [50], 'logprob': -10.143119}, {'token': '1', 'bytes': [49], 'logprob': -15.276017}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Comment summarizes function well, includes parameters and exception. Lacks detail on request method and response handling. Not fully concise.', 'weighted': 3.9871672492419776}
+------------------[33]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.68436337}, {'token': '3', 'bytes': [51], 'logprob': -0.75275517}, {'token': '2', 'bytes': [50], 'logprob': -3.748437}, {'token': '5', 'bytes': [53], 'logprob': -6.975053}, {'token': '1', 'bytes': [49], 'logprob': -10.35234}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes code purpose. Minor details omitted, but main function clear. Concise, no redundancy. Not perfect, slight ambiguity in 'root of current package'.", 'weighted': 3.482661252007193}
+------------------[34]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.10384218}, {'token': '5', 'bytes': [53], 'logprob': -2.7307267}, {'token': '3', 'bytes': [51], 'logprob': -3.4267106}, {'token': '2', 'bytes': [50], 'logprob': -6.9551377}, {'token': '1', 'bytes': [49], 'logprob': -11.317488}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes function well, but doesn't mention conditional checks or IP conversion. Slightly lacks detail but is mostly clear.", 'weighted': 4.030730273210302}
+------------------[35]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.281805}, {'token': '3', 'bytes': [51], 'logprob': -1.9751225}, {'token': '5', 'bytes': [53], 'logprob': -2.3276157}, {'token': '2', 'bytes': [50], 'logprob': -4.698698}, {'token': '1', 'bytes': [49], 'logprob': -8.525648}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Comment is concise, correct, but lacks detail on the variety of blueprints registered.', 'weighted': 3.939968674523457}
+------------------[36]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.109397836}, {'token': '5', 'bytes': [53], 'logprob': -2.3997345}, {'token': '3', 'bytes': [51], 'logprob': -4.3755093}, {'token': '2', 'bytes': [50], 'logprob': -8.122337}, {'token': '1', 'bytes': [49], 'logprob': -12.190628}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment describes function and error case. Minor clarity issue with 'Equivalent to' part, but overall concise and correct.", 'weighted': 4.077549102081404}
+------------------[37]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.6862024}, {'token': '5', 'bytes': [53], 'logprob': -0.73400056}, {'token': '3', 'bytes': [51], 'logprob': -4.167703}, {'token': '2', 'bytes': [50], 'logprob': -6.943168}, {'token': '1', 'bytes': [49], 'logprob': -9.652371}]
+FINAL {'Comprehensiveness': '5', 'Thought process': "Comment accurately describes code function. It's concise, correct, and clear. No redundant information.", 'weighted': 4.46232065153898}
+------------------[38]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.2480929}, {'token': '3', 'bytes': [51], 'logprob': -1.6294024}, {'token': '4', 'bytes': [52], 'logprob': -4.2262883}, {'token': '1', 'bytes': [49], 'logprob': -4.7155766}, {'token': '5', 'bytes': [53], 'logprob': -9.172567}]
+FINAL {'Comprehensiveness': '2', 'Thought process': 'Comment describes async execution but misses pool usage and sleep function. Lacks conciseness and clarity on exception handling.', 'weighted': 2.216614961627369}
+------------------[39]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.18586338}, {'token': '3', 'bytes': [51], 'logprob': -2.053379}, {'token': '5', 'bytes': [53], 'logprob': -3.5519485}, {'token': '2', 'bytes': [50], 'logprob': -4.405319}, {'token': '1', 'bytes': [49], 'logprob': -7.7850494}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Code checks if distribution is in user site. Comment is clear, concise, but omits normalization detail.', 'weighted': 3.874634014092096}
+------------------[40]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.43782532}, {'token': '3', 'bytes': [51], 'logprob': -1.19827}, {'token': '4', 'bytes': [52], 'logprob': -3.0528727}, {'token': '1', 'bytes': [49], 'logprob': -5.244128}, {'token': '5', 'bytes': [53], 'logprob': -7.9762735}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is too vague, doesn't describe parsing details or error handling. Lacks specifics on gene info structure.", 'weighted': 2.391912517860879}
+------------------[41]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.576072}, {'token': '2', 'bytes': [50], 'logprob': -1.2626851}, {'token': '4', 'bytes': [52], 'logprob': -1.871978}, {'token': '5', 'bytes': [53], 'logprob': -7.415328}, {'token': '1', 'bytes': [49], 'logprob': -7.4479265}]
+FINAL {'Comprehensiveness': '3', 'Thought process': "Comment summarizes code's purpose. Lacks detail on implementation and softmax application. Correct but not fully comprehensive.", 'weighted': 2.870961583734585}
+------------------[42]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.104029015}, {'token': '3', 'bytes': [51], 'logprob': -2.785662}, {'token': '1', 'bytes': [49], 'logprob': -3.322447}, {'token': '4', 'bytes': [52], 'logprob': -6.867373}, {'token': '5', 'bytes': [53], 'logprob': -11.926409}]
+FINAL {'Comprehensiveness': '2', 'Thought process': 'Comment mentions packing but omits logic details like blocking size. Not fully comprehensive, lacks iteration and condition explanation.', 'weighted': 2.027725387155966}
+------------------[43]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.10226558}, {'token': '1', 'bytes': [49], 'logprob': -3.032943}, {'token': '3', 'bytes': [51], 'logprob': -3.0350716}, {'token': '4', 'bytes': [52], 'logprob': -6.9627504}, {'token': '5', 'bytes': [53], 'logprob': -10.931968}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment vague, doesn't mention temporal constraints or optimization. Lacks clarity on method's purpose. Not fully correct or concise.", 'weighted': 2.0018421771716532}
+------------------[44]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.4136639}, {'token': '2', 'bytes': [50], 'logprob': -1.2152271}, {'token': '4', 'bytes': [52], 'logprob': -3.1731052}, {'token': '1', 'bytes': [49], 'logprob': -8.4213505}, {'token': '5', 'bytes': [53], 'logprob': -10.121422}]
+FINAL {'Comprehensiveness': '3', 'Thought process': "Comment summarizes code function but lacks detail on 'raw' and 'output' handling. Not incorrect, but not fully comprehensive.", 'weighted': 2.744869375503417}
+------------------[45]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.48001844}, {'token': '2', 'bytes': [50], 'logprob': -1.2868497}, {'token': '4', 'bytes': [52], 'logprob': -2.2783926}, {'token': '1', 'bytes': [49], 'logprob': -6.1951065}, {'token': '5', 'bytes': [53], 'logprob': -7.4213104}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment is concise, but lacks detail on image processing steps like decoding and dtype conversion.', 'weighted': 2.8234208275762067}
+------------------[46]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.66148245}, {'token': '2', 'bytes': [50], 'logprob': -0.7802721}, {'token': '4', 'bytes': [52], 'logprob': -3.7841153}, {'token': '1', 'bytes': [49], 'logprob': -5.8475385}, {'token': '5', 'bytes': [53], 'logprob': -11.093064}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment summarizes function but omits details about cls_name parameter and empty cases. Not fully comprehensive, but main idea conveyed.', 'weighted': 2.5586986127275138}
+------------------[47]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.062487658}, {'token': '3', 'bytes': [51], 'logprob': -3.3209314}, {'token': '5', 'bytes': [53], 'logprob': -3.7376204}, {'token': '2', 'bytes': [50], 'logprob': -7.3544645}, {'token': '1', 'bytes': [49], 'logprob': -12.188231}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes function well, but doesn't mention validation or error handling. Slightly lacks completeness.", 'weighted': 3.9863941808559655}
+------------------[48]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.53354037}, {'token': '4', 'bytes': [52], 'logprob': -1.0819813}, {'token': '2', 'bytes': [50], 'logprob': -2.6911368}, {'token': '5', 'bytes': [53], 'logprob': -5.644033}, {'token': '1', 'bytes': [49], 'logprob': -5.965402}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment summarizes function but lacks detail on conditions and view specifics. Not incorrect, but not fully comprehensive.', 'weighted': 3.271134216879285}
+------------------[49]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.6045489}, {'token': '4', 'bytes': [52], 'logprob': -0.8705706}, {'token': '2', 'bytes': [50], 'logprob': -3.3762927}, {'token': '5', 'bytes': [53], 'logprob': -7.1957736}, {'token': '1', 'bytes': [49], 'logprob': -10.070537}]
+FINAL {'Comprehensiveness': '3', 'Thought process': "Comment summarizes code function but lacks clarity on 'left alone' and 'source code text'. Somewhat concise.", 'weighted': 3.385951577303547}
+------------------[50]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.12410194}, {'token': '1', 'bytes': [49], 'logprob': -2.1877196}, {'token': '3', 'bytes': [51], 'logprob': -5.3976655}, {'token': '4', 'bytes': [52], 'logprob': -11.489094}, {'token': '5', 'bytes': [53], 'logprob': -15.027208}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment vague, doesn't mention parsing HTML or exception handling. Correct but not concise or fully descriptive.", 'weighted': 1.8923757070707432}
+------------------[51]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.16439685}, {'token': '3', 'bytes': [51], 'logprob': -1.9398752}, {'token': '5', 'bytes': [53], 'logprob': -5.2386956}, {'token': '2', 'bytes': [50], 'logprob': -5.9684834}, {'token': '1', 'bytes': [49], 'logprob': -11.829921}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes main action but omits details like output, metrics, and docker usage. Still, it's clear and correct.", 'weighted': 3.856446111776621}
+------------------[52]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.33131367}, {'token': '5', 'bytes': [53], 'logprob': -1.2838206}, {'token': '3', 'bytes': [51], 'logprob': -5.3142695}, {'token': '2', 'bytes': [50], 'logprob': -9.066019}, {'token': '1', 'bytes': [49], 'logprob': -12.138527}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes the code's purpose. Minor grammar issue ('doesn t'), but meaning is clear. Concise and correct.", 'weighted': 4.271804005762242}
+------------------[53]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.12262364}, {'token': '3', 'bytes': [51], 'logprob': -2.202801}, {'token': '5', 'bytes': [53], 'logprob': -5.465929}, {'token': '2', 'bytes': [50], 'logprob': -7.2967777}, {'token': '1', 'bytes': [49], 'logprob': -12.584789}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Comment summarizes code purpose well, but lacks mention of locals formatting and bytecode decoding. Slightly less than fully comprehensive.', 'weighted': 3.8923667225642236}
+------------------[54]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.50025654}, {'token': '4', 'bytes': [52], 'logprob': -1.2480631}, {'token': '2', 'bytes': [50], 'logprob': -2.2529497}, {'token': '5', 'bytes': [53], 'logprob': -6.8060217}, {'token': '1', 'bytes': [49], 'logprob': -7.909774}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment is concise, but lacks detail on how summary and description are extracted. Correctness is assumed.', 'weighted': 3.18344645700422}
+------------------[55]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.87528515}, {'token': '3', 'bytes': [51], 'logprob': -1.2699938}, {'token': '2', 'bytes': [50], 'logprob': -1.3318472}, {'token': '5', 'bytes': [53], 'logprob': -3.352519}, {'token': '1', 'bytes': [49], 'logprob': -5.673747}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Comment explains function purpose and usage. Minor details omitted, but main functionality covered. Clear and concise.', 'weighted': 3.2158665116368628}
+------------------[56]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.52761483}, {'token': '4', 'bytes': [52], 'logprob': -1.4583075}, {'token': '2', 'bytes': [50], 'logprob': -1.7464926}, {'token': '1', 'bytes': [49], 'logprob': -6.373331}, {'token': '5', 'bytes': [53], 'logprob': -6.678192}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment is concise, somewhat clear, but lacks detail on conditions and formatting. Assumes knowledge of IOPub.', 'weighted': 3.057316108905731}
+------------------[57]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.64488727}, {'token': '4', 'bytes': [52], 'logprob': -1.2471402}, {'token': '2', 'bytes': [50], 'logprob': -1.6972821}, {'token': '1', 'bytes': [49], 'logprob': -5.8434806}, {'token': '5', 'bytes': [53], 'logprob': -6.2820754}]
+FINAL {'Comprehensiveness': '3', 'Thought process': "Comment describes recursive search, but code doesn't show recursion. Accurate about listing modules. Lacks clarity on MODULE_INIT_FILE role.", 'weighted': 3.102074084332086}
+------------------[58]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.7678193}, {'token': '4', 'bytes': [52], 'logprob': -1.1344231}, {'token': '2', 'bytes': [50], 'logprob': -1.5795697}, {'token': '5', 'bytes': [53], 'logprob': -4.916394}, {'token': '1', 'bytes': [49], 'logprob': -6.9297457}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment summarizes purpose but lacks detail on key event handling and conditions. Not fully comprehensive.', 'weighted': 3.1282352423558883}
+------------------[59]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.36997655}, {'token': '2', 'bytes': [50], 'logprob': -1.4615712}, {'token': '4', 'bytes': [52], 'logprob': -2.563828}, {'token': '1', 'bytes': [49], 'logprob': -8.105353}, {'token': '5', 'bytes': [53], 'logprob': -9.628448}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment summarizes function but omits details like prompt_number handling. Not fully comprehensive, but main idea conveyed.', 'weighted': 2.844663527449893}
+------------------[60]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.14812768}, {'token': '3', 'bytes': [51], 'logprob': -2.3723536}, {'token': '1', 'bytes': [49], 'logprob': -3.1485605}, {'token': '4', 'bytes': [52], 'logprob': -6.508292}, {'token': '5', 'bytes': [53], 'logprob': -11.320113}]
+FINAL {'Comprehensiveness': '2', 'Thought process': 'Comment is in Russian, not English. Describes filling a table but lacks clarity on logic and thresholds.', 'weighted': 2.053363506358146}
+------------------[61]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.17792132}, {'token': '3', 'bytes': [51], 'logprob': -2.069746}, {'token': '5', 'bytes': [53], 'logprob': -3.430378}, {'token': '2', 'bytes': [50], 'logprob': -5.432949}, {'token': '1', 'bytes': [49], 'logprob': -10.492331}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes function well, but doesn't mention error handling which returns 0. Slightly less comprehensive.", 'weighted': 3.8973282484694862}
+------------------[62]--------------------
+TOP_LOGPROBS [{'token': '5', 'bytes': [53], 'logprob': -0.4377296}, {'token': '4', 'bytes': [52], 'logprob': -1.0587432}, {'token': '3', 'bytes': [51], 'logprob': -4.937398}, {'token': '2', 'bytes': [50], 'logprob': -7.832591}, {'token': '1', 'bytes': [49], 'logprob': -10.392772}]
+FINAL {'Comprehensiveness': '5', 'Thought process': 'Comment matches code function and parameters. Correct and concise. No redundant info. Explains purpose and parameters clearly.', 'weighted': 4.637411114641874}
+------------------[63]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.06799907}, {'token': '5', 'bytes': [53], 'logprob': -2.8950675}, {'token': '3', 'bytes': [51], 'logprob': -4.5781765}, {'token': '2', 'bytes': [50], 'logprob': -8.709742}, {'token': '1', 'bytes': [49], 'logprob': -12.61754}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Comment summarizes code well, mentioning robot movement and crashes. Slightly lacks detail on how crashes are handled, but still clear.', 'weighted': 4.044675926929614}
+------------------[64]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.09648695}, {'token': '3', 'bytes': [51], 'logprob': -2.404028}, {'token': '1', 'bytes': [49], 'logprob': -6.5212784}, {'token': '4', 'bytes': [52], 'logprob': -8.787535}, {'token': '5', 'bytes': [53], 'logprob': -14.999037}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is too vague, doesn't explain logic or error handling. Lacks detail on parameters and feature selection process.", 'weighted': 2.0891871356306813}
+------------------[65]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.6551168}, {'token': '3', 'bytes': [51], 'logprob': -0.8096216}, {'token': '4', 'bytes': [52], 'logprob': -3.4708574}, {'token': '1', 'bytes': [49], 'logprob': -5.421772}, {'token': '5', 'bytes': [53], 'logprob': -9.4122505}]
+FINAL {'Comprehensiveness': '2', 'Thought process': 'Comment mentions selecting small parts but omits ratio parameter and non-closed option. Not fully comprehensive.', 'weighted': 2.503031429984829}
+------------------[66]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.10294346}, {'token': '5', 'bytes': [53], 'logprob': -2.7269325}, {'token': '3', 'bytes': [51], 'logprob': -3.4625225}, {'token': '2', 'bytes': [50], 'logprob': -6.884159}, {'token': '1', 'bytes': [49], 'logprob': -10.561905}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes code purpose. Minor detail missing about 'site-packages', but main function clear. Concise, no redundancy.", 'weighted': 4.031935588012162}
+------------------[67]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.6720554}, {'token': '3', 'bytes': [51], 'logprob': -0.7330753}, {'token': '4', 'bytes': [52], 'logprob': -4.7843237}, {'token': '1', 'bytes': [49], 'logprob': -7.5282755}, {'token': '5', 'bytes': [53], 'logprob': -11.107022}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is too vague, doesn't mention filtering criteria or that it yields paths and dates. Lacks detail for full understanding.", 'weighted': 2.496655339602108}
+------------------[68]--------------------
+TOP_LOGPROBS [{'token': '5', 'bytes': [53], 'logprob': -0.17968903}, {'token': '4', 'bytes': [52], 'logprob': -1.8143822}, {'token': '3', 'bytes': [51], 'logprob': -6.5115714}, {'token': '2', 'bytes': [50], 'logprob': -10.217737}, {'token': '1', 'bytes': [49], 'logprob': -11.830469}]
+FINAL {'Comprehensiveness': '5', 'Thought process': 'Code checks table existence. Comment concise, correct. Matches code function. No redundancy. Comprehensiveness high.', 'weighted': 4.833942882546291}
+------------------[69]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.21989335}, {'token': '3', 'bytes': [51], 'logprob': -1.8511189}, {'token': '5', 'bytes': [53], 'logprob': -3.3228502}, {'token': '2', 'bytes': [50], 'logprob': -5.4611216}, {'token': '1', 'bytes': [49], 'logprob': -10.274133}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment is clear, concise, and correct. Missing context on 'index' and 'thermostats' array, but main action described well.", 'weighted': 3.8703833287307376}
+------------------[70]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.30221507}, {'token': '3', 'bytes': [51], 'logprob': -1.4986949}, {'token': '5', 'bytes': [53], 'logprob': -3.8201747}, {'token': '2', 'bytes': [50], 'logprob': -4.1812797}, {'token': '1', 'bytes': [49], 'logprob': -8.547307}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes function well, but omits parameters and inclusion_states detail. Still, it's clear and concise.", 'weighted': 3.7673527668952196}
+------------------[71]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.7216973}, {'token': '4', 'bytes': [52], 'logprob': -0.89763874}, {'token': '2', 'bytes': [50], 'logprob': -2.3735623}, {'token': '5', 'bytes': [53], 'logprob': -4.3506}, {'token': '1', 'bytes': [49], 'logprob': -7.612166}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment summarizes main action but lacks detail on conditional logic and version-specific behavior.', 'weighted': 3.339189997723262}
+------------------[72]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.47460416}, {'token': '3', 'bytes': [51], 'logprob': -1.2348351}, {'token': '2', 'bytes': [50], 'logprob': -2.7322145}, {'token': '5', 'bytes': [53], 'logprob': -3.9022698}, {'token': '1', 'bytes': [49], 'logprob': -6.3695245}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Comment is concise, correct, but lacks detail on handling exceptions or file locking which are key points.', 'weighted': 3.594016372165581}
+------------------[73]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.3066832}, {'token': '3', 'bytes': [51], 'logprob': -1.5994135}, {'token': '1', 'bytes': [49], 'logprob': -2.8647468}, {'token': '4', 'bytes': [52], 'logprob': -5.301659}, {'token': '5', 'bytes': [53], 'logprob': -9.061044}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Code collects pids using fetchers. Comment vague, doesn't mention collection or condition. Not fully comprehensive, lacks detail.", 'weighted': 2.15532362745054}
+------------------[74]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.69719535}, {'token': '3', 'bytes': [51], 'logprob': -0.76745635}, {'token': '4', 'bytes': [52], 'logprob': -3.289963}, {'token': '1', 'bytes': [49], 'logprob': -7.5461736}, {'token': '5', 'bytes': [53], 'logprob': -10.030241}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment summarizes function but omits details about parameters and checks. Not fully comprehensive, but gives a general idea.', 'weighted': 2.538306221381383}
+------------------[75]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.6423256}, {'token': '3', 'bytes': [51], 'logprob': -1.5663998}, {'token': '1', 'bytes': [49], 'logprob': -1.7613614}, {'token': '4', 'bytes': [52], 'logprob': -2.421281}, {'token': '5', 'bytes': [53], 'logprob': -5.433572}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment mentions PEP 426, specific Python version, and boolean return, but code doesn't specify these. Lacks conciseness and correctness.", 'weighted': 2.227401029798883}
+------------------[76]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.46309185}, {'token': '3', 'bytes': [51], 'logprob': -1.1865568}, {'token': '2', 'bytes': [50], 'logprob': -2.8912058}, {'token': '5', 'bytes': [53], 'logprob': -4.6838655}, {'token': '1', 'bytes': [49], 'logprob': -7.362529}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Comment summarizes code purpose. Minor details omitted, but main functionality clear. Concise, no redundancy. Almost perfect, slight room for improvement.', 'weighted': 3.5910201396990296}
+------------------[77]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.119935855}, {'token': '5', 'bytes': [53], 'logprob': -2.3055513}, {'token': '3', 'bytes': [51], 'logprob': -4.3429565}, {'token': '2', 'bytes': [50], 'logprob': -8.086889}, {'token': '1', 'bytes': [49], 'logprob': -11.405233}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes the function well, but doesn't mention 'as_text' option. Otherwise, clear and concise.", 'weighted': 4.086048769152271}
+------------------[78]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.048092604}, {'token': '1', 'bytes': [49], 'logprob': -3.682286}, {'token': '3', 'bytes': [51], 'logprob': -3.8312767}, {'token': '4', 'bytes': [52], 'logprob': -9.148217}, {'token': '5', 'bytes': [53], 'logprob': -14.392888}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is vague, doesn't mention filtering by institute or user. Lacks clarity on 'sanger' and aggregation process.", 'weighted': 1.9967306295321683}
+------------------[79]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.5242034}, {'token': '5', 'bytes': [53], 'logprob': -0.90046036}, {'token': '3', 'bytes': [51], 'logprob': -6.455804}, {'token': '2', 'bytes': [50], 'logprob': -10.958348}, {'token': '1', 'bytes': [49], 'logprob': -13.898101}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes code well, but doesn't mention renaming or incrementing filename. Slightly lacks detail.", 'weighted': 4.404769683480825}
+------------------[80]--------------------
+[Validation] ---- [200_python_test.jsonl]
+------------------[80]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.39428708}, {'token': '2', 'bytes': [50], 'logprob': -1.2196503}, {'token': '4', 'bytes': [52], 'logprob': -3.508707}, {'token': '1', 'bytes': [49], 'logprob': -7.5655556}, {'token': '5', 'bytes': [53], 'logprob': -9.865292}]
+FINAL {'Comprehensiveness': '3', 'Thought process': "Comment is correct but vague. Doesn't mention conditional output or specific details. Adequate for quick understanding.", 'weighted': 2.7336684330121113}
+------------------[81]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.16877063}, {'token': '5', 'bytes': [53], 'logprob': -1.9309014}, {'token': '3', 'bytes': [51], 'logprob': -4.5912027}, {'token': '2', 'bytes': [50], 'logprob': -8.941802}, {'token': '1', 'bytes': [49], 'logprob': -11.943782}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes function well, but doesn't mention list() call or dict_is_subset check explicitly. Still, it's clear and concise.", 'weighted': 4.1345877010462395}
+------------------[82]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.24514402}, {'token': '1', 'bytes': [49], 'logprob': -1.552683}, {'token': '3', 'bytes': [51], 'logprob': -5.1681824}, {'token': '4', 'bytes': [52], 'logprob': -10.353397}, {'token': '5', 'bytes': [53], 'logprob': -13.459713}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment vague, doesn't mention checking IDs, handling errors, or storing. Lacks detail, not fully accurate.", 'weighted': 1.7940823234979617}
+------------------[83]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.6721556}, {'token': '4', 'bytes': [52], 'logprob': -0.8738234}, {'token': '2', 'bytes': [50], 'logprob': -2.6671278}, {'token': '5', 'bytes': [53], 'logprob': -6.0577106}, {'token': '1', 'bytes': [49], 'logprob': -8.301937}]
+FINAL {'Comprehensiveness': '3', 'Thought process': "Comment summarizes code but lacks clarity on 'full mapping' and process details. Not entirely concise or clear.", 'weighted': 3.3520809609073163}
+------------------[84]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.89561373}, {'token': '3', 'bytes': [51], 'logprob': -1.2509127}, {'token': '4', 'bytes': [52], 'logprob': -1.369092}, {'token': '1', 'bytes': [49], 'logprob': -3.1129103}, {'token': '5', 'bytes': [53], 'logprob': -5.0228777}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment mentions 'Device Marks a Command as Rejected' but lacks clarity on method's function. Includes unnecessary URL, not concise.", 'weighted': 2.77019432797291}
+------------------[85]--------------------
+[Validation] ---- [200_python_test.jsonl]
+------------------[85]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.035844278}, {'token': '5', 'bytes': [53], 'logprob': -3.4617572}, {'token': '3', 'bytes': [51], 'logprob': -5.5695395}, {'token': '2', 'bytes': [50], 'logprob': -10.761722}, {'token': '1', 'bytes': [49], 'logprob': -14.0713415}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes code well, minor typo 'Santizes' instead of 'Sanitizes', but meaning is clear and concise.", 'weighted': 4.027514866208118}
+------------------[86]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.08280681}, {'token': '3', 'bytes': [51], 'logprob': -2.8418915}, {'token': '5', 'bytes': [53], 'logprob': -3.8822834}, {'token': '2', 'bytes': [50], 'logprob': -7.51381}, {'token': '1', 'bytes': [49], 'logprob': -12.003581}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Read code, identifies signal handling. Comment matches code function but lacks detail on 'print_method' and 'pass_along' effects.", 'weighted': 3.9611773871511207}
+------------------[87]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.25743163}, {'token': '1', 'bytes': [49], 'logprob': -1.7967192}, {'token': '3', 'bytes': [51], 'logprob': -2.8141522}, {'token': '4', 'bytes': [52], 'logprob': -6.769131}, {'token': '5', 'bytes': [53], 'logprob': -10.909495}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment vague, doesn't mention conditional checks or sets. Correct but not specific to code functionality.", 'weighted': 1.896463816368104}
+------------------[88]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.3308008}, {'token': '3', 'bytes': [51], 'logprob': -1.3459165}, {'token': '1', 'bytes': [49], 'logprob': -4.127865}, {'token': '4', 'bytes': [52], 'logprob': -5.25861}, {'token': '5', 'bytes': [53], 'logprob': -10.43997}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is somewhat vague, doesn't mention mapping/indexing process or creation of Wmapped. Lacks detail on method's operation.", 'weighted': 2.254673175074387}
+------------------[89]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.6099519}, {'token': '1', 'bytes': [49], 'logprob': -0.7840356}, {'token': '3', 'bytes': [51], 'logprob': -9.671998}, {'token': '4', 'bytes': [52], 'logprob': -15.712876}, {'token': '5', 'bytes': [53], 'logprob': -17.526068}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment vague, doesn't describe error handling or response. Not comprehensive, lacks detail on process and outcomes.", 'weighted': 1.543503599160809}
+------------------[90]--------------------
+TOP_LOGPROBS [{'token': '5', 'bytes': [53], 'logprob': -0.26561454}, {'token': '4', 'bytes': [52], 'logprob': -1.4571505}, {'token': '3', 'bytes': [51], 'logprob': -7.978732}, {'token': '2', 'bytes': [50], 'logprob': -10.972459}, {'token': '1', 'bytes': [49], 'logprob': -12.451793}]
+FINAL {'Comprehensiveness': '5', 'Thought process': 'Comment matches code function, is correct and concise. No redundant info.', 'weighted': 4.766335251109317}
+------------------[91]--------------------
+[Validation] ---- [200_python_test.jsonl]
+------------------[91]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.14241868}, {'token': '5', 'bytes': [53], 'logprob': -2.4439113}, {'token': '3', 'bytes': [51], 'logprob': -3.1177223}, {'token': '2', 'bytes': [50], 'logprob': -6.440242}, {'token': '1', 'bytes': [49], 'logprob': -9.949193}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes function well, but doesn't mention coordinate pointers or dimension. Mostly clear and concise.", 'weighted': 4.039148719160619}
+------------------[92]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.31897968}, {'token': '2', 'bytes': [50], 'logprob': -1.5760484}, {'token': '4', 'bytes': [52], 'logprob': -2.7162328}, {'token': '1', 'bytes': [49], 'logprob': -8.992249}, {'token': '5', 'bytes': [53], 'logprob': -9.552366}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment summarizes function but lacks detail on error handling and caching. Correct but not fully comprehensive.', 'weighted': 2.8592253164674806}
+------------------[93]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.10700169}, {'token': '1', 'bytes': [49], 'logprob': -2.9615474}, {'token': '3', 'bytes': [51], 'logprob': -3.0224223}, {'token': '4', 'bytes': [52], 'logprob': -6.870416}, {'token': '5', 'bytes': [53], 'logprob': -11.080657}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment lists file references, but doesn't explain method's purpose or exception. Lacks clarity on method's main functionality.", 'weighted': 1.9990657722605496}
+------------------[94]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.5356233}, {'token': '3', 'bytes': [51], 'logprob': -1.0508897}, {'token': '2', 'bytes': [50], 'logprob': -2.804283}, {'token': '5', 'bytes': [53], 'logprob': -5.4825077}, {'token': '1', 'bytes': [49], 'logprob': -7.9344864}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes code's function. Minor details missing, like UNC path handling. Still, clear and concise. Almost perfect.", 'weighted': 3.5323500216342514}
+------------------[95]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.12655517}, {'token': '3', 'bytes': [51], 'logprob': -2.522868}, {'token': '5', 'bytes': [53], 'logprob': -3.3513114}, {'token': '2', 'bytes': [50], 'logprob': -5.6345696}, {'token': '1', 'bytes': [49], 'logprob': -10.3066225}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Comment explains function purpose and parameters. Minor clarity issues, but overall comprehensive. Not perfectly concise, but no major redundancy.', 'weighted': 3.9475593966259606}
+------------------[96]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.7395163}, {'token': '2', 'bytes': [50], 'logprob': -1.0027838}, {'token': '4', 'bytes': [52], 'logprob': -1.9088583}, {'token': '1', 'bytes': [49], 'logprob': -5.0860586}, {'token': '5', 'bytes': [53], 'logprob': -6.5979147}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment describes purpose but not how headers are handled (regex). Slightly misleading (not a list). Average comprehensiveness.', 'weighted': 2.771744342998064}
+------------------[97]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.3562523}, {'token': '3', 'bytes': [51], 'logprob': -1.7827736}, {'token': '5', 'bytes': [53], 'logprob': -2.1824698}, {'token': '2', 'bytes': [50], 'logprob': -4.00757}, {'token': '1', 'bytes': [49], 'logprob': -7.439031}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment is clear, concise, and mostly accurate. Misses details about 'types' and 'methods' parameters but captures main functionality.", 'weighted': 3.9064531410889627}
+------------------[98]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.66524655}, {'token': '3', 'bytes': [51], 'logprob': -0.91825825}, {'token': '4', 'bytes': [52], 'logprob': -2.5736556}, {'token': '1', 'bytes': [49], 'logprob': -4.638572}, {'token': '5', 'bytes': [53], 'logprob': -7.2713923}]
+FINAL {'Comprehensiveness': '2', 'Thought process': 'Comment gives purpose but lacks detail on timeouts. Not fully comprehensive, missing how timeouts affect locking.', 'weighted': 2.5441071052246236}
+------------------[99]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.20601207}, {'token': '5', 'bytes': [53], 'logprob': -2.3731472}, {'token': '3', 'bytes': [51], 'logprob': -2.429826}, {'token': '2', 'bytes': [50], 'logprob': -5.3241363}, {'token': '1', 'bytes': [49], 'logprob': -9.662173}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes code's function (generating points on hypersphere). Minor details omitted (normal distribution, seed), but main purpose clear.", 'weighted': 3.99519316284005}
+------------------[100]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.62617934}, {'token': '4', 'bytes': [52], 'logprob': -0.88261855}, {'token': '2', 'bytes': [50], 'logprob': -2.9760423}, {'token': '5', 'bytes': [53], 'logprob': -7.4175344}, {'token': '1', 'bytes': [49], 'logprob': -9.485944}]
+FINAL {'Comprehensiveness': '3', 'Thought process': "Comment summarizes code purpose but lacks detail on how it's determined. Correct but not fully concise or complete.", 'weighted': 3.36375200943036}
+------------------[101]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.7459396}, {'token': '3', 'bytes': [51], 'logprob': -1.1009487}, {'token': '2', 'bytes': [50], 'logprob': -1.8100704}, {'token': '1', 'bytes': [49], 'logprob': -4.2002854}, {'token': '5', 'bytes': [53], 'logprob': -4.232737}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Code registers a function to run before each request. Comment is clear and correct but slightly verbose.', 'weighted': 3.309659717466052}
+------------------[102]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.09451829}, {'token': '3', 'bytes': [51], 'logprob': -2.8810477}, {'token': '1', 'bytes': [49], 'logprob': -3.4076667}, {'token': '4', 'bytes': [52], 'logprob': -6.9146914}, {'token': '5', 'bytes': [53], 'logprob': -13.707991}]
+FINAL {'Comprehensiveness': '2', 'Thought process': 'Comment mentions fetching genes, not exons. Args described, but main function not accurately summarized. Lacks detail on data attributes and filters.', 'weighted': 2.024946436279797}
+------------------[103]--------------------
+TOP_LOGPROBS [{'token': '1', 'bytes': [49], 'logprob': -0.053005844}, {'token': '2', 'bytes': [50], 'logprob': -2.9642017}, {'token': '3', 'bytes': [51], 'logprob': -10.674611}, {'token': '0', 'bytes': [48], 'logprob': -15.638339}, {'token': '4', 'bytes': [52], 'logprob': -15.922532}]
+FINAL {'Comprehensiveness': '1', 'Thought process': "Comment vague, doesn't describe function's purpose or behavior. Lacks detail, not comprehensive.", 'weighted': 1.0516476233453822}
+------------------[104]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.7141112}, {'token': '4', 'bytes': [52], 'logprob': -1.2968825}, {'token': '2', 'bytes': [50], 'logprob': -1.4741896}, {'token': '5', 'bytes': [53], 'logprob': -5.0987988}, {'token': '1', 'bytes': [49], 'logprob': -6.25494}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Read code, identified bidirectional GRU. Comment brief, lacks detail on sequence handling, layers, but correctly identifies CuDNN GRU. Not fully comprehensive.', 'weighted': 3.0527819655860466}
+------------------[105]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.066034645}, {'token': '3', 'bytes': [51], 'logprob': -3.1293833}, {'token': '5', 'bytes': [53], 'logprob': -3.923958}, {'token': '2', 'bytes': [50], 'logprob': -7.849406}, {'token': '1', 'bytes': [49], 'logprob': -12.496433}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Comment summarizes function. Minor details missing, but main purpose clear. Concise, no redundancy. Almost perfect.', 'weighted': 3.9752253309653462}
+------------------[106]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.36074027}, {'token': '1', 'bytes': [49], 'logprob': -1.3766953}, {'token': '3', 'bytes': [51], 'logprob': -3.0470195}, {'token': '4', 'bytes': [52], 'logprob': -5.8830314}, {'token': '5', 'bytes': [53], 'logprob': -8.913149}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment describes syntax, not the function's action. Lacks clarity on action performed. Partially correct, not concise.", 'weighted': 1.8010506217215816}
+------------------[107]--------------------
+TOP_LOGPROBS [{'token': '1', 'bytes': [49], 'logprob': -0.5201454}, {'token': '2', 'bytes': [50], 'logprob': -0.9533787}, {'token': '3', 'bytes': [51], 'logprob': -3.9208107}, {'token': '4', 'bytes': [52], 'logprob': -8.194498}, {'token': '5', 'bytes': [53], 'logprob': -10.536621}]
+FINAL {'Comprehensiveness': '1', 'Thought process': "Comment lacks detail, doesn't mention NotImplementedError, not comprehensive. Incorrect as it implies code generation which isn't happening.", 'weighted': 1.4260196591694978}
+------------------[108]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.050216816}, {'token': '1', 'bytes': [49], 'logprob': -3.4548151}, {'token': '3', 'bytes': [51], 'logprob': -4.057741}, {'token': '4', 'bytes': [52], 'logprob': -9.269806}, {'token': '5', 'bytes': [53], 'logprob': -13.497883}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is too vague, doesn't describe steps or structure. Lacks detail on stream processing stages.", 'weighted': 1.9858874181589952}
+------------------[109]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.4622527}, {'token': '4', 'bytes': [52], 'logprob': -1.1970378}, {'token': '2', 'bytes': [50], 'logprob': -2.6931925}, {'token': '5', 'bytes': [53], 'logprob': -8.129018}, {'token': '1', 'bytes': [49], 'logprob': -9.323686}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment summarizes code purpose but lacks clarity on type conversion and omits key details like handling different class names.', 'weighted': 3.2348331111189412}
+------------------[110]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.25610635}, {'token': '3', 'bytes': [51], 'logprob': -1.6271601}, {'token': '1', 'bytes': [49], 'logprob': -3.8433523}, {'token': '4', 'bytes': [52], 'logprob': -4.83134}, {'token': '5', 'bytes': [53], 'logprob': -9.856439}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment vague, doesn't explain 'envelope' or how expansion works. Code handles tuples, comment doesn't specify.", 'weighted': 2.1911666606145803}
+------------------[111]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.65755963}, {'token': '1', 'bytes': [49], 'logprob': -0.7375004}, {'token': '3', 'bytes': [51], 'logprob': -5.6422415}, {'token': '4', 'bytes': [52], 'logprob': -10.387357}, {'token': '5', 'bytes': [53], 'logprob': -13.246469}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment warns not to overwrite method but doesn't summarize what the code does. Lacks clarity and correctness.", 'weighted': 1.5253032200516474}
+------------------[112]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.24287905}, {'token': '3', 'bytes': [51], 'logprob': -1.5514671}, {'token': '1', 'bytes': [49], 'logprob': -6.137038}, {'token': '4', 'bytes': [52], 'logprob': -6.481435}, {'token': '5', 'bytes': [53], 'logprob': -12.572164}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is too vague, doesn't mention parsing HTML, extracting data, or creating JSON. Lacks detail on process and error handling.", 'weighted': 2.2128482906006157}
+------------------[113]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.027645867}, {'token': '1', 'bytes': [49], 'logprob': -3.8754547}, {'token': '3', 'bytes': [51], 'logprob': -5.0340204}, {'token': '4', 'bytes': [52], 'logprob': -11.589078}, {'token': '5', 'bytes': [53], 'logprob': -15.528934}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment vague, doesn't mention creation/storage of formatters. Not wrong, but lacks detail. Not fully comprehensive.", 'weighted': 1.985786160570476}
+------------------[114]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.32879072}, {'token': '1', 'bytes': [49], 'logprob': -1.2893581}, {'token': '3', 'bytes': [51], 'logprob': -5.3513584}, {'token': '4', 'bytes': [52], 'logprob': -11.008366}, {'token': '5', 'bytes': [53], 'logprob': -14.894665}]
+FINAL {'Comprehensiveness': '2', 'Thought process': 'Comment suggests single format; code handles multiple formats. Comment is clear but not accurate. Lacks detail on regex and format handling.', 'weighted': 1.7293278810371273}
+------------------[115]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.109103076}, {'token': '3', 'bytes': [51], 'logprob': -2.503739}, {'token': '1', 'bytes': [49], 'logprob': -3.9142578}, {'token': '4', 'bytes': [52], 'logprob': -6.4279203}, {'token': '5', 'bytes': [53], 'logprob': -11.363801}]
+FINAL {'Comprehensiveness': '2', 'Thought process': 'Comment mentions evaluating a file, but not execution or context. Lacks clarity on process and result.', 'weighted': 2.0650885752299954}
+------------------[116]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.40188047}, {'token': '3', 'bytes': [51], 'logprob': -1.1482279}, {'token': '2', 'bytes': [50], 'logprob': -4.4523716}, {'token': '5', 'bytes': [53], 'logprob': -6.2013187}, {'token': '1', 'bytes': [49], 'logprob': -9.686884}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes code well, but omits 'FANTASY_PRIMARY_NODE' detail. Not perfect, but clear and concise.", 'weighted': 3.6613356708771114}
+------------------[117]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.6284562}, {'token': '3', 'bytes': [51], 'logprob': -0.7759705}, {'token': '4', 'bytes': [52], 'logprob': -5.130432}, {'token': '1', 'bytes': [49], 'logprob': -7.799732}, {'token': '5', 'bytes': [53], 'logprob': -12.415556}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment describes schema versions and digest usage. Omits 'config' and blob retrieval details. Partially correct, not concise.", 'weighted': 2.4716860972280807}
+------------------[118]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.2059727}, {'token': '5', 'bytes': [53], 'logprob': -2.181984}, {'token': '3', 'bytes': [51], 'logprob': -2.6916142}, {'token': '2', 'bytes': [50], 'logprob': -5.2748947}, {'token': '1', 'bytes': [49], 'logprob': -7.7785816}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment is clear, concise, and correct. Misses 'async' detail, but not critical for understanding main action.", 'weighted': 4.033478529665144}
+------------------[119]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.5011819}, {'token': '3', 'bytes': [51], 'logprob': -0.98586017}, {'token': '4', 'bytes': [52], 'logprob': -4.0685687}, {'token': '1', 'bytes': [49], 'logprob': -5.5441737}, {'token': '5', 'bytes': [53], 'logprob': -9.82344}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is vague, doesn't explain 'correct_date' context or 'wraps'. Lacks detail on how timestamp is disabled.", 'weighted': 2.40357128365123}
+------------------[120]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.3849262}, {'token': '4', 'bytes': [52], 'logprob': -1.451609}, {'token': '2', 'bytes': [50], 'logprob': -2.4642587}, {'token': '5', 'bytes': [53], 'logprob': -8.993723}, {'token': '1', 'bytes': [49], 'logprob': -9.126488}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment summarizes code purpose but omits deprecation warning detail. Correct but not fully comprehensive.', 'weighted': 3.1491486846748105}
+------------------[121]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.17147599}, {'token': '3', 'bytes': [51], 'logprob': -2.5393786}, {'token': '5', 'bytes': [53], 'logprob': -2.6402907}, {'token': '2', 'bytes': [50], 'logprob': -4.9501433}, {'token': '1', 'bytes': [49], 'logprob': -8.350416}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Code replaces part of URL for archiving. Comment explains purpose but not 'how'. Slightly lacks 'how' detail for full score.", 'weighted': 3.977531970324923}
+------------------[122]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.36555088}, {'token': '3', 'bytes': [51], 'logprob': -1.2911891}, {'token': '5', 'bytes': [53], 'logprob': -4.084507}, {'token': '2', 'bytes': [50], 'logprob': -4.248358}, {'token': '1', 'bytes': [49], 'logprob': -9.035147}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Code removes a websocket subscriber from list and events. Comment is concise and correct but lacks detail on event removal.', 'weighted': 3.712939981513359}
+------------------[123]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.70421666}, {'token': '3', 'bytes': [51], 'logprob': -0.8306567}, {'token': '2', 'bytes': [50], 'logprob': -2.8076541}, {'token': '5', 'bytes': [53], 'logprob': -4.693503}, {'token': '1', 'bytes': [49], 'logprob': -8.3409815}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes the function's purpose. Minor details missing but main idea clear. Concise, no redundancy, slight lack of detail.", 'weighted': 3.451976335615234}
+------------------[124]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.658116}, {'token': '2', 'bytes': [50], 'logprob': -1.0394255}, {'token': '4', 'bytes': [52], 'logprob': -2.0682244}, {'token': '1', 'bytes': [49], 'logprob': -6.594746}, {'token': '5', 'bytes': [53], 'logprob': -7.211634}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Code defines plot method. Comment describes plotting but omits details about metric handling and algo checks. Somewhat comprehensive.', 'weighted': 2.7714910316533103}
+------------------[125]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.05151487}, {'token': '3', 'bytes': [51], 'logprob': -3.115083}, {'token': '1', 'bytes': [49], 'logprob': -5.1633735}, {'token': '4', 'bytes': [52], 'logprob': -9.092893}, {'token': '5', 'bytes': [53], 'logprob': -14.197425}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is too vague, doesn't mention source or conditionals. Lacks detail on JSON formatting and error handling.", 'weighted': 2.0388791490673293}
+------------------[126]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.058030825}, {'token': '1', 'bytes': [49], 'logprob': -2.904312}, {'token': '3', 'bytes': [51], 'logprob': -6.4433913}, {'token': '4', 'bytes': [52], 'logprob': -13.390383}, {'token': '5', 'bytes': [53], 'logprob': -16.923075}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment vague, doesn't describe HTML generation or URL handling. Correct but not concise or specific to code functionality.", 'weighted': 1.946807539040633}
+------------------[127]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.03751161}, {'token': '3', 'bytes': [51], 'logprob': -3.4849203}, {'token': '1', 'bytes': [49], 'logprob': -5.101139}, {'token': '4', 'bytes': [52], 'logprob': -9.5651455}, {'token': '5', 'bytes': [53], 'logprob': -14.691336}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment vague, doesn't mention schema or warning. Not wrong but lacks detail. Not fully comprehensive, somewhat concise.", 'weighted': 2.0247074880433904}
+------------------[128]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.48157814}, {'token': '2', 'bytes': [50], 'logprob': -1.1111882}, {'token': '4', 'bytes': [52], 'logprob': -2.961097}, {'token': '1', 'bytes': [49], 'logprob': -6.779079}, {'token': '5', 'bytes': [53], 'logprob': -8.989102}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment summarizes code function but lacks detail on version check and get_ipython replacement. Not fully comprehensive.', 'weighted': 2.7205676729513306}
+------------------[129]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.048794474}, {'token': '3', 'bytes': [51], 'logprob': -3.333989}, {'token': '1', 'bytes': [49], 'logprob': -4.439139}, {'token': '4', 'bytes': [52], 'logprob': -8.706132}, {'token': '5', 'bytes': [53], 'logprob': -14.181212}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is too vague, doesn't mention filtering or output conditions. Lacks detail on the code's functionality.", 'weighted': 2.0241773653497517}
+------------------[130]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.22424921}, {'token': '1', 'bytes': [49], 'logprob': -1.623917}, {'token': '3', 'bytes': [51], 'logprob': -5.5877614}, {'token': '4', 'bytes': [52], 'logprob': -11.112251}, {'token': '5', 'bytes': [53], 'logprob': -14.58989}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is too vague, doesn't describe how or what augmentations. Code has multiple conditional augmentations.", 'weighted': 1.8066491833841902}
+------------------[131]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.21543851}, {'token': '3', 'bytes': [51], 'logprob': -1.9797379}, {'token': '5', 'bytes': [53], 'logprob': -3.2416475}, {'token': '2', 'bytes': [50], 'logprob': -4.1114707}, {'token': '1', 'bytes': [49], 'logprob': -8.440292}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Comment summarizes code purpose. Minor detail missing about non-zero condition. Otherwise, clear and concise.', 'weighted': 3.8675480931847854}
+------------------[132]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.566914}, {'token': '3', 'bytes': [51], 'logprob': -1.0581384}, {'token': '2', 'bytes': [50], 'logprob': -2.5358815}, {'token': '5', 'bytes': [53], 'logprob': -5.265328}, {'token': '1', 'bytes': [49], 'logprob': -6.6760125}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Code adds modules to skip list. Comment explains purpose but omits traceback modification. Clear but not fully comprehensive.', 'weighted': 3.495880548659005}
+------------------[133]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.15439397}, {'token': '3', 'bytes': [51], 'logprob': -2.6364381}, {'token': '5', 'bytes': [53], 'logprob': -2.6744916}, {'token': '2', 'bytes': [50], 'logprob': -6.0064983}, {'token': '1', 'bytes': [49], 'logprob': -10.03306}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes code function. Minor details missing, but overall clear. Not perfect due to lack of detail on 'sizes', 'validate_args'.", 'weighted': 3.99226377041338}
+------------------[134]--------------------
+TOP_LOGPROBS [{'token': '5', 'bytes': [53], 'logprob': -0.19954489}, {'token': '4', 'bytes': [52], 'logprob': -1.7102909}, {'token': '3', 'bytes': [51], 'logprob': -9.430059}, {'token': '2', 'bytes': [50], 'logprob': -12.929007}, {'token': '1', 'bytes': [49], 'logprob': -15.426218}]
+FINAL {'Comprehensiveness': '5', 'Thought process': 'Comment matches code function. Correct and concise. No redundant info. Explains code purpose clearly.', 'weighted': 4.819015874206143}
+------------------[135]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.42978436}, {'token': '3', 'bytes': [51], 'logprob': -1.1196036}, {'token': '2', 'bytes': [50], 'logprob': -4.0603137}, {'token': '5', 'bytes': [53], 'logprob': -5.1764655}, {'token': '1', 'bytes': [49], 'logprob': -9.919529}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Comment describes plotting function and diagnostic use. Minor details missing, but main purpose clear. Concise and correct.', 'weighted': 3.6446011064504376}
+------------------[136]--------------------
+TOP_LOGPROBS [{'token': '1', 'bytes': [49], 'logprob': -0.41656014}, {'token': '2', 'bytes': [50], 'logprob': -1.0793524}, {'token': '3', 'bytes': [51], 'logprob': -7.053355}, {'token': '4', 'bytes': [52], 'logprob': -12.089234}, {'token': '5', 'bytes': [53], 'logprob': -14.009776}]
+FINAL {'Comprehensiveness': '1', 'Thought process': "Comment vague, doesn't explain logic or parameters. Lacks clarity and correctness. Not concise or accurate.", 'weighted': 1.34156200550244}
+------------------[137]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.80379486}, {'token': '3', 'bytes': [51], 'logprob': -0.81142616}, {'token': '4', 'bytes': [52], 'logprob': -2.2627945}, {'token': '1', 'bytes': [49], 'logprob': -5.6713295}, {'token': '5', 'bytes': [53], 'logprob': -7.345333}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is too vague, doesn't mention handling of merged cells or lists/tables within cells. Not fully accurate.", 'weighted': 2.6508347624043895}
+------------------[138]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.14061949}, {'token': '5', 'bytes': [53], 'logprob': -2.1672957}, {'token': '3', 'bytes': [51], 'logprob': -4.1188297}, {'token': '2', 'bytes': [50], 'logprob': -7.7703304}, {'token': '1', 'bytes': [49], 'logprob': -11.8063755}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment explains PUT function, creation, and header setting. Misses 'request' method details. Concise, minor detail omission.", 'weighted': 4.097355614415986}
+------------------[139]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.60454005}, {'token': '3', 'bytes': [51], 'logprob': -0.8927614}, {'token': '2', 'bytes': [50], 'logprob': -3.196091}, {'token': '5', 'bytes': [53], 'logprob': -5.7703056}, {'token': '1', 'bytes': [49], 'logprob': -9.116272}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes code's purpose. Minor details missing, but main function clear. Correct and concise, but lacks exception handling mention.", 'weighted': 3.511420197334172}
+------------------[140]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.20782754}, {'token': '3', 'bytes': [51], 'logprob': -1.6912146}, {'token': '4', 'bytes': [52], 'logprob': -6.022191}, {'token': '1', 'bytes': [49], 'logprob': -6.9835844}, {'token': '5', 'bytes': [53], 'logprob': -12.066903}]
+FINAL {'Comprehensiveness': '2', 'Thought process': 'Read code, identifies option resolution with conditions. Comment vague, lacks detail on conditions and environment/conf fallback. Not fully comprehensive.', 'weighted': 2.188233987561007}
+------------------[141]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.51449287}, {'token': '2', 'bytes': [50], 'logprob': -1.2463998}, {'token': '4', 'bytes': [52], 'logprob': -2.1946192}, {'token': '1', 'bytes': [49], 'logprob': -6.0246973}, {'token': '5', 'bytes': [53], 'logprob': -7.08871}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment is concise, but lacks detail on process and purpose of dot product in this context.', 'weighted': 2.820681855518008}
+------------------[142]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.031876106}, {'token': '1', 'bytes': [49], 'logprob': -3.6058145}, {'token': '3', 'bytes': [51], 'logprob': -5.47292}, {'token': '4', 'bytes': [52], 'logprob': -11.627439}, {'token': '5', 'bytes': [53], 'logprob': -15.991712}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is too vague, doesn't explain logic or potential exception. Lacks detail on operation class instantiation.", 'weighted': 1.9770515722305955}
+------------------[143]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.05620427}, {'token': '3', 'bytes': [51], 'logprob': -3.088326}, {'token': '1', 'bytes': [49], 'logprob': -4.715874}, {'token': '4', 'bytes': [52], 'logprob': -9.002579}, {'token': '5', 'bytes': [53], 'logprob': -14.819265}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is too vague, doesn't explain logic or outcomes. Lacks detail on API version impact. Not entirely incorrect, but not comprehensive.", 'weighted': 2.036872824902873}
+------------------[144]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.11075017}, {'token': '3', 'bytes': [51], 'logprob': -2.267046}, {'token': '5', 'bytes': [53], 'logprob': -6.890522}, {'token': '2', 'bytes': [50], 'logprob': -8.508318}, {'token': '1', 'bytes': [49], 'logprob': -14.428743}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Comment summarizes main action (decode data). Includes conditional flushing. Lacks error handling detail. Concise, no redundancy. Almost complete.', 'weighted': 3.8969939046416617}
+------------------[145]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.25634807}, {'token': '3', 'bytes': [51], 'logprob': -1.6946263}, {'token': '5', 'bytes': [53], 'logprob': -3.6296144}, {'token': '2', 'bytes': [50], 'logprob': -4.143975}, {'token': '1', 'bytes': [49], 'logprob': -9.531549}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Comment summarizes main action but omits details like pagination, error handling, and tweet data extraction.', 'weighted': 3.8109177488849504}
+------------------[146]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.6922004}, {'token': '3', 'bytes': [51], 'logprob': -0.7370231}, {'token': '4', 'bytes': [52], 'logprob': -3.9050605}, {'token': '1', 'bytes': [49], 'logprob': -7.100581}, {'token': '5', 'bytes': [53], 'logprob': -10.59022}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment is concise, but lacks detail on error handling and yEnc specifics. Correctness is good, not fully comprehensive.', 'weighted': 2.518065659329524}
+------------------[147]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.16271007}, {'token': '5', 'bytes': [53], 'logprob': -1.9382247}, {'token': '3', 'bytes': [51], 'logprob': -5.1025524}, {'token': '2', 'bytes': [50], 'logprob': -9.036121}, {'token': '1', 'bytes': [49], 'logprob': -12.956661}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Code creates AST nodes for attributes. Comment concise, correct, but 'recursive' could confuse without code context.", 'weighted': 4.1376306933339535}
+------------------[148]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.3038046}, {'token': '3', 'bytes': [51], 'logprob': -1.356888}, {'token': '2', 'bytes': [50], 'logprob': -5.5759354}, {'token': '5', 'bytes': [53], 'logprob': -7.2138996}, {'token': '1', 'bytes': [49], 'logprob': -11.552813}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Comment summarizes code well, mentions temp file, but omits encoding handling. Slightly less concise due to extra note.', 'weighted': 3.7356693545313564}
+------------------[149]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.2457414}, {'token': '3', 'bytes': [51], 'logprob': -1.7483907}, {'token': '2', 'bytes': [50], 'logprob': -3.2328038}, {'token': '5', 'bytes': [53], 'logprob': -5.895722}, {'token': '1', 'bytes': [49], 'logprob': -6.4239717}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes function well but omits error handling and logging, which are part of function's behavior.", 'weighted': 3.744930926142319}
+------------------[150]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.23473823}, {'token': '4', 'bytes': [52], 'logprob': -2.2498941}, {'token': '2', 'bytes': [50], 'logprob': -2.280076}, {'token': '1', 'bytes': [49], 'logprob': -7.0993605}, {'token': '5', 'bytes': [53], 'logprob': -7.2552137}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment is concise and correct but lacks detail on JSON loading and return structure. Adequate for quick understanding.', 'weighted': 3.002885927578941}
+------------------[151]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.8565595}, {'token': '3', 'bytes': [51], 'logprob': -0.9277952}, {'token': '4', 'bytes': [52], 'logprob': -1.7982767}, {'token': '1', 'bytes': [49], 'logprob': -4.507574}, {'token': '5', 'bytes': [53], 'logprob': -5.7017956}]
+FINAL {'Comprehensiveness': '2', 'Thought process': 'Code checks signature validity. Comment mentions certificates, not in code. Lacks clarity on error handling. Partially correct, not concise.', 'weighted': 2.7255756664643713}
+------------------[152]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.4816548}, {'token': '5', 'bytes': [53], 'logprob': -1.022617}, {'token': '3', 'bytes': [51], 'logprob': -3.8716447}, {'token': '2', 'bytes': [50], 'logprob': -6.3919406}, {'token': '1', 'bytes': [49], 'logprob': -9.3799}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Code returns learning rates. Comment concise, correct, but doesn't mention exception. Almost perfect, slight detail missing.", 'weighted': 4.33521027222967}
+------------------[153]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.1075278}, {'token': '3', 'bytes': [51], 'logprob': -2.6752977}, {'token': '5', 'bytes': [53], 'logprob': -3.4705534}, {'token': '2', 'bytes': [50], 'logprob': -6.2420835}, {'token': '1', 'bytes': [49], 'logprob': -11.078914}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Code deletes a team by name. Comment concise, correct, but lacks detail on error handling. Almost perfect.', 'weighted': 3.9582712838599345}
+------------------[154]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.34147432}, {'token': '2', 'bytes': [50], 'logprob': -1.922857}, {'token': '4', 'bytes': [52], 'logprob': -1.9497926}, {'token': '1', 'bytes': [49], 'logprob': -7.8156757}, {'token': '5', 'bytes': [53], 'logprob': -7.8716984}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment is concise, correct but lacks detail on error handling and setting currency/source.', 'weighted': 2.9960671854309138}
+------------------[155]--------------------
+TOP_LOGPROBS [{'token': '1', 'bytes': [49], 'logprob': -0.00038479414}, {'token': '2', 'bytes': [50], 'logprob': -7.863857}, {'token': '3', 'bytes': [51], 'logprob': -15.363891}, {'token': '0', 'bytes': [48], 'logprob': -17.165157}, {'token': '",', 'bytes': [34, 44], 'logprob': -18.26203}]
+FINAL {'Comprehensiveness': '1', 'Thought process': "Comment describes 'get' operation, but code is for 'delete'. Incorrect and not concise. Misleading information.", 'weighted': 1.000384694504531}
+------------------[156]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.36864978}, {'token': '5', 'bytes': [53], 'logprob': -1.1908925}, {'token': '3', 'bytes': [51], 'logprob': -5.4507804}, {'token': '2', 'bytes': [50], 'logprob': -9.37246}, {'token': '1', 'bytes': [49], 'logprob': -12.7448}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes code's purpose. Minor details omitted, but main function clear. Concise, correct, but could mention return value for full clarity.", 'weighted': 4.299471598882195}
+------------------[157]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.09869692}, {'token': '3', 'bytes': [51], 'logprob': -2.4642518}, {'token': '5', 'bytes': [53], 'logprob': -4.8272696}, {'token': '2', 'bytes': [50], 'logprob': -7.015094}, {'token': '1', 'bytes': [49], 'logprob': -12.592223}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes function well, but 'held buttons' is vague. Could mention 'self.move' for clarity. Otherwise, concise and correct.", 'weighted': 3.921128086267893}
+------------------[158]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.18538277}, {'token': '3', 'bytes': [51], 'logprob': -1.8576239}, {'token': '5', 'bytes': [53], 'logprob': -4.668503}, {'token': '2', 'bytes': [50], 'logprob': -5.5820503}, {'token': '1', 'bytes': [49], 'logprob': -10.862606}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes code's purpose. Minor details omitted, but main function clear. Concise, no redundancy, slight lack of detail for full score.", 'weighted': 3.845754173721259}
+------------------[159]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.06371519}, {'token': '3', 'bytes': [51], 'logprob': -2.857794}, {'token': '1', 'bytes': [49], 'logprob': -5.496954}, {'token': '4', 'bytes': [52], 'logprob': -8.366865}, {'token': '5', 'bytes': [53], 'logprob': -14.153778}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is too vague, doesn't mention authorization check or conditional database file presence. Lacks detail on data handling.", 'weighted': 2.0537626615986024}
+------------------[160]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.16759631}, {'token': '2', 'bytes': [50], 'logprob': -2.2750487}, {'token': '4', 'bytes': [52], 'logprob': -2.9679961}, {'token': '1', 'bytes': [49], 'logprob': -9.498218}, {'token': '5', 'bytes': [53], 'logprob': -10.365331}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment summarizes code but lacks detail on conditions and process. Not incorrect, but not fully comprehensive.', 'weighted': 2.9485266941168793}
+------------------[161]--------------------
+TOP_LOGPROBS [{'token': '1', 'bytes': [49], 'logprob': -0.16864163}, {'token': '2', 'bytes': [50], 'logprob': -1.8922744}, {'token': '3', 'bytes': [51], 'logprob': -5.456947}, {'token': '4', 'bytes': [52], 'logprob': -8.813938}, {'token': '5', 'bytes': [53], 'logprob': -10.07197}]
+FINAL {'Comprehensiveness': '1', 'Thought process': 'Comment is just a repetition of code, not explaining functionality or purpose. Lacks explanation, not comprehensive.', 'weighted': 1.1598743159227165}
+------------------[162]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.01674138}, {'token': '1', 'bytes': [49], 'logprob': -4.3472886}, {'token': '3', 'bytes': [51], 'logprob': -5.6125913}, {'token': '4', 'bytes': [52], 'logprob': -11.716544}, {'token': '5', 'bytes': [53], 'logprob': -15.51998}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is too vague. Doesn't mention key, max_depth, or error handling. Lacks detail on 'fast' criteria.", 'weighted': 1.9907261362840694}
+------------------[163]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.51598185}, {'token': '3', 'bytes': [51], 'logprob': -1.024399}, {'token': '1', 'bytes': [49], 'logprob': -3.6677992}, {'token': '4', 'bytes': [52], 'logprob': -3.9959471}, {'token': '5', 'bytes': [53], 'logprob': -8.8669815}]
+FINAL {'Comprehensiveness': '2', 'Thought process': 'Comment mentions starting a run and storage service, but omits wrap mode check and signal handling. Not fully comprehensive.', 'weighted': 2.3706624752911236}
+------------------[164]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.49354365}, {'token': '2', 'bytes': [50], 'logprob': -1.0808086}, {'token': '4', 'bytes': [52], 'logprob': -3.007187}, {'token': '1', 'bytes': [49], 'logprob': -7.227356}, {'token': '5', 'bytes': [53], 'logprob': -9.685127}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment summarizes the function but omits error handling and guest update details. Not fully comprehensive.', 'weighted': 2.7087795610403145}
+------------------[165]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.2919636}, {'token': '3', 'bytes': [51], 'logprob': -1.4500942}, {'token': '4', 'bytes': [52], 'logprob': -4.562145}, {'token': '1', 'bytes': [49], 'logprob': -4.8146324}, {'token': '5', 'bytes': [53], 'logprob': -9.161678}]
+FINAL {'Comprehensiveness': '2', 'Thought process': 'Comment is brief but misses details like resetting to original cursor. Not fully accurate or comprehensive.', 'weighted': 2.24762971879122}
+------------------[166]--------------------
+TOP_LOGPROBS [{'token': '1', 'bytes': [49], 'logprob': -0.15553144}, {'token': '2', 'bytes': [50], 'logprob': -1.9381471}, {'token': '3', 'bytes': [51], 'logprob': -9.580886}, {'token': '4', 'bytes': [52], 'logprob': -15.531035}, {'token': '0', 'bytes': [48], 'logprob': -17.508495}]
+FINAL {'Comprehensiveness': '1', 'Thought process': "Comment lacks detail, doesn't explain process or error handling. Not comprehensive, missing key points of code.", 'weighted': 1.14410892318785}
+------------------[167]--------------------
+TOP_LOGPROBS [{'token': '5', 'bytes': [53], 'logprob': -0.64843315}, {'token': '4', 'bytes': [52], 'logprob': -0.76598114}, {'token': '3', 'bytes': [51], 'logprob': -4.443685}, {'token': '2', 'bytes': [50], 'logprob': -7.6844897}, {'token': '1', 'bytes': [49], 'logprob': -10.070064}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Code imports parse_version or falls back to LooseVersion. Comment summarizes well but doesn't mention fallback explicitly.", 'weighted': 4.510052105429634}
+------------------[168]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.69050527}, {'token': '2', 'bytes': [50], 'logprob': -0.81827474}, {'token': '4', 'bytes': [52], 'logprob': -2.9031594}, {'token': '1', 'bytes': [49], 'logprob': -5.989608}, {'token': '5', 'bytes': [53], 'logprob': -8.952682}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Read code, identifies sum of MVNs. Comment brief, lacks detail on conditions and error. Partially comprehensive.', 'weighted': 2.6089026542959006}
+------------------[169]--------------------
+TOP_LOGPROBS [{'token': '5', 'bytes': [53], 'logprob': -0.036721554}, {'token': '4', 'bytes': [52], 'logprob': -3.325555}, {'token': '3', 'bytes': [51], 'logprob': -9.344789}, {'token': '2', 'bytes': [50], 'logprob': -11.699294}, {'token': '1', 'bytes': [49], 'logprob': -12.989224}]
+FINAL {'Comprehensiveness': '5', 'Thought process': 'Comment matches code function, correctly and concisely describes the crz gate application with control and target qubits.', 'weighted': 4.963813904065}
+------------------[170]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.17850845}, {'token': '1', 'bytes': [49], 'logprob': -1.812389}, {'token': '3', 'bytes': [51], 'logprob': -8.426861}, {'token': '4', 'bytes': [52], 'logprob': -15.213654}, {'token': '5', 'bytes': [53], 'logprob': -17.38319}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment vague, doesn't mention kwargs or validation. Not fully accurate or concise. Lacks detail on function's purpose.", 'weighted': 1.836955462288316}
+------------------[171]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.9566239}, {'token': '1', 'bytes': [49], 'logprob': -0.98889625}, {'token': '3', 'bytes': [51], 'logprob': -1.6053342}, {'token': '4', 'bytes': [52], 'logprob': -3.203021}, {'token': '5', 'bytes': [53], 'logprob': -6.0639887}]
+FINAL {'Comprehensiveness': '1', 'Thought process': "Comment unclear, missing context, doesn't explain '_wrap_node' or 'operator.methodcaller'. Not concise or correct.", 'weighted': 1.9170123719346222}
+------------------[172]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.38895366}, {'token': '4', 'bytes': [52], 'logprob': -1.5531611}, {'token': '2', 'bytes': [50], 'logprob': -2.2090106}, {'token': '5', 'bytes': [53], 'logprob': -7.4678245}, {'token': '1', 'bytes': [49], 'logprob': -8.201907}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Code maps types to xsd. Comment summarizes but lacks detail on conditions and return value. Correct but not fully comprehensive.', 'weighted': 3.1023578732316985}
+------------------[173]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.21251294}, {'token': '3', 'bytes': [51], 'logprob': -1.7075043}, {'token': '5', 'bytes': [53], 'logprob': -5.1949368}, {'token': '2', 'bytes': [50], 'logprob': -5.3908577}, {'token': '1', 'bytes': [49], 'logprob': -10.450991}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes code's function. Minor detail on ChangedInMarshmallow3Warning missing. Otherwise, clear and concise.", 'weighted': 3.8150205214173076}
+------------------[174]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.37682635}, {'token': '3', 'bytes': [51], 'logprob': -1.184535}, {'token': '2', 'bytes': [50], 'logprob': -4.997039}, {'token': '5', 'bytes': [53], 'logprob': -6.653533}, {'token': '1', 'bytes': [49], 'logprob': -10.468392}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Comment summarizes function well but omits wildcard handling and file existence check details.', 'weighted': 3.681797495791126}
+------------------[175]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.5784534}, {'token': '3', 'bytes': [51], 'logprob': -1.1063446}, {'token': '2', 'bytes': [50], 'logprob': -2.3167272}, {'token': '5', 'bytes': [53], 'logprob': -4.7314553}, {'token': '1', 'bytes': [49], 'logprob': -6.852202}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes function well, but lacks clarity on 's' and 'iterset' usage. No logical errors. Slightly unclear but mostly concise.", 'weighted': 3.477674193506656}
+------------------[176]--------------------
+TOP_LOGPROBS [{'token': '5', 'bytes': [53], 'logprob': -0.21294293}, {'token': '4', 'bytes': [52], 'logprob': -1.6559743}, {'token': '3', 'bytes': [51], 'logprob': -7.0881968}, {'token': '2', 'bytes': [50], 'logprob': -10.527377}, {'token': '",', 'bytes': [34, 44], 'logprob': -11.399205}]
+FINAL {'Comprehensiveness': '5', 'Thought process': 'Code handles server ping by logging and sending PONG. Comment accurately and concisely describes the function.', 'weighted': 4.807193451683392}
+------------------[177]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.20782259}, {'token': '3', 'bytes': [51], 'logprob': -1.7035272}, {'token': '1', 'bytes': [49], 'logprob': -5.3491993}, {'token': '4', 'bytes': [52], 'logprob': -7.0669727}, {'token': '5', 'bytes': [53], 'logprob': -12.738338}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is too vague, doesn't mention namespace changes. Lacks detail on condition and effect.", 'weighted': 2.179001059524599}
+------------------[178]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.13538045}, {'token': '3', 'bytes': [51], 'logprob': -2.3523757}, {'token': '5', 'bytes': [53], 'logprob': -3.6246822}, {'token': '2', 'bytes': [50], 'logprob': -5.345135}, {'token': '1', 'bytes': [49], 'logprob': -10.044583}]
+FINAL {'Comprehensiveness': '4', 'Thought process': 'Comment explains creation and initialization of instance. Minor clarity issues but overall comprehensive. Deducted 1 point for slight ambiguity.', 'weighted': 3.9218367398313556}
+------------------[179]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.12433262}, {'token': '3', 'bytes': [51], 'logprob': -2.5169375}, {'token': '5', 'bytes': [53], 'logprob': -3.3910525}, {'token': '2', 'bytes': [50], 'logprob': -6.007166}, {'token': '1', 'bytes': [49], 'logprob': -9.608637}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Code parses JSON from API response. Comment concise, correct, but doesn't mention yielding items. Minor detail missing.", 'weighted': 3.947818753791833}
+------------------[180]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.384712}, {'token': '3', 'bytes': [51], 'logprob': -1.2195108}, {'token': '4', 'bytes': [52], 'logprob': -3.953716}, {'token': '1', 'bytes': [49], 'logprob': -5.3575954}, {'token': '5', 'bytes': [53], 'logprob': -9.409859}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is concise but lacks detail on how delayed computations are handled. Doesn't mention error handling or promise.", 'weighted': 2.3292720772911486}
+------------------[181]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.20448758}, {'token': '3', 'bytes': [51], 'logprob': -2.021527}, {'token': '1', 'bytes': [49], 'logprob': -2.9902637}, {'token': '4', 'bytes': [52], 'logprob': -6.1275244}, {'token': '5', 'bytes': [53], 'logprob': -10.662736}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is vague, doesn't explain nested functions or how items are filtered. Lacks detail on 'specified function' usage.", 'weighted': 2.086607980316712}
+------------------[182]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.271411}, {'token': '5', 'bytes': [53], 'logprob': -1.9826841}, {'token': '3', 'bytes': [51], 'logprob': -2.379634}, {'token': '2', 'bytes': [50], 'logprob': -4.9270105}, {'token': '1', 'bytes': [49], 'logprob': -8.738221}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Code sets rate limit handling. Comment clear but doesn't mention 'value' determines enable/disable. Minor detail missing.", 'weighted': 4.030118203618528}
+------------------[183]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.28221112}, {'token': '4', 'bytes': [52], 'logprob': -1.6533773}, {'token': '2', 'bytes': [50], 'logprob': -2.9122808}, {'token': '5', 'bytes': [53], 'logprob': -9.130524}, {'token': '1', 'bytes': [49], 'logprob': -10.68338}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Read code, identifies text processing. Comment summarizes but misses default handling for cursor/justification. Not fully comprehensive, but main idea conveyed.', 'weighted': 3.1372206605423734}
+------------------[184]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.6479687}, {'token': '4', 'bytes': [52], 'logprob': -1.0069127}, {'token': '2', 'bytes': [50], 'logprob': -2.2146478}, {'token': '5', 'bytes': [53], 'logprob': -6.1262784}, {'token': '1', 'bytes': [49], 'logprob': -8.67897}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment summarizes action but lacks detail on data types and structure. Correct but not fully concise.', 'weighted': 3.260180077883974}
+------------------[185]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.11003718}, {'token': '3', 'bytes': [51], 'logprob': -2.7532446}, {'token': '1', 'bytes': [49], 'logprob': -3.2183516}, {'token': '4', 'bytes': [52], 'logprob': -7.7035413}, {'token': '5', 'bytes': [53], 'logprob': -12.029806}]
+FINAL {'Comprehensiveness': '2', 'Thought process': 'Comment mentions decoration but lacks detail on error handling, result creation, and session management in the code.', 'weighted': 2.024619687694519}
+------------------[186]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.2178543}, {'token': '5', 'bytes': [53], 'logprob': -1.7768085}, {'token': '3', 'bytes': [51], 'logprob': -3.6694572}, {'token': '2', 'bytes': [50], 'logprob': -6.8505163}, {'token': '1', 'bytes': [49], 'logprob': -10.414617}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment is concise, correct, but 'absract' typo slightly reduces clarity. Otherwise, summarizes code purpose well.", 'weighted': 4.141475239044207}
+------------------[187]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.6623333}, {'token': '3', 'bytes': [51], 'logprob': -0.7538021}, {'token': '4', 'bytes': [52], 'logprob': -4.451316}, {'token': '1', 'bytes': [49], 'logprob': -6.1692686}, {'token': '5', 'bytes': [53], 'logprob': -10.73767}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is too vague, doesn't mention args validation or default addition. Not all key actions described.", 'weighted': 2.491869631425103}
+------------------[188]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.37611797}, {'token': '4', 'bytes': [52], 'logprob': -1.7117522}, {'token': '2', 'bytes': [50], 'logprob': -2.0204966}, {'token': '1', 'bytes': [49], 'logprob': -8.647766}, {'token': '5', 'bytes': [53], 'logprob': -8.717634}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment mentions IPython shell but lacks detail on config setup or warning. Not fully comprehensive, but main idea conveyed.', 'weighted': 3.0479337441798395}
+------------------[189]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.3391392}, {'token': '3', 'bytes': [51], 'logprob': -1.29157}, {'token': '1', 'bytes': [49], 'logprob': -5.033082}, {'token': '4', 'bytes': [52], 'logprob': -5.077876}, {'token': '5', 'bytes': [53], 'logprob': -10.573922}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is too vague, doesn't mention exception handling or updating package data. Lacks detail on command wrapping.", 'weighted': 2.280862495120126}
+------------------[190]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.34521383}, {'token': '3', 'bytes': [51], 'logprob': -1.2842989}, {'token': '2', 'bytes': [50], 'logprob': -4.374732}, {'token': '5', 'bytes': [53], 'logprob': -6.034686}, {'token': '1', 'bytes': [49], 'logprob': -9.215106}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes function well, excludes _id_ index mention. Could clarify 'current indexes' means all unless collection specified.", 'weighted': 3.7000633559126577}
+------------------[191]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.06493876}, {'token': '5', 'bytes': [53], 'logprob': -2.9251606}, {'token': '3', 'bytes': [51], 'logprob': -4.691407}, {'token': '2', 'bytes': [50], 'logprob': -10.022157}, {'token': '1', 'bytes': [49], 'logprob': -14.592996}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes code well, but doesn't mention redraw request. Slightly lacks full scope, still concise and correct.", 'weighted': 4.044390353285522}
+------------------[192]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.18778014}, {'token': '1', 'bytes': [49], 'logprob': -1.7688196}, {'token': '3', 'bytes': [51], 'logprob': -7.311989}, {'token': '4', 'bytes': [52], 'logprob': -13.4899235}, {'token': '5', 'bytes': [53], 'logprob': -16.824724}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Read code, it's about declaring special variables. Comment mentions env variables, which is misleading. Comment lacks clarity and correctness.", 'weighted': 1.8301362318966523}
+------------------[193]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.5231504}, {'token': '4', 'bytes': [52], 'logprob': -1.1041822}, {'token': '2', 'bytes': [50], 'logprob': -2.60493}, {'token': '5', 'bytes': [53], 'logprob': -6.543166}, {'token': '1', 'bytes': [49], 'logprob': -7.5735617}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment summarizes code function but omits error handling and object creation details. Not fully comprehensive but main action described.', 'weighted': 3.2594090746868045}
+------------------[194]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.35789838}, {'token': '3', 'bytes': [51], 'logprob': -1.240316}, {'token': '4', 'bytes': [52], 'logprob': -4.9312606}, {'token': '1', 'bytes': [49], 'logprob': -5.446523}, {'token': '5', 'bytes': [53], 'logprob': -10.286547}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment is vague, doesn't explain 'disj' or 'scan'. Misses details like 'constant_score' filter. Not fully accurate or concise.", 'weighted': 2.2995179069609426}
+------------------[195]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.06587426}, {'token': '3', 'bytes': [51], 'logprob': -3.038771}, {'token': '1', 'bytes': [49], 'logprob': -4.173994}, {'token': '4', 'bytes': [52], 'logprob': -7.675253}, {'token': '5', 'bytes': [53], 'logprob': -12.958986}]
+FINAL {'Comprehensiveness': '2', 'Thought process': 'Comment mentions setting query and initiating connection, but lacks detail on error handling and statement parsing.', 'weighted': 2.0334374398345383}
+------------------[196]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.3322336}, {'token': '3', 'bytes': [51], 'logprob': -2.0031855}, {'token': '1', 'bytes': [49], 'logprob': -2.0552504}, {'token': '4', 'bytes': [52], 'logprob': -3.9583857}, {'token': '5', 'bytes': [53], 'logprob': -7.4160576}]
+FINAL {'Comprehensiveness': '2', 'Thought process': 'Comment describes purpose but lacks detail on input validation and error handling. Not fully comprehensive.', 'weighted': 2.0467980461559883}
+------------------[197]--------------------
+TOP_LOGPROBS [{'token': '3', 'bytes': [51], 'logprob': -0.46699914}, {'token': '2', 'bytes': [50], 'logprob': -1.1049215}, {'token': '4', 'bytes': [52], 'logprob': -3.1873684}, {'token': '1', 'bytes': [49], 'logprob': -7.5090084}, {'token': '5', 'bytes': [53], 'logprob': -9.833139}]
+FINAL {'Comprehensiveness': '3', 'Thought process': 'Comment mentions NeuralVariable, input/output types. Lacks detail on error handling, init, and compute_tensor. Not fully comprehensive, but correct.', 'weighted': 2.709053446175103}
+------------------[198]--------------------
+TOP_LOGPROBS [{'token': '1', 'bytes': [49], 'logprob': -0.01774224}, {'token': '2', 'bytes': [50], 'logprob': -4.041212}, {'token': '3', 'bytes': [51], 'logprob': -11.566273}, {'token': '4', 'bytes': [52], 'logprob': -16.589933}, {'token': '0', 'bytes': [48], 'logprob': -17.108353}]
+FINAL {'Comprehensiveness': '1', 'Thought process': "Comment vague, doesn't describe logic or handling of size. Incorrect, not similar to 'pos'. Lacks detail, not comprehensive.", 'weighted': 1.0175952322698985}
+------------------[199]--------------------
+TOP_LOGPROBS [{'token': '4', 'bytes': [52], 'logprob': -0.3499607}, {'token': '3', 'bytes': [51], 'logprob': -1.2529815}, {'token': '2', 'bytes': [50], 'logprob': -4.734343}, {'token': '5', 'bytes': [53], 'logprob': -7.094874}, {'token': '1', 'bytes': [49], 'logprob': -11.150862}]
+FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes code well, but doesn't mention error handling or S3 mapping specifics. Slightly lacks detail.", 'weighted': 3.697556233752443}
+------------------[200]--------------------
+TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.83184546}, {'token': '3', 'bytes': [51], 'logprob': -0.9318134}, {'token': '4', 'bytes': [52], 'logprob': -2.0926507}, {'token': '1', 'bytes': [49], 'logprob': -3.1265118}, {'token': '5', 'bytes': [53], 'logprob': -5.607383}]
+FINAL {'Comprehensiveness': '2', 'Thought process': "Comment mentions 'descriptor' and 'getter', but not clear about 'class wide' or returning self. Lacks clarity and precision.", 'weighted': 2.6076699832385213}[Validation] ---- [188_python_test.jsonl]
+------------------[91]--------------------
+[Validation] ---- [188_python_test.jsonl]
+------------------[91]--------------------
+[Validation] ---- [188_python_test.jsonl]
+------------------[91]--------------------
+[Validation] ---- [188_python_test.jsonl]
+------------------[91]--------------------
+[Validation] ---- [188_python_test.jsonl]
+------------------[91]--------------------
+[Validation] ---- [188_python_test.jsonl]
+------------------[91]--------------------
+[Validation] ---- [188_python_test.jsonl]
+------------------[91]--------------------
+[Validation] ---- [188_python_test.jsonl]
+------------------[91]--------------------
+[Validation] ---- [188_python_test.jsonl]
+------------------[91]--------------------
+[Validation] ---- [188_python_test.jsonl]
+------------------[91]--------------------
+[Validation] ---- [188_python_test.jsonl]
+------------------[91]--------------------
+------------------[92]--------------------
+[Validation] ---- [188_python_test.jsonl]
+------------------[91]--------------------
+[Validation] ---- [188_python_test.jsonl]
+------------------[91]--------------------

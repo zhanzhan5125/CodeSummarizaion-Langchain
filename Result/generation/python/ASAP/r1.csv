@@ -1,0 +1,589 @@
+Reference,Summary,G-eval,BLEU,BLEU-CN,METEOR,BERTSCORE,SIDESCORE,ROUGE-1,ROUGE-2,ROUGE-L
+Restricts a function in n - dimensions to a given direction .,Create a function that restricts the input function `value_and_gradients_function` along a given `direction` from a given `position`. The returned function `_restricted_func` takes a scalar `t` and computes the value and gradient of the original function at the point `position + t * direction`. The gradient is projected along the `direction`.,4.817916672543805,3.2346,5.1366,21.1268,53.2989,88.3987,19.35,10.0,16.13
+Recursively searches from the parent to the child gathering all the applicable namespaces along the way,"The function `_find_namespaces_from_child` is a recursive method that traverses the child nodes of a given `parent` node to find and collect namespace declarations into the `namespaces` dictionary. It stops and returns `True` when the specified `child` node is found, indicating that the `child` is a descendant of the `parent`. If the `child` is not immediately found, the function calls itself recursively on each child node (`cur_child`) of the `parent`. When the `child` is eventually found in a deeper level of the tree, the function collects any namespace declarations found in the attributes of the `cur_child` node. Namespace declarations are attributes that either start with `'xmlns:'` or are exactly `'xmlns'`. These are added to the `namespaces` dictionary with their corresponding values. If the `child` is not found in the subtree of a `cur_child`, the function continues the search with the next sibling. If the `child` is not found at all, the function returns `False`.",4.891582233829586,0.979,1.7209,23.1023,48.8376,95.254,12.57,4.62,10.29
+Inverse of the covariance matrix,Return the inverse of the covariance matrix of the tree.,4.3229436918231405,39.2815,45.1801,81.0909,80.8465,85.5915,66.67,61.54,66.67
+Checks whether the Wolfe or approx Wolfe conditions are satisfied .,"Checks if the Wolfe conditions, both exact and approximate, are satisfied for a given line search iteration. The Wolfe conditions are used to ensure that the step size during optimization is appropriate.
+
+- `exact_wolfe_suff_dec` checks the sufficient decrease condition (Armijo condition) for exact Wolfe.
+- `wolfe_curvature` checks the curvature condition for Wolfe.
+- `exact_wolfe` is True if both the sufficient decrease and curvature conditions are met for exact Wolfe.
+- `approx_wolfe_applies` checks if the function value is below a certain limit `f_lim`.
+- `approx_wolfe_suff_dec` checks the sufficient decrease condition for approximate Wolfe.
+- `approx_wolfe` is True if the function value is below `f_lim`, the sufficient decrease condition is met, and the curvature condition is met for approximate Wolfe.
+- `is_satisfied` is True if either the exact or approximate Wolfe conditions are satisfied.
+
+The function returns `is_satisfied`, indicating whether the Wolfe conditions are met.",4.981304316283284,2.4501,3.2377,34.3776,55.6403,97.1109,12.42,7.55,9.94
+Return a list with number of missed cache lines per memory hierarchy level .,"Return the number of cache misses per cache level, normalized by the first dimension factor.",4.4076953574173885,5.0906,13.0837,36.3327,73.3887,92.0418,42.86,7.69,42.86
+Runs the model forward to return a stochastic encoding .,"The `call` method is part of a class, likely a model, that takes an input, processes it through an encoder network, and returns a multivariate normal distribution parameterized by the output of the encoder network. The encoder network's output is split into two parts: one for the location (`loc`) parameters and the other for the scale (`scale_diag`) parameters of the multivariate normal distribution. The scale parameters are transformed using the softplus function to ensure they are positive, as required for a scale parameter.
+
+Here's a breakdown of the dataflow and categorization:
+
+- **Function name**: `ProbabilisticGrammarVariational.call`
+- **Parameters of the function**: `['self', 'inputs']`
+- **Identifier to be returned**: The result of `ed.MultivariateNormalDiag` which creates a multivariate normal distribution object.
+- **Method Invocation**:
+  - `self.encoder_net`: Invokes the encoder network that is a member of the class.
+  - `tf.cast`: Casts the `inputs` to `tf.float32` data type.
+  - `ed.MultivariateNormalDiag`: Creates a multivariate normal distribution with diagonal covariance matrix.
+  - `tf.nn.softplus`: Applies the softplus function.
+- **Method Arguments**:
+  - `(tf.cast(inputs, tf.float32))`: Argument for `self.encoder_net`, casting `inputs` to float32.
+  - `(inputs, tf.float32)`: Arguments for `tf.cast`, specifying the input tensor and the target data type.
+  - The arguments for `ed.MultivariateNormalDiag` include `loc`, `scale_diag`, and `name` parameters, which define the mean, scale, and name of the distribution, respectively.
+  - `(net[..., self.latent_size:])`: Argument for `tf.nn.softplus`, specifying the part of the `net` tensor to apply the function to.
+- **Variable Declaration**: `['net']` - `net` is the variable that holds the output of the encoder network.
+
+The method is part of a probabilistic model that likely serves as a variational autoencoder (VAE) where the `call` method is used to define the posterior distribution of the latent code given the input data.",4.790073349106561,0.1904,0.4889,9.434,42.9035,89.7497,2.68,0.0,2.68
+Return the ancestry of the context ( that is all of the packages and modules containing the context ) in order of descent with the outermost ancestor last . This method is a generator .,"The `ancestry` function in the `ContextSuiteFactory` class is designed to generate the ancestry of a given context, which is typically a class or module. The function iterates through the hierarchy of the context to yield each ancestor in the hierarchy.
+
+Here's a breakdown of the data flow and categorization of identifiers in the function:
+
+Dataflow:
+- `self`: The instance of the `ContextSuiteFactory` class.
+- `context`: The object for which the ancestry is being determined. It is used throughout the function to access attributes and determine the class or module hierarchy.
+- `ancestors`: A list of ancestor names derived from the `__module__` or `__name__` attribute of the `context`.
+
+Identifiers:
+- Function name: `ContextSuiteFactory.ancestry`
+- Parameters of the function: `self`, `context`
+- Identifier to be returned: The function is a generator, so it yields the resolved names of ancestors rather than returning a value.
+- Method Invocation: The function calls several methods such as `log.debug`, `hasattr`, `context.__module__.split`, `context.__name__.split`, `TypeError`, `resolve_name`, and `ancestors.pop`.
+- Method Arguments: The function uses various arguments to pass to the methods it invokes, such as the context, attribute names, and the join character for splitting module or name strings.
+- Variable Declaration: The function declares and modifies the `context` and `ancestors` variables based on the attributes of the `context` object.
+
+The function uses logging to debug information about the ancestry process and employs exception handling to raise a `TypeError` if the context does not have ancestors. It also uses the `resolve_name` function to yield the fully qualified name of each ancestor in the hierarchy.",4.002337117168643,1.561,1.9957,22.2569,48.0312,86.1508,13.19,5.59,10.42
+Return absolute path at which item content can be accessed .,"The `get_item_abspath` function in the `S3StorageBroker` class retrieves the absolute path of an item identified by `identifier` within an S3 bucket. The function performs the following steps:
+
+1. It retrieves administrative metadata for the current dataset using `self.get_admin_metadata()`.
+2. It extracts the `uuid` from the `admin_metadata`.
+3. It constructs the absolute path to the dataset cache by joining the S3 cache path (`self._s3_cache_abspath`) with the `uuid`.
+4. It ensures that the cache directory exists by calling `mkdir_parents(dataset_cache_abspath)`.
+5. It constructs the full path to the object in the S3 bucket by concatenating `self.data_key_prefix` with the `identifier`.
+6. It creates an S3 Object resource for the object in the bucket.
+7. It retrieves the relative path (`relpath`) of the object from its metadata.
+8. It splits the `relpath` to get the file extension using `os.path.splitext(relpath)`.
+9. It constructs the local absolute path to the item by joining the dataset cache path with the `identifier` and its extension.
+10. If the item does not exist locally as a file, it downloads the item from the S3 bucket to a temporary path (`tmp_local_item_abspath`) and then renames it to the `local_item_abspath`.
+11. Finally, it returns the `local_item_abspath`.
+
+The function ensures that the item is available locally and returns the path where it can be accessed.",4.966247284149534,0.7839,1.1634,18.0583,46.7183,88.6424,5.06,2.55,5.06
+Sets general options used by plugins and streams originating from this session object .,"This function `set_option` in the `Streamlink` class is used to set various options for the Streamlink session. It takes a `key` and a `value` as arguments and updates the session's configuration based on the provided key. The function handles different types of options, such as proxy settings, cookie management, header manipulation, query parameter adjustments, SSL verification, and more.
+
+The function first checks if the provided `key` matches any of the special cases that require renaming (e.g., ""rtmpdump"" to ""rtmp-rtmpdump""). Then, it updates the corresponding attributes of the `self.http` object or other relevant objects based on the `key`. For example, it sets proxies, updates cookies, headers, query parameters, SSL settings, etc. If the `key` is related to disabling Diffie-Hellman (DH) key exchange for SSL, it appends the necessary cipher exclusion to the default ciphers list.
+
+If the `key` does not match any of the special cases, the function falls back to updating the `self.options` dictionary with the provided `key` and `value`.
+
+The `update_scheme` function is used to ensure that the proxy URLs have the correct scheme (""http://"" or ""https://""). The `isinstance` checks are used to determine if the `value` is a dictionary or a string that needs to be parsed. The `requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS` is used to modify the default SSL ciphers used by the requests library.
+
+The `self.options.set` method is called when the `key` does not match any of the predefined options, allowing for a generic setting of options within the Streamlink session.",4.548922104136873,0.4123,0.7805,15.6137,45.4156,90.0686,5.93,0.75,3.7
+Shows the number of paid invoices containing given products or categories per day .,Generate a report of paid invoices by date using the provided form data to filter by product and category. The report lists the count of paid invoices for each date.,4.135723460439797,4.5099,7.5701,45.7448,66.2046,92.2696,18.6,9.76,18.6
+Standardizes continuous features and expands categorical features .,"Expand categorical features and standardize continuous features in a dataset. The function takes a dataset and various parameters that dictate how the dataset should be transformed. It returns a modified dataset with expanded and standardized features, along with a list of the new headers for the expanded dataset.
+
+The function processes each row in the dataset, applying transformations based on the column's header and the specified parameters. Categorical features are expanded into multiple binary features, and continuous features are standardized by subtracting the mean and dividing by the standard deviation as provided by the `standardizers` dictionary.
+
+The `response_index` is used to identify the outcome column, which is transformed according to the `outcome_trans_dict`. Features listed in `feats_to_ignore` are skipped, while those in `columns_to_expand` are expanded. The `response_header` is used to ensure the outcome column is not expanded.
+
+The function returns two items: `modified_set`, which is the transformed dataset, and `expanded_headers`, which is the list of headers for the new dataset.",4.915231457910746,0.7038,1.2495,24.5686,49.5049,88.9515,5.65,3.43,5.65
+Return a convert - to - tensor func given a name config callable etc .,"Determine the appropriate function to convert an input to a tensor based on the type of the identifier provided. If the identifier is None, a string, a dictionary, or a callable, it returns the corresponding conversion function. If the identifier does not match any of these types, it raises a ValueError.",4.199895858144407,0.9337,3.115,22.0126,54.7459,95.19,19.05,0.0,15.87
+Plot randomized benchmarking data .,"Plots randomized benchmarking data including individual sequences, their average, and a fit to the average.",4.160299160895874,8.392,14.4795,77.8186,68.7771,82.3257,31.58,23.53,31.58
+Returns a generator with all environmental vars with prefix PIP_,"Retrieve environment variables that match a specific prefix pattern, remove the prefix, and yield the modified key and its value as a tuple.",4.86841880569033,1.38,5.3485,13.2743,51.3144,87.8273,12.12,0.0,12.12
+Creates a CNAME record attached to this hosted zone .,Create a new CNAME record in the hosted zone .,3.523520208918024,9.4522,23.9803,62.5,76.7431,72.7394,55.56,25.0,55.56
+issue wakeup command to device to take out of standby mode .,"The `_wakeup` method is designed to wake up the weather station by sending newline characters and waiting for a specific acknowledgment (ACK) response. If the expected ACK is not received after three attempts, a `NoDeviceException` is raised, indicating that the weather station cannot be accessed. The method logs the wakeup attempt and the received acknowledgment for debugging purposes.",4.991599708886174,0.6276,2.0418,6.3291,46.2731,98.7045,5.71,0.0,5.71
+Loads several items from an iterable,"The function `_srvc_load_several_items` is designed to load multiple items into the storage service. It iterates over an `iterable` where each element is expected to be a tuple containing a message, an item, and optionally additional arguments and keyword arguments.
+
+The function processes each `input_tuple` from the `iterable` by extracting the message and item. If the tuple contains more than two elements, it updates the `args` and `kwargs` with the additional elements from the tuple. If the tuple contains more than four elements, it raises a `RuntimeError` to indicate that too many elements were passed.
+
+Finally, the function calls the `self.load` method for each tuple, passing the extracted message, item, and any additional arguments and keyword arguments.
+
+Here's a breakdown of the dataflow within the function:
+
+- `self`: The instance of the `HDF5StorageService` class, used to call the `load` method.
+- `iterable`: The collection of tuples to be processed.
+- `msg`: The first element of each tuple, representing a message.
+- `item`: The second element of each tuple, representing an item to be loaded.
+- `args`: Additional positional arguments extracted from the tuple, if present.
+- `kwargs`: Additional keyword arguments extracted from the tuple, if present.
+
+The function does not return any value; it performs its operations through side effects (loading items into the storage service).",4.884005093059829,0.5111,0.9143,11.1111,42.9974,91.263,4.5,1.82,3.6
+Estimates the beats using librosa .,Estimate the beats of the audio signal using the percussive component . The beats are returned as times and frame indices .,4.1346484830868295,3.2802,8.138,48.5577,67.9576,98.0021,24.0,8.7,24.0
+Updates a logical interface .,Update an existing logical interface in the IBM Watson IoT Platform .,3.9662405989211007,5.1908,13.8439,54.3735,68.0565,94.692,26.67,15.38,26.67
+Ensure that the path or the root of the current package ( if path is in a package ) is in sys . path .,"Adds the given path to sys . path if it is not already there . If the path is a package directory ( contains __init__.py ), adds the parent directory instead . If config is provided and has a srcDirs attribute , also adds any directories within path that are listed in srcDirs . Returns a list of paths that were added .",4.279173429844474,2.7251,5.327,36.3356,59.7213,97.062,38.96,10.67,23.38
+Converts py_zipkin s Endpoint to Protobuf s Endpoint .,Converts a Zipkin endpoint object to a protobuf endpoint object.,4.773404336963059,3.6713,16.9904,32.967,78.0697,92.4995,63.16,0.0,63.16
+Register Flask blueprints .,Register Flask blueprints for different sections of the application.,4.9255899521900055,14.4498,25.0986,81.7901,77.1258,91.0104,50.0,40.0,50.0
+Return the first n characters from the queue without removing them . Throws an error if there are less than n characters in the queue . Equivalent to :: s = queue [ : n ] if queue where a regular string .,Returns the first `n` bytes from the queue without removing them .,4.583955965341308,6.6317,8.5416,22.8221,71.5593,89.2789,39.13,31.82,39.13
+Return a tuple with the process RSS and VMS size .,"The `Process.get_memory_info` function retrieves the memory usage information of a process identified by `self.pid`. It uses the `_psutil_bsd.get_process_memory_info` method to get the raw memory info, which returns a tuple where the first two elements are `rss` (Resident Set Size) and `vms` (Virtual Memory Size). The function then returns a named tuple `nt_meminfo` containing the `rss` and `vms` values.
+
+The data flow in the function is as follows:
+- `self`: The `Process` instance from which the memory information is being retrieved. It is used to access the process ID (`self.pid`) and is the source for the `get_process_memory_info` method call.
+- `rss` and `vms`: These are the variables that store the memory usage information obtained from the `_psutil_bsd.get_process_memory_info` method.
+- `nt_meminfo(rss, vms)`: This is the named tuple that is returned by the function, containing the `rss` and `vms` memory information.
+
+The function does not declare any new variables; it only uses the ones provided by the `_psutil_bsd.get_process_memory_info` method. The `nt_meminfo` is likely a named tuple type that has been defined elsewhere in the code to hold memory information in a structured way.",4.881373202802972,1.003,1.4715,23.4106,49.8308,91.8975,7.48,3.77,6.54
+Return True if given Distribution is installed in user site .,Determine if the given distribution is installed in the user site directory.,4.416471500111523,37.7006,43.6684,76.3634,73.8733,13.6457,72.73,50.0,72.73
+Use SoftmaxNormal quantiles to form quadrature on K - 1 simplex .,"Create a quadrature scheme for a softmax-normal distribution, which is a normal distribution transformed by a softmax function. The function computes the quantiles and associated probabilities for the quadrature scheme based on the provided location (mean), scale, and size parameters of the normal distribution. The quadrature scheme is used for numerical integration over the softmax-normal distribution.",4.129302983362178,0.7047,2.2991,14.3885,56.4515,96.5615,8.96,0.0,8.96
+Prepares and runs an SQL query for the history database .,"Execute a SQL query against the IPython history database, optionally retrieving raw input or processed input, and optionally including output. Returns a cursor or a generator of results.",4.168493862684813,3.4123,7.5623,43.3145,62.8108,86.0255,31.58,11.11,26.32
+Returns an image tensor .,Read and preprocess an image file for use in a TensorFlow model.,4.78319730595829,4.7748,12.606,39.0625,65.3502,89.7223,25.0,14.29,25.0
+Given an list of words this function highlights the matched text in the given string .,"The `highlight` function is designed to add HTML highlighting to keywords found within a given string. It uses the `get_text_tokenizer` function to separate the keywords into include and exclude sets, and then applies the `highlight_text` function to wrap the included keywords with HTML tags that apply the specified `cls_name` class for styling.
+
+Here's a breakdown of the data flow within the function:
+
+- The `string` parameter is the text that will be searched for keywords to highlight.
+- The `keywords` parameter contains the words that should be highlighted within the string.
+- The `cls_name` parameter is optional and specifies the CSS class name to apply to the highlighted keywords.
+
+The function first checks if there are any keywords provided; if not, it returns the original string unmodified. It also checks if the string is empty and returns an empty string if true.
+
+The `get_text_tokenizer` function is called with `keywords` to create two sets: `include` (keywords to highlight) and `exclude` (keywords not to highlight).
+
+The `highlight_text` function is then called with the `include` set, the original `string`, and the `cls_name`. This function is responsible for the actual highlighting process.
+
+Finally, the `highlighted` variable, which contains the result of the `highlight_text` function, is returned. This is the original string with HTML tags added around the keywords that were found and needed to be highlighted.",4.786902283563556,0.5739,1.0209,17.8082,49.3735,94.1564,8.16,1.65,7.35
+Transform a 0 - D or 1 - D Tensor to be 1 - D .,Expand a tensor to a vector if it is a scalar or ensure it is a vector.,4.116139080437269,4.0945,10.3632,37.9592,59.0057,98.5785,30.77,8.33,23.08
+Handles display of the options menu .,Display the Godot options dialog if the info object has been initialized.,4.063469670896627,2.6381,11.7312,22.7273,62.2766,70.3922,33.33,0.0,33.33
+The return value for each rule can be either retyped compressed or left alone . This method determines that and returns the source code text for accomplishing it .,"Generates the transformation code for a given rule based on the directives . If no directive is found , it defaults to ""retype"" . The transformation can be ""retype"" , ""compress"" , or ""identity"" . Each transformation type generates different code .",4.058219151262957,2.6631,6.1763,36.1202,55.2903,96.6406,32.26,3.33,22.58
+Runs Picard MarkDuplicates on a BAM file . Requires that the BAM file be coordinate sorted .,"The `picard_mark_duplicates` function is designed to mark duplicate reads in a BAM file using Picard's MarkDuplicates tool. The function takes in a job object, a BAM file, and a BAI index file, along with an optional validation stringency parameter. It performs the following steps:
+
+1. Retrieves a local temporary directory from the job's file store.
+2. Reads the global BAM and BAI files into the local temporary directory.
+3. Constructs the Picard MarkDuplicates command with appropriate input and output file names, metrics file, and validation stringency.
+4. Sets up Docker parameters, including memory allocation and volume mounting for the working directory.
+5. Records the start time of the Docker call.
+6. Executes the Picard MarkDuplicates command within a Docker container using the `dockerCall` function.
+7. Records the end time of the Docker call.
+8. Logs the runtime of the MarkDuplicates process.
+9. Writes the marked duplicates BAM and BAI files to the job's file store.
+10. Returns the file store IDs for the new BAM and BAI files.
+
+The function uses several methods to accomplish its tasks, including file store operations (`readGlobalFile`, `writeGlobalFile`), Docker call (`dockerCall`), and logging (`_log_runtime`). It also uses standard Python modules like `os.path` for file path manipulations and `time` for recording timestamps. The function returns the file store IDs for the marked duplicates BAM and BAI files, which can be used by other job functions in a Toil workflow.",4.839965718260055,0.9206,1.3436,15.0685,52.598,84.2782,7.35,3.29,7.35
+Patch the three methods belonging to IPushProducer onto the transport if it doesn t already have them . ( Agent assumes its transport has these . ),"Patches a transport object to ensure it has the methods required by a push producer, even if those methods are not implemented by the transport itself. If the methods are missing, they are added as no-op lambdas or, in the case of 'stopProducing', it is set to call the transport's 'loseConnection' method.",4.837491939758727,1.7526,3.8686,21.0728,55.7803,96.4042,23.38,2.67,18.18
+Takes a FunctionBody and optionally a FunctionType yielding the string representation of the function line by line . The function type is required for formatting function parameter and return value information .,Format the given WebAssembly function body into a human-readable text representation.,4.063150035430376,0.6325,3.1568,10.6383,51.8556,95.0974,19.05,0.0,9.52
+Get summary and description of this notebook,"Extracts the description from the first markdown cell of a Jupyter notebook, handling headers and formatting.",4.087180164311804,2.2225,9.2875,25.3165,50.0779,87.6054,34.78,0.0,26.09
+Indicate whether an input line has ( i . e . ends in or is ) a comment . This uses tokenize so it can distinguish comments from # inside strings .,Check if a block of Python code contains any comments.,4.9750704938341945,0.6224,3.3014,4.2553,55.8515,57.53,11.43,0.0,11.43
+prefixed topic for IOPub messages,Generate a byte string for a message topic based on the kernel identity .,2.974930673798522,2.2267,9.7307,25.8621,57.1694,60.8159,22.22,0.0,11.11
+Attempts to list all of the modules and submodules found within a given directory tree . This function recursively searches the directory tree for potential python modules and returns a list of candidate names .,"The `rdiscover_modules` function is designed to recursively discover Python module files within a given directory. It returns a list of modules found in the directory that contain an `__init__.py` file, which is a common indicator of a Python package.
+
+Here's a breakdown of the function's data flow and categorization:
+
+- **Function name**: `rdiscover_modules`
+- **Parameters of the function**: `['directory']` - The directory path to search for Python modules.
+- **Identifier to be returned**: `['found']` - A list of discovered modules.
+- **Method Invocation**:
+  - `list` - Initializes an empty list for `found`.
+  - `os.path.isdir` - Checks if `directory` is a directory.
+  - `os.listdir` - Lists the entries in `directory`.
+  - `os.path.join` - Joins `directory` and `entry` to form `next_dir`.
+  - `os.path.isfile` - Checks if the `__init__.py` file exists in `next_dir`.
+  - `_search_for_modules` - A helper function that searches for modules in `next_dir`.
+  - `found.extend` - Extends the `found` list with the modules returned by `_search_for_modules`.
+- **Method Arguments**:
+  - `()` - Used for initializing the `list`.
+  - `(directory)` - Passed to `os.path.isdir` and `os.listdir`.
+  - `(directory, entry)` - Passed to `os.path.join` to create `next_dir`.
+  - `(os.path.join(next_dir, MODULE_INIT_FILE))` - Passed to `os.path.isfile` to check for the `__init__.py` file.
+  - `(next_dir, True, entry)` - Passed to `_search_for_modules` to find modules in `next_dir`.
+  - `(modules)` - Passed to `found.extend` to add found modules to the list.
+- **Variable Declaration**:
+  - `found` - A list to store found modules.
+  - `next_dir` - The full path to a directory entry.
+  - `modules` - A list of modules found by `_search_for_modules`.
+
+The function works by iterating over each entry in the specified `directory`. If the entry is a directory and contains an `__init__.py` file, it calls `_search_for_modules` to find all modules within that directory. The found modules are then added to the `found` list, which is returned at the end of the function.",3.9085907740117087,2.1469,2.5666,21.3115,49.4453,95.8998,14.45,5.81,9.83
+Filter key events for the underlying text widget to create a console - like interface .,"Handle keypress events in the console widget, potentially overriding the default behavior to implement custom actions.",3.944181670332447,2.35,9.8204,17.6056,68.3816,82.6361,33.33,0.0,26.67
+Create a new code cell with input and output,Create a new code cell with optional source code and execution count for an IPython notebook,4.754903994762449,31.3142,35.3553,65.4324,67.4652,44.5938,56.0,43.48,56.0
+Compute Area Under the Curve ( AUC ) from prediction scores .,Calculate ROC AUC score for binary classification tasks.,3.493180264003591,2.5239,12.4276,11.236,61.8599,95.8597,11.76,0.0,11.76
+Crop an image given the top left corner .,"Crops an image to a specified rectangle.
+
+The function `crop_image` takes an image and the coordinates of the top-left corner of the rectangle to be cropped (`start_y`, `start_x`), as well as the height (`h`) and width (`w`) of the rectangle. It returns a copy of the cropped section of the image. The image is assumed to be a NumPy array with the last dimension representing color channels.",4.979476076851936,3.9366,5.4192,40.0314,55.3994,98.9253,17.72,10.39,17.72
+Produces a new game state in which the robots have advanced towards the player by one step . Handles the robots crashing into one another too .,"Advance the state of the robots in the game, moving them towards the player, resolving any crashes, and updating the list of robots to remove any that have crashed.",4.7209648603411605,6.6447,10.8465,35.6777,59.1167,86.3799,40.74,11.54,29.63
+Checks whether path belongs to standard library or installed modules .,"This function checks if a given module path is part of the standard library or site-packages directory. If the module path matches any of the standard library paths or contains 'site-packages', it returns True, indicating that the module is from a standard directory. Otherwise, it returns False.
+
+The function iterates over a predefined list of standard library paths (`_STDLIB_PATHS`) and uses the `fnmatch.fnmatchcase` function to check if the `module_path` matches any of these standard paths with a wildcard suffix. If a match is found, it confirms that the `module_path` is a standard directory.",4.42672921554882,1.5718,2.4932,18.5185,53.3276,99.197,11.01,3.74,9.17
+Check if table exists,Checks if a table exists in the Hive metastore.,3.9229232818746778,6.9954,19.0708,83.3333,60.8693,80.5336,46.15,18.18,46.15
+Delete the vacation with name vacation,Deletes a vacation event from a thermostat .,4.159478701291012,3.2359,16.1499,16.3934,55.6902,98.6569,15.38,0.0,15.38
+Returns all transfers associated with the seed .,"Fetches transfer data from the Tangle for the specified seed. The method can optionally include the inclusion state of the transfers, which indicates whether the transfer is confirmed by the network. The `start` and `stop` parameters define the range of transfers to fetch. If `stop` is `None`, it will fetch transfers up to the latest one. The `inclusion_states` parameter determines whether to include the confirmation state of each transfer.",4.831555443095393,0.6012,1.9006,11.2782,45.4337,77.3962,7.79,0.0,5.19
+Write the data encoding the QueryResponsePayload object to a stream .,Serializes the QueryResponsePayload object to a buffer.,3.8917001065526136,40.0497,46.1945,51.3402,85.1562,68.5145,58.82,53.33,58.82
+Insert size bytes of empty space starting at offset .,Inserts a block of null bytes into a file at a specified offset.,4.228987665425654,2.648,11.5718,26.5957,62.2081,96.2645,36.36,0.0,27.27
+Takes a python cls and creates a type for it in the Dagster domain .,Decorates a Python type to specify how it interfaces with the Dagster type system.,4.091433768041593,6.458,15.5766,30.4563,70.2084,89.0369,42.86,15.38,42.86
+The url on jupyter nbviewer for this notebook or None if unknown,"The `url` method in the `NotebookProcessor` class is designed to retrieve a URL associated with a notebook. If the `_url` attribute of the `self` object is already set, it uses that value. Otherwise, it attempts to get the URL from the notebook's metadata. If a URL is found, it is then processed by the `nbviewer_link` function to generate a link that can be used to view the notebook on NBViewer.
+
+Here's a breakdown of the data flow within the function:
+
+1. The method checks if `self._url` is not `None`. If it's set, it assigns `self._url` to the local variable `url`.
+2. If `self._url` is `None`, it then uses `getattr` to attempt to retrieve the URL from `self.nb.metadata`. If the 'url' key is present in the metadata, it assigns the corresponding value to the local variable `url`.
+3. If a URL is found (i.e., `url` is not `None`), the method returns the result of calling `nbviewer_link(url)`, which presumably generates a proper link to view the notebook on NBViewer.
+
+The identifiers are categorized as follows:
+
+- Function name: `NotebookProcessor.url`
+- Parameters of the function: `['self']`
+- Identifier to be returned: `['nbviewer_link(url)']`
+- Method Invocation: `['getattr', 'nbviewer_link']`
+- Method Arguments: `[""(self.nb.metadata, 'url', None)"", '(url)']`
+- Variable Declaration: `['url', 'url']` (Note: 'url' is declared twice, but it's the same variable being reassigned)
+
+The function is part of the `sphinx-nbexamples` package, which integrates Jupyter Notebooks into Sphinx documentation. The `url` method is used to generate a link to a notebook that can be included in the generated documentation.",4.718073252936945,0.4784,0.8408,10.7527,43.0071,88.9932,5.8,1.46,4.35
+Save a small version of the graph based on a checkpoint and the output node names .,Extract and save the graph definition from a TensorFlow checkpoint file.,4.5235649576090085,4.3362,12.0111,19.3548,61.7228,84.0465,44.44,8.0,37.04
+Copy an existing notebook and return its notebook_id .,Create a copy of an existing notebook with a new name and ID .,4.206773612708651,11.5727,20.0429,45.3605,67.7173,91.396,54.55,20.0,54.55
+Display debug information for the storage,Debug the storage data structure used in the BiDi algorithm.,2.4806486425019263,6.3026,16.9904,23.4375,60.3954,65.1879,37.5,14.29,37.5
+Get alerts that match the alert type and args .,Retrieve a list of alerts filtered by a specific type and optional arguments .,4.697156591901582,4.897,12.8063,27.1868,61.3712,88.1962,27.27,10.0,27.27
+Creates a full mapping from all wildcard translations to the corresponding wildcards,Creates a reversed mapping from wildcard results to wildcard keys and run indices.,4.02539788593139,6.9254,16.854,47.3098,68.3613,78.6372,48.0,17.39,48.0
+Santizes the data for the given block . If block has a matching embed serializer use the to_internal_value method .,"The `sanitize_block` function is designed to clean up or transform a block of data within a content serializer. It retrieves the type of the block and its associated data, looks up a serializer for the block type, and if a serializer is found, it uses that serializer to convert the block's data to its internal representation. The function then returns the sanitized block.
+
+Here's a breakdown of the data flow and categorization of identifiers within the function:
+
+**Data Flow:**
+- `self`: The instance of the `ContentSerializer` class that the method is a part of. It is used to access the `serializers` attribute.
+- `block`: The block of data that is being sanitized. It is the input to the function and is also modified and returned as the output.
+- `embed_type`: The type of the block, which is used to determine which serializer to use.
+- `data`: The data within the block that needs to be sanitized.
+- `serializer`: The serializer that corresponds to the `embed_type` of the block.
+
+**Identifiers:**
+- Function name: `ContentSerializer.sanitize_block`
+- Parameters of the function: `self`, `block`
+- Identifier to be returned: `block` (after potential modification)
+- Method Invocation:
+  - `block.get`: Used to retrieve the `type` and `data` from the block.
+  - `self.serializers.get`: Used to retrieve the serializer based on the `embed_type`.
+  - `serializer.to_internal_value`: Used to sanitize the `data` of the block.
+- Method Arguments:
+  - `('type', None)`: Default value for `type` if not present in the block.
+  - `('data', {})`: Default value for `data` if not present in the block.
+  - `(embed_type, None)`: Retrieves the serializer for the given `embed_type`, with `None` as a default if not found.
+  - `(data)`: The data to be passed to the serializer for sanitization.
+- Variable Declaration:
+  - `embed_type`: Stores the type of the block.
+  - `data`: Stores the data of the block.
+  - `serializer`: Stores the serializer instance for the block type.",4.577964992380881,1.025,1.3613,18.4426,54.2536,94.9618,10.37,3.07,9.76
+Set whether we stop or not when this signal is caught . If set_stop is True your program will stop when this signal happens .,"The `handle_stop` function in the `SignalManager` class is designed to configure the behavior of the debugger when a specific signal is received. It takes three parameters: `self`, `signame`, and `set_stop`. The `signame` parameter is the name of the signal to be handled, and `set_stop` is a boolean that determines whether the debugger should stop when this signal is received.
+
+If `set_stop` is `True`, the function sets the `b_stop` attribute of the signal handler for `signame` to `True`, indicating that the debugger should stop execution when this signal is encountered. It also sets the `print_method` attribute to the message function of the last interface in the debugger's interface list, and sets `pass_along` to `False`, indicating that the signal should not be passed along to other handlers.
+
+If `set_stop` is `False`, the function sets the `b_stop` attribute of the signal handler for `signame` to `False`, indicating that the debugger should not stop for this signal.
+
+The function returns the value of `set_stop`, which indicates whether the stop behavior was set or cleared for the given signal.",4.186714455526793,4.5918,5.1201,23.6908,55.5284,95.1121,17.22,9.66,15.31
+return a class by its name raise KeyError if not found,"Search for a class with the given name in the diagram and return it. If the class is not found, raise a KeyError with the name of the class.",4.499759839830641,3.6579,8.0726,49.6484,66.9142,88.0515,45.0,10.53,30.0
+Deletes items from the index with the given id within the specified coordinates .,"The `delete` function in the `Index` class of the `rtree` library is designed to remove an entry from the spatial index based on the provided `id` and `coordinates`. The function first retrieves the pointers to the coordinates of the bounding box that encapsulates the spatial object using the `get_coordinate_pointers` method. It then calls the `Index_DeleteData` function from the `core.rt` module, which is likely a wrapper around a C library function, to perform the actual deletion from the index.
+
+Here's a breakdown of the data flow and categorization of identifiers in the `delete` function:
+
+**Data Flow:**
+- `self`: The instance of the `Index` class, used to access instance methods and properties.
+- `id`: The identifier of the entry to be deleted from the index.
+- `coordinates`: The coordinates that define the bounding box of the spatial object to be deleted.
+
+**Identifier Classes:**
+- **Function name:** `Index.delete` - The name of the function being defined.
+- **Parameters of the function:** `['self', 'id', 'coordinates']` - The parameters that the function accepts.
+- **Identifier to be returned:** Not applicable, as the function does not return any value.
+- **Method Invocation:**
+  - `self.get_coordinate_pointers` - An instance method called to get pointers to the coordinates.
+  - `core.rt.Index_DeleteData` - A function from the `core.rt` module that deletes data from the index.
+- **Method Arguments:**
+  - `'(coordinates)'` - The argument passed to `self.get_coordinate_pointers`, which is the `coordinates` parameter of the `delete` function.
+  - `'(\n self.handle, id, p_mins, p_maxs, self.properties.dimension)'` - The arguments passed to `core.rt.Index_DeleteData`, which include the index handle, the `id` of the entry to be deleted, the minimum and maximum coordinate pointers, and the dimension property of the index.
+- **Variable Declaration:**
+  - `p_mins, p_maxs` - Variables that store the minimum and maximum coordinate pointers returned by `self.get_coordinate_pointers`.
+
+The `delete` function does not explicitly return any value, as its purpose is to modify the state of the index by removing an entry.",4.736602207222417,0.5408,0.8143,9.0703,44.2566,94.4317,4.75,1.19,4.15
+Trace the dependencies for app .,Trace dependencies of an app using a subprocess and cache the result.,4.128096018460894,2.8348,12.606,35.0877,59.6015,72.7694,47.06,0.0,35.29
+Return standard output of executing cmd in a shell .,"The `getoutput` function executes a command in a subprocess and returns its output as a string. It uses a context manager `AvoidUNCPath` to potentially modify the command to avoid UNC path issues on Windows. The `process_handler` function is used to handle the subprocess execution and capture its output. If the output is `None`, it is converted to an empty byte string before being converted to a string using `py3compat.bytes_to_str` for compatibility with Python 3.
+
+Here's a breakdown of the data flow within the function:
+
+- `cmd`: The command to be executed is passed as an argument to the function. It may be modified within the context manager if `path` is not `None`.
+- `out`: This variable captures the output from the subprocess. If the output is `None`, it is set to an empty byte string. Finally, it is converted to a string and returned.
+
+The identifiers are categorized as follows:
+
+- Function name: `getoutput`
+- Parameters of the function: `cmd` (the command to be executed)
+- Identifier to be returned: The result of `py3compat.bytes_to_str(out)` (the output of the command as a string)
+- Method Invocation: The function calls `AvoidUNCPath`, `process_handler`, `p.communicate`, and `py3compat.bytes_to_str` to execute the command and process the output.
+- Method Arguments: The arguments passed to these methods include the command itself, a lambda function to capture the output, and the output variable to be converted to a string.
+- Variable Declaration: Variables `cmd` and `out` are declared and used within the function to store the command and its output, respectively.",4.969367862764991,0.4299,0.7562,10.2339,43.1816,88.3072,3.7,1.49,2.96
+Get Gnosis Safe Master contract . It should be used to access Safe methods on Proxy contracts .,Return a contract object for a Gnosis Safe with the provided address and the standard Gnosis Safe ABI and bytecode.,4.920536151319611,3.5248,8.7448,12.1951,50.3579,92.7505,22.22,5.88,16.67
+Defines a list of headers that must be present in the outgoing request in order to satisfy the matcher no matter what value the headers hosts .,Define a matcher for HTTP headers presence in the mock definition.,3.8055416678102647,1.6692,4.9874,17.4036,61.6054,74.3036,27.03,5.71,21.62
+Determines if a BoundMethod node represents a method call .,Check if a function call is a method call on a specific type and/or a specific method name.,4.386617665179563,8.3009,13.7946,25.0,65.7316,96.3817,35.71,23.08,35.71
+Returns a batch of points chosen uniformly from the unit hypersphere .,"This function generates a sample vector that is uniformly distributed on the surface of a unit sphere in a given dimension. It uses the normal distribution to generate a raw sample and then normalizes it to have a unit norm.
+
+Here's a breakdown of the data flow and categorization of identifiers in the function `_uniform_unit_norm`:
+
+Dataflow:
+- `dimension` is used to create the final shape of the sample by concatenating it with `shape`.
+- `shape` is used to determine the initial shape of the sample before adding the `dimension`.
+- `dtype` is used to cast the `loc` and `scale` parameters of the normal distribution to the appropriate data type.
+- `seed` is used to seed the random number generator for reproducibility.
+- `raw` is the initial sample drawn from the normal distribution.
+- `unit_norm` is the final normalized sample vector with a unit norm.
+
+Categorization:
+- Function name: `_uniform_unit_norm`
+- Parameters of the function: `dimension`, `shape`, `dtype`, `seed`
+- Identifier to be returned: `unit_norm`
+- Method Invocation: The function invokes several methods to create the normal distribution, sample from it, concatenate shapes, and normalize the sample.
+- Method Arguments: The arguments passed to the invoked methods include the location and scale for the normal distribution, the shape of the tensor, the seed for the random number generator, and the axis for normalization.
+- Variable Declaration: The variables `raw` and `unit_norm` are declared within the function. `raw` holds the initial unnormalized samples, and `unit_norm` holds the normalized samples.",4.963550908399964,0.4024,0.7651,10.2041,44.6705,85.371,4.71,0.79,3.92
+Check if the given node is from a fallback import block .,"Determines if a given AST node is part of a try/except block that serves as a fallback mechanism, typically used for handling failed imports. The function checks if the node is wrapped in a try/except block that either ignores `ImportError` or contains fallback import statements.
+
+- `node`: The AST node to check.
+- `context`: The try/except wrapper node found around the given node.
+- `other_body`: The body of the try block or the bodies of other except handlers in the same try/except block.
+- `handlers`: The except handlers of the try/except block.
+- `has_fallback_imports`: A boolean indicating if there are any import statements in the `other_body`.
+- `ignores_import_error`: A boolean indicating if any of the handlers in the try/except block are designed to ignore `ImportError`.
+
+The function returns `True` if the node is within a try/except block that either has fallback imports or ignores `ImportError`, otherwise it returns `False`.",4.7559658041528445,1.5186,2.2157,29.1765,53.2514,96.8471,11.98,7.27,9.58
+Like : meth : Flask . before_request . Such a function is executed before each request even if outside of a blueprint .,"Registers a function to run before each request in the application, even outside of the blueprint.",4.4026919355364695,10.1929,16.9553,40.9982,68.4298,72.9276,51.43,24.24,51.43
+Fast CuDNN Bi - GRU implementation,Bidirectional GRU layer using CuDNN for TensorFlow .,4.0712190373019,3.8482,19.2056,19.2308,68.9402,93.4184,33.33,0.0,16.67
+Generate an XML report of coverage results .,generate an XML report from the coverage data,4.004899057488788,36.5555,45.9661,68.169,79.2796,76.097,66.67,46.15,66.67
+Create a Python Layer base on the given java value and the real type .,"The function `of` is a utility method that takes a Java value (`jvalue`) and a type (`bigdl_type`) as input and returns a corresponding Python model or layer object. The function is part of the BigDL library, which is a distributed deep learning library for Apache Spark.
+
+Here's a breakdown of the data flow within the function:
+
+1. The `jvalue` parameter is used to determine the real class name of the Java object it represents by calling the `callBigDlFunc` function with the `bigdl_type` and `""getRealClassNameOfJValue""` arguments.
+
+2. The `jname` variable holds the full Java class name returned by `callBigDlFunc`.
+
+3. The `jpackage_name` variable is derived from `jname` by joining all but the last element of the class name split by `"".""`.
+
+4. The `pclass_name` variable is the Python class name, which is determined by the `get_py_name` function that maps certain Java class names to their Python equivalents.
+
+5. Depending on the `jpackage_name`, the `base_module` is imported using `importlib.import_module`. It imports the appropriate Python module that corresponds to the Java package.
+
+6. The `realClassName` is set to `""Layer""` by default but is updated to `pclass_name` if it exists in the `base_module`'s directory.
+
+7. The `module` variable is assigned the class from the `base_module` using the `realClassName`.
+
+8. The `jvalue_creator` is a method called `""from_jvalue""` that is part of the `module` class.
+
+9. The `model` variable is created by calling the `jvalue_creator` with the `jvalue` and `bigdl_type` as arguments.
+
+10. Finally, the `model` is returned.
+
+The function is designed to dynamically import the necessary Python module and class based on the Java class name and then instantiate a Python object that wraps the Java object. This is useful for interoperability between Java and Python within the BigDL library.",4.63355117262409,0.5723,0.9523,15.5131,48.2889,64.097,7.82,2.62,5.86
+Resume playback on the user s account .,Resume playback on a device,4.402149021475664,20.0767,35.4628,43.3007,70.7195,97.3832,50.0,40.0,50.0
+Attempt to get the access token from the environment .,"This function retrieves an access token from environment variables. It first checks for the token in the current environment variable and if not found, it checks for legacy environment variables. If a legacy variable is used, it issues a deprecation warning and suggests updating to the new environment variable. The function returns the access token if found, otherwise, it returns `None`.",4.968690929407612,3.4265,5.0252,37.467,52.9191,88.2165,20.0,8.82,14.29
+Sanitize URL of a HTTP request by removing the token information before storing / retrieving archived items,"The `sanitize_for_archive` function is designed to sanitize the URL for archival purposes by replacing the bot token (or any sensitive information following 'bot' and preceding '/') with a placeholder 'botXXXXX/'. This is to ensure that sensitive information is not stored or logged, which could be a security risk.
+
+The function takes three parameters: `url`, `headers`, and `payload`. It uses the `re.sub` method from the `re` (regular expression) module to search for the pattern 'bot.*/' in the `url` and replace any matches with 'botXXXXX/'. The `headers` and `payload` are not modified within the function.
+
+The function returns a tuple containing the sanitized `url`, and the original `headers` and `payload` unchanged.
+
+Here's a breakdown of the identifiers and their roles:
+
+- Function name: `TelegramBotClient.sanitize_for_archive`
+- Parameters of the function: `['url', 'headers', 'payload']`
+- Identifier to be returned: `['url, headers, payload']`
+- Method Invocation: `['re.sub']`
+- Method Arguments: `[""('bot.*/', 'botXXXXX/', url)""]`
+- Variable Declaration: `['url']` (the `url` variable is re-assigned after being sanitized)",4.494323501321279,0.3753,1.043,16.3399,46.0646,96.6642,8.99,0.0,6.74
+Remove a websocket subscriber .,Removes a websocket subscriber from the thing's list of subscribers and from all event subscriptions.,4.447481904175575,7.8558,13.5271,76.3221,77.2535,97.8599,30.0,22.22,30.0
+Backward update for a Kalman smoother .,"Performs a backward smoothing update step in a Kalman filter, which is used to refine the state estimates of a system over time. This function takes the filtered mean and covariance from the current time step, the predicted mean and covariance for the next time step, the posterior mean and covariance from the next time step after observing new data, and the transition matrix of the system. It computes the smoothed estimates for the current time step by applying the Rauch-Tung-Striebel (RTS) smoother equations. The function returns the updated posterior mean and covariance for the current time step.",4.76848503172308,0.9068,1.8753,19.4805,52.2213,97.4419,11.32,1.92,9.43
+Plot training set ( and validation set if available ) scoring history for an H2OBinomialModel .,Plotting utility for H2O binomial models .,2.4807574247576327,1.4157,8.0061,11.2782,56.2892,85.6192,19.05,0.0,19.05
+Create the python script from the notebook node,Converts a Jupyter notebook to a Python script .,3.9781758281981854,7.8826,21.736,31.9444,61.8621,71.689,37.5,14.29,25.0
+Removes all points in the fronts that overlap with the segmentation mask .,The function `_remove_overlaps` is designed to modify the `fronts` array by setting elements to zero where there is an overlap with non-zero elements in the `segmentation_mask` that are not equal to the corresponding elements in `fronts`. It uses NumPy's `where` function to find the indices of such overlapping elements and then sets those specific elements in `fronts` to zero. The function does not return any value as it modifies the `fronts` array in place.,4.739547792461761,2.7509,4.1733,42.9441,51.469,95.2145,20.0,11.36,15.56
+This will exclude all of the modules from the traceback,"The `skip_module` function is designed to add specified modules to a list of skipped modules, which is likely used to control the behavior of traceback extraction, possibly to exclude certain modules from being included in the traceback output. The function takes a variable number of arguments, which are expected to be module names, and adds them to the `SKIPPED_MODULES` list if they are not already present. After updating the list, it modifies the `traceback.extract_tb` function to a custom one, presumably `_new_extract_tb`, which would handle traceback extraction considering the skipped modules.
+
+Here's a breakdown of the function:
+
+- The `modules` variable is reassigned based on whether the first argument is a list and whether any arguments were passed at all. If the first argument is a list, it uses that list; otherwise, it uses the tuple of arguments passed to the function.
+- The function then iterates over each module in the `modules` list or tuple.
+- For each module, it checks if the module is not already in the `SKIPPED_MODULES` list.
+- If the module is not in the list, it appends the module to `SKIPPED_MODULES`.
+- Finally, the function sets `traceback.extract_tb` to `_new_extract_tb`, which is not defined within the provided code snippet but is assumed to be a custom traceback extraction function that respects the skipped modules.
+
+The function does not return any value, and its purpose is to modify a global state (`SKIPPED_MODULES`) and alter the behavior of traceback extraction.",4.799980680165978,0.5959,1.0049,11.7302,45.0602,91.2313,6.13,3.09,5.36
+Returns initializer configuration as a JSON - serializable dict .,Returns the configuration of a BlockwiseInitializer instance in a dictionary format.,4.6582633436020044,2.8425,12.8832,18.0723,62.1209,42.2787,31.58,0.0,31.58
+Given a URL set or replace a query parameter and return the modified URL .,Set or replace a query parameter in a URL .,4.593376917130413,37.904,42.7552,52.0255,70.873,88.1669,69.57,57.14,60.87
+Plot alpha versus the ks value for derived alpha . This plot can be used as a diagnostic of whether you have derived the best fit : if there are multiple local minima your data set may be well suited to a broken powerlaw or a different function .,Plot alpha vs KS statistic,3.568309748703608,0.0037,0.0405,3.58,56.3685,95.8189,11.76,4.08,11.76
+PUTs the container and returns the results . This is usually done to create new containers and can also be used to set X - Container - Meta - xxx headers . Note that if the container already exists any existing X - Container - Meta - xxx headers will remain untouched . To remove an X - Container - Meta - xxx header send the header with an empty string as its value .,"Create or update a container with the given name. If the container does not exist, it will be created. If it does exist, the metadata will be updated.",4.675516926869094,1.8019,3.1637,11.9454,52.9504,90.2415,22.22,4.55,15.56
+Compute exponentially weighted moving { mean variance } of a streaming value .,Updates `mean_var` and `variance_var` to be a moving average of `value` using `decay`.,4.125192809675752,2.5967,11.0021,28.5714,62.0509,88.0286,48.0,0.0,32.0
+Decoding using the dot product .,"Calculate the dot product between the transposed images to decode and the feature images, and then transpose the result.",4.968536193148568,6.6015,11.2982,49.3164,62.6064,90.3882,25.0,18.18,25.0
+Decode the data passed in and potentially flush the decoder .,"Decodes the data returned by the server, using the decoder specified in the response headers, if necessary.",3.929562064581051,5.1486,12.1268,44.8217,66.505,98.3706,37.04,16.0,29.63
+Gets tweets for a given user via the Twitter frontend API .,Scrape tweets from a user's timeline on Twitter.,3.3693552448240265,2.914,14.1087,18.5185,69.3854,95.2178,40.0,0.0,40.0
+Generator for the lines of a compressed info ( textual ) response .,"Generator function that decodes yEnc encoded data using zlib for decompression, checking for proper yEnc headers, trailers, and CRC32 checksums.",4.8700990593679645,1.5506,6.1835,9.0909,50.5616,91.3176,13.33,0.0,13.33
+Generate recursive Python Attribute AST nodes for resolving nested names .,"The `_load_attr` function is designed to generate an Abstract Syntax Tree (AST) for a given attribute access expression in Python, such as `module.submodule.attribute`. The function takes a string `name` representing the attribute access expression and an optional `ctx` parameter representing the context in which the attribute is loaded, which defaults to `ast.Load()` indicating a load (read) operation.
+
+The function works by splitting the `name` string into its constituent parts (separated by dots) and recursively building an `ast.Attribute` node for each part of the expression. The base case for the recursion is when the `idx` (index) is equal to the length of the `attrs` list, at which point the context of the node is set to the provided `ctx` and the node is returned.
+
+The `attr_node` function is a nested helper function that performs the recursion. It takes a `node` (which starts as an `ast.Name` node for the first part of the expression) and an `idx` (which starts at 1, since the first part is already handled as an `ast.Name` node). The recursion continues by creating a new `ast.Attribute` node with the current `node` as the `value` and the attribute at the current `idx` as the `attr`, and then calling `attr_node` again with the new node and the incremented index.
+
+The final result is an AST node representing the full attribute access expression, which can be used in the compilation or interpretation of Python code.
+
+The identifiers are categorized as follows:
+
+- Function name: `_load_attr`
+- Parameters of the function: `name` (the attribute access expression as a string), `ctx` (the context, defaulting to `ast.Load()`)
+- Identifier to be returned: The final `ast.Attribute` node representing the attribute access expression
+- Method Invocation: The function calls various constructors and methods from the `ast` module to build the AST nodes
+- Method Arguments: The arguments passed to the constructors and methods of the `ast` module to create the AST nodes
+- Variable Declaration: `attrs` is declared as a list of strings, obtained by splitting the `name` parameter on dots.",4.802142270022908,0.3077,0.5685,13.5487,46.6333,89.52,3.99,0.57,3.42
+Open the HTML document in a web browser saving it to a temporary file to open it . Note that this does not delete the file after use . This is mainly meant for debugging .,Open an lxml ElementTree or Element in a web browser for debugging.,4.049789689116608,4.5533,6.7463,18.5259,63.2235,79.5366,31.11,18.6,31.11
+r Return True if at least one GPU is available,"The function `check_gpu_existence` is designed to check if a GPU is available for TensorFlow to use. It sets a global variable `_gpu_available` to `True` if a GPU is found, or `False` otherwise. The function uses TensorFlow's `ConfigProto` and `Session` to configure and start a session that checks for available devices, and it uses `list_local_devices` from `device_lib` to get a list of the local devices. If an `AttributeError` is caught, it logs a warning and assumes that the function is being called in the context of building documentation, setting `_gpu_available` to `False`.
+
+Here's a breakdown of the data flow and categorization of identifiers in the function:
+
+- **Function name**: `check_gpu_existence`
+- **Parameters of the function**: None (no parameters)
+- **Identifier to be returned**: `_gpu_available` (the function returns the status of GPU availability)
+- **Method Invocation**:
+  - `tf.ConfigProto`: Creates a configuration for a TensorFlow session.
+  - `tf.Session`: Starts a TensorFlow session with the specified configuration.
+  - `device_lib.list_local_devices`: Retrieves a list of the available local devices.
+  - `any`: Checks if any device in the device list is a GPU.
+  - `log.warning`: Logs a warning message if an `AttributeError` is encountered.
+- **Method Arguments**:
+  - `()`: Empty tuple, indicating no arguments for `tf.ConfigProto` and `device_lib.list_local_devices`.
+  - `(config=sess_config)`: The configuration for the TensorFlow session.
+  - `(f'Got an AttributeError `{e}`, assuming documentation building')`: The formatted warning message to log if an `AttributeError` occurs.
+- **Variable Declaration**:
+  - `sess_config`: The TensorFlow session configuration.
+  - `device_list`: The list of local devices retrieved.
+  - `_gpu_available`: The global variable that indicates the GPU availability status. It is declared twice because it is first checked if it is `None` and then set based on the presence of a GPU device.",4.790349500971339,0.59,0.8665,7.874,41.0395,94.7619,3.32,2.01,3.32
+Get crate data,"The function `__fetch_crate_data` is a private method of the `Crates` class in the GrimoireLab Perceval Mozilla backend. It is responsible for fetching data about a specific crate (package) from the Crates.io registry by using the crate's ID. The method uses the `self.client.crate` function to retrieve the raw crate data and then parses it using `json.loads` to convert the JSON string into a Python dictionary. The method returns the 'crate' portion of the dictionary, which contains the relevant data about the crate.
+
+Here's a breakdown of the data flow and categorization of identifiers in the function:
+
+- **Function name**: `Crates.__fetch_crate_data`
+- **Parameters of the function**: `self` (the instance of the `Crates` class), `crate_id` (the ID of the crate to fetch data for)
+- **Identifier to be returned**: `crate['crate']` (the data about the crate extracted from the JSON response)
+- **Method Invocation**:
+  - `self.client.crate(crate_id)`: Calls the `crate` method of the `client` attribute of the `self` instance, passing `crate_id` as an argument to fetch the raw crate data.
+  - `json.loads(raw_crate)`: Parses the raw JSON string `raw_crate` into a Python dictionary.
+- **Method Arguments**:
+  - `(crate_id)`: The argument passed to the `self.client.crate` method.
+  - `(raw_crate)`: The argument passed to `json.loads` for parsing.
+- **Variable Declaration**:
+  - `raw_crate`: A variable that holds the raw JSON string returned by `self.client.crate`.
+  - `crate`: A variable that holds the Python dictionary obtained by parsing `raw_crate` with `json.loads`.",4.479342736689819,0.3001,0.5697,5.4348,33.4267,93.9848,1.59,0.8,1.59
+Get current learning rates .,Retrieve the current learning rate(s) from the optimizer's parameter groups.,4.906565137626698,4.7748,12.606,61.3426,65.6022,80.6969,25.0,14.29,25.0
+** Description ** Deletes a team from Sysdig Monitor .,Deletes a team from the Sysdig Monitor or Secure platform using the team name.,4.316331686026744,21.1421,27.6996,66.3781,60.5224,99.3351,57.14,42.11,57.14
+Downloads and parses the price,Download the price for a given symbol and currency using a specified agent.,4.089223877249862,4.897,12.8063,54.4181,54.2478,87.8542,33.33,12.5,22.22
+Create message content and properties to purge queue with QMFv2,"The `purge_queue` function in the `RequestCmd` class constructs a request to purge a queue in a message broker system using the Qpid Management Framework (QMF) version 2. It creates a dictionary with the necessary information to identify the queue and the action to be taken (purge), then logs the message content and returns the constructed content along with method properties associated with the `self` object.",4.354810859478163,3.0111,4.6552,29.0323,56.5372,95.539,21.33,10.96,13.33
+Returns the movement vector according to held buttons and the rotation .,"Calculates the motion vector for the player based on the current rotation and movement direction. If there is any movement, it computes the strafe angle, converts the player's rotation to radians, and then calculates the directional movement components dx and dz. If there is no movement, it sets all components to 0.0. The function returns a tuple with the motion vector components (dx, dy, dz).",4.749220615582203,0.818,2.6178,24.3902,56.3522,97.4232,21.05,0.0,13.16
+Load from a file into the target table handling each step of the load process .,Load data from a file into a Teradata database using the TeradataBulkLoad class.,3.864781461063349,18.3498,24.5716,28.8101,63.0872,91.288,42.86,23.08,42.86
+Fetch additional data under * index * .,"Fetches more children for the item associated with the given index if they are available, and notifies any views that rows have been inserted.",4.538100511664525,1.12,4.3038,14.4928,50.2855,77.8111,6.9,0.0,6.9
+Updates the suggestions dictionary for an object upon visiting its page,"The function `update_suggestions_dictionary` is designed to track and update a user's viewing history of different objects within an application, presumably for the purpose of generating suggestions or recommendations. It operates differently depending on whether the user is authenticated or a guest.
+
+Here's a breakdown of the function's logic:
+
+1. If the user is authenticated:
+   - Retrieve the user object from the request.
+   - Get the content type of the object being viewed.
+   - Try to retrieve an `ObjectView` instance that matches the user, object ID, and content type. If it doesn't exist, create a new one.
+   - Filter all `ObjectView` instances for the current user to get a list of viewed objects.
+
+2. If the user is not authenticated:
+   - Call the `update_dict_for_guests` function with the request, object, and content type.
+
+3. If there are any viewed objects (`viewed` is not empty):
+   - Iterate over each viewed object.
+   - Check if the content type of the current object matches the content type of the viewed object.
+   - If the current object and the viewed object are different and they do not already exist in the suggestions dictionary, create a new `ObjectViewDictionary` instance linking the current object with the previously viewed object.
+   - Perform a similar check in the opposite direction (from the viewed object to the current object) and create a corresponding `ObjectViewDictionary` instance if necessary.
+
+The function does not explicitly return a value, so it returns `None` by default after executing its logic.
+
+The dataflow in the function indicates the usage of variables and the flow of data between different parts of the function. The categorized identifiers provide a clear understanding of the function's components, such as parameters, method invocations, and variable declarations.",4.166188117676661,0.5977,0.9052,15.3268,44.5041,95.9685,4.78,1.37,4.78
+Use parse_version from pkg_resources or distutils as available .,"The `parse_version` function is designed to import and use the `parse_version` function from either `pkg_resources` or `distutils.version` (as `LooseVersion`) depending on which is available. It then uses the imported `parse_version` to parse the input `version` string and return the parsed version object.
+
+The dataflow of the function indicates that the `version` parameter is the source that flows into the `parse_version` call, and the result of this call is the target that is returned by the function.
+
+The identifiers are categorized as follows:
+
+- Function name: `parse_version`
+- Parameters of the function: `['version']`
+- Identifier to be returned: `['parse_version(version)']`
+- Method Invocation: `['parse_version']`
+- Method Arguments: `['(version)']`
+- Variable Declaration: `[]` (There are no new variables declared within the function, but there is a global variable `_THREAD_CLASS` that is modified.)
+
+The function does not declare any new variables within its scope; it only modifies the global `parse_version` variable to point to the appropriate version parsing function based on the availability of the `pkg_resources` module. If `pkg_resources` is not available, it falls back to using `LooseVersion` from `distutils.version`.",4.577070392498992,1.6388,2.2711,23.1934,53.3297,97.7856,10.31,4.17,10.31
+Attempt to sum MultivariateNormal distributions .,"The function `sum_mvns` takes a list of multivariate normal distributions and returns a new multivariate normal distribution that is the sum of the input distributions. It checks if all distributions are instances of `MultivariateNormalDiag` and if so, it computes the sum of their means and the square root of the sum of their variances to create a new `MultivariateNormalDiag` distribution. If any of the input distributions are not `MultivariateNormalDiag`, it raises a `NotImplementedError`.
+
+The function is designed to work within TensorFlow's graph execution mode, as indicated by the use of `tf.compat.v1.name_scope` which is a compatibility function for TensorFlow 1.x name scopes. The function is part of TensorFlow Probability, a library for probabilistic reasoning and statistical analysis in TensorFlow.",4.817056649941407,0.3696,1.0678,8.8757,51.8025,99.3578,4.65,0.0,3.1
+Apply crz from ctl to tgt with angle theta .,"The `crz` function is a method that appends a controlled-Z rotation gate (CrzGate) to a quantum circuit. The gate is parameterized by an angle `theta` and is applied to two qubits in the circuit: a control qubit `ctl` and a target qubit `tgt`. The method returns the modified quantum circuit object.
+
+The `CrzGate` is a class that represents the controlled-Z rotation gate, and it is instantiated with the angle `theta`. The `append` method is used to add the instantiated gate to the circuit, with the control and target qubits specified in a list as the second argument. The third argument is an empty list, which would typically hold additional options or configurations if needed.
+
+The function is part of the Qiskit library, which is a framework for quantum computing. This particular function is located in the `crz.py` file within the `qiskit/extensions/standard` directory of the Qiskit Terra repository.",4.814213067423848,0.6442,1.2789,22.834,47.5255,94.1066,8.7,1.26,7.45
+Build an xsd simpleType out of a S_CDT .,"The function `build_core_type` takes a single parameter `s_cdt` and uses it to determine the core data type for an XML schema element. It does this by navigating to a related data type (`s_dt`) and then mapping the name of this data type to an XML schema data type (`type_name`). If a mapping is found, it creates an XML element (`mapped_type`) representing a simple type with a restriction based on the `type_name`. If the data type name is not recognized or is 'void', no XML element is created, and the function returns `None`. The function uses the `nav_one` method to navigate the model and `ElementTree` (`ET`) to create the XML elements.",4.528001717284061,0.7803,1.5874,15.0754,51.1893,91.6494,9.45,1.6,6.3
+Apply filters to deprecation warnings .,Filters out deprecation warnings from Qiskit and marshmallow 3.,4.4129719466420525,7.8826,21.736,48.218,64.1993,69.6819,46.15,18.18,46.15
+builds a list of input files from command - line arguments,"The `make_file_list` function is designed to create a list of file paths based on the input arguments provided. If no arguments are given, it defaults to using the command-line arguments passed to the script, excluding the script name itself. The function processes each argument, expanding any wildcards using the `glob` module to match file names, and then adds the resulting file paths to the `file_list`. If no files are found, `file_list` is set to `None`. Otherwise, it filters out any non-existent files using the `file_exists` function before returning the final list of file paths.
+
+Here's a breakdown of the data flow within the function:
+
+- `file_list`: This is the main list that will contain all the file paths. It is initialized as an empty list and gets extended with `newpath` if files are found. It is also the value that gets returned by the function after being filtered for existing files.
+- `args`: This variable holds the list of arguments to process. If no arguments are provided to the function, it defaults to the command-line arguments (`sys.argv[1:]`).
+- `newpath`: This variable is used to store the list of file paths that match a given pattern (when wildcards are used) or a single file path when no wildcards are present.
+
+The function uses several method invocations to perform its tasks:
+- `string.find`: Checks if a wildcard character (`*`) is present in the pathname.
+- `glob.glob`: Expands the wildcard pattern to a list of matching file paths.
+- `newpath.sort`: Sorts the list of file paths.
+- `file_list.extend`: Adds the file paths from `newpath` to `file_list`.
+- `len`: Checks the length of `file_list` to determine if any files were added.
+- `filter`: Filters out non-existent files from `file_list` using the `file_exists` function.
+
+The function's parameters, method arguments, and variable declarations are categorized accordingly. The function does not take any parameters by default (`args = None`), but it can accept a list of file path patterns as an argument. The identifier to be returned is `file_list`, which contains the final list of existing file paths.",4.8271987557381015,0.7669,1.0128,18.702,47.6254,87.7535,4.96,2.77,4.41
+Like pairwise except returns n - tuples of adjacent items . s - > ( s0 s1 ... sn ) ( s1 s2 ... s ( n + 1 )) ...,"Creates a sliding window iterator that yields tuples of length `n`, where each tuple contains consecutive elements from the input `iter`. Each tuple is offset from the previous one by one element.",4.784993510310096,2.1375,5.0101,17.0608,49.6661,68.6224,12.24,4.26,12.24
+\ Respond to periodic PING messages from server,Respond to a server ping by sending back a pong with the payload .,4.9623844980063625,5.2622,13.7612,41.5296,56.0984,96.7634,40.0,11.11,30.0
+Create and return a new instance in the metamodel of some * kind * . Optionally initial attribute values may be assigned to the new instance by passing them as positional or keyword arguments . Positional arguments are assigned in the order in which they appear in the metaclass .,Create a new instance of a model element .,2.6280137234374727,0.1839,0.5327,9.0073,56.6271,78.6954,18.87,7.84,18.87
+Parse a StackExchange API raw response .,"The `parse_questions` function is designed to parse a raw JSON page containing StackExchange questions and yield each question individually. It uses the `json.loads` method to deserialize the raw JSON content into a Python dictionary, then extracts the list of questions under the 'items' key. Each question in this list is then yielded one by one.
+
+Here's a breakdown of the data flow within the function:
+
+- `raw_page`: The raw JSON string input to the function. It is used as an argument to `json.loads` to parse the JSON content.
+- `raw_questions`: A Python dictionary obtained from parsing `raw_page` with `json.loads`. It is used to access the 'items' key to retrieve the list of questions.
+- `questions`: The list of questions extracted from `raw_questions['items']`. This list is iterated over, and each question is yielded by the generator.
+
+The identifiers are categorized as follows:
+
+- Function name: `StackExchange.parse_questions`
+- Parameters of the function: `['raw_page']` (the raw JSON string containing the questions)
+- Identifier to be returned: The function does not return a value; it is a generator that yields questions.
+- Method Invocation: `['json.loads']` (used to parse the raw JSON string)
+- Method Arguments: `['(raw_page)']` (the raw JSON string passed to `json.loads`)
+- Variable Declaration: `['raw_questions', 'questions']` (variables holding the parsed JSON dictionary and the list of questions, respectively)",4.861135922969455,0.3932,0.7533,7.1942,47.0509,94.4134,3.48,0.88,3.48
+Enable or disable automatic rate - limit handling .,Setter for ** self . _wait_on_rate_limit ** attribute .,4.401768636787258,7.1227,19.6407,26.4085,49.4777,80.5712,26.67,15.38,26.67
+Input text short or long . Writes in order within the defined page boundaries . Sequential add_text commands will print without additional whitespace .,"Add text to the PDF document at the current cursor position, with optional justification. If the text contains newline characters, it will be split into multiple lines, and each line will be added separately. The text will also be cleaned up to replace multiple spaces with a single space.",4.927850425156012,1.6519,3.6861,10.1215,53.2826,97.4794,14.08,2.9,11.27
+Write the data required by PrecalculatedTextMeasurer to a stream .,Write a JSON file with precalculated text measurements for badge generation .,3.453646406072645,2.5685,11.6413,10.8696,63.1741,84.2175,20.0,0.0,20.0
+Convert a parse tree node into an absract syntax tree node .,Converts a parse tree node to an Abstract Syntax Notation (ASN) object based on the node's type.,4.77377957509657,15.4643,20.8953,53.953,69.8937,93.2978,48.28,22.22,48.28
+Open the SolveBio shell ( IPython wrapper ) with IPython 5 +,Launches an IPython shell with a custom banner and initialization file for the SolveBio Python environment.,4.314696876598364,4.5799,11.6784,42.2727,68.2309,87.2398,41.67,9.09,16.67
+Return a list with the current indexes Skip the mandatory _id_ indexes,Retrieves a list of index names for the specified collection or for all collections if no specific collection is provided.,4.710023873997965,3.2802,8.138,24.6582,50.8037,86.6786,18.75,6.67,18.75
+Parses the Xdot attributes of all graph components and adds the components to a new canvas .,"Redraw the canvas by parsing the xdot attributes of nodes and edges and adding the resulting components to the canvas. The function iterates over all nodes and edges, parses their drawing attributes, and adds the parsed components to the canvas. After updating the canvas with all components, it requests a redraw of the view.",4.208419178944544,7.5908,9.9383,42.4011,67.3157,99.4081,40.0,17.65,31.43
+Parses the dot_code string and replaces the existing model .,"The function `_parse_dot_code_fired` is a method of the `GraphViewModel` class in the `godot` repository. It is responsible for parsing the DOT (graph description language) code contained within the instance (referred to by `self`) and updating the model of the `GraphViewModel` with the resulting graph if parsing is successful.
+
+Here's the data flow within the function:
+
+- `self`: The instance of `GraphViewModel` that the method is being called on. It is the source of the `dot_code` attribute and the target for setting the `model` attribute.
+- `parser`: An instance of `GodotDataParser` created within the function. It is used to parse the DOT code.
+- `graph`: The variable that holds the result of the parsing operation. If the parsing is successful and a graph is returned, it is assigned to the `model` attribute of `self`.
+
+The identifiers are categorized as follows:
+
+- Function name: `GraphViewModel._parse_dot_code_fired`
+- Parameters of the function: `['self']` (indicating that the function takes one parameter, which is the instance itself)
+- Identifier to be returned: None (the function does not return any value)
+- Method Invocation: `['GodotDataParser', 'parser.parse_dot_data']` (indicating that the function creates an instance of `GodotDataParser` and calls the `parse_dot_data` method on it)
+- Method Arguments: `['()', '(self.dot_code)']` (indicating that `GodotDataParser` is instantiated without arguments and `parse_dot_data` is called with `self.dot_code` as its argument)
+- Variable Declaration: `['parser', 'graph']` (indicating that the function declares variables for the parser and the graph)",4.650038250648078,0.6635,1.0111,15.9769,45.9825,75.9009,4.74,1.59,4.74
+Compute based on NeuralVariable .,"The `compute` method in the `NeuralLayer` class is responsible for initializing the layer with the appropriate input dimensions and computing the output tensor based on the given inputs. It checks if the inputs are instances of `NeuralVariable`, initializes the layer, links it to the default computational graph if it has parameters and is not already linked, and then computes the output tensor using the `compute_tensor` method. The output is wrapped in a `NeuralVariable` with the appropriate dimensionality, or in a list of `NeuralVariable` objects if the output is a list or tuple.",4.423188691961642,0.8751,1.8232,24.4671,51.3158,95.2659,8.25,2.11,8.25
+Sets the process environemnt and executes the [ COMMAND ] in the same context . Does not modify the current shell environment .,"The `exec_command` function in the `s3conf` client is designed to execute a command within the context of an S3 configuration environment. The function takes four parameters: `ctx`, `section`, `command`, and `map_files`. Here's a breakdown of the data flow and the actions performed within the function:
+
+1. The function starts by logging that it's running an exec command.
+2. It retrieves the existing sections from the local configuration file.
+3. The `command` parameter, which is expected to be a list, is joined into a single string.
+4. If the provided `section` is not in the existing sections, it is prepended to the `command` string, and `section` is set to `None`.
+5. If no command is detected after processing, a warning is logged, and the help message is displayed using `click.echo`.
+6. A new `settings` object is created for the specified `section`.
+7. A storage object is instantiated using the `STORAGES['s3']` factory with the created `settings`.
+8. An `S3Conf` object is created with the `storage` and `settings`.
+9. Environment variables are retrieved from the `S3Conf` object's environment file and converted to a dictionary.
+10. If the `S3CONF_MAP` environment variable is set and `map_files` is `True`, the configuration mapping is downloaded.
+11. The current environment variables are copied and updated with the retrieved `env_vars`.
+12. The command is executed in a subprocess with the updated environment variables.
+13. If an `EnvfilePathNotDefinedError` is caught, an `EnvfilePathNotDefinedUsageError` is raised.
+
+The function does not have a return statement, so it implicitly returns `None` at the end of execution unless an exception is raised. The function interacts with various methods and objects to handle configuration settings, environment variables, and subprocess execution.",4.3106451233726055,0.6065,1.0148,19.9601,51.5206,98.0982,8.16,2.74,6.8

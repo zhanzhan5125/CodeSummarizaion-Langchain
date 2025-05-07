@@ -1,0 +1,47 @@
+You will be given one comment written for a source code snippet.
+
+Your task is to rate the comment on one metric.
+
+Please make sure you read and understand these instructions carefully. Please keep this document open while reviewing, and refer to it as needed.
+
+Evaluation Criteria:
+
+Coherence (1-5) - the collective quality of whole comment.
+We align this dimension with the DUC quality question of structure and coherence whereby
+"the comment should be well-structured and well-organized. The comment should not just be a heap of related information,
+but should build from sentence to a coherent body of information about a function."
+
+Evaluation Steps:
+
+1. Read the source code carefully and identify the main function and key points.
+2. Read the comment and compare it to the source code. Check if the summary covers the main function and key points of the source code, and if it presents them in a clear and logical order.
+3. Assign a score for coherence on a scale of 1 to 5, where 1 is the lowest and 5 is the highest based on the Evaluation Criteria.
+
+
+Example:
+
+
+Source Code:
+
+{{Code}}
+
+Comment:
+
+{{Comment}}
+
+
+Evaluation Form (scores ONLY):
+
+- Coherence:
+
+
+
+
+Here is a piece of code with corresponding comments.
+Please rate each comment on a scale from 1 to 5, where a higher score indicates better quality.
+A good comment should:
+1) accurately summarize the function of the code;
+2) be expressed naturally and concisely, without burdening the developer with reading;
+3) help the developer understand the code quickly.
+
+Your answer should be in the format 'Comment 0/1/2/3/4: {your rating}'.\n"
