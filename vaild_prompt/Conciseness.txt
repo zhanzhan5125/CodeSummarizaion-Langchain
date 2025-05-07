@@ -1,0 +1,24 @@
+You will be given one comment written for a code snippet.
+
+Your task is to rate the comment on "Conciseness" metric and provide a modification suggestion.
+Finally return the rate answer (Score only) and your suggestion in json format.
+
+Evaluation Criteria:
+Conciseness (1-5)
+1. Start with an action verb, ignore the subjective.
+2. Focus on the core responsibility, without redundancy.
+3. Preserve essential adjective words and qualifiers.
+
+The suggestion should be the form of following:
+1. Be more concise by ...
+2. No suggestion matched. (when the score is 5)
+
+Code:
+{Code}
+
+Comment:
+{Comment}
+
+Evaluation Form:
+{"Conciseness":"","Suggestion":""}
+

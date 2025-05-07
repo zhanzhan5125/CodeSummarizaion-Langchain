@@ -1,0 +1,36 @@
+You will be given one comment written for a code snippet.
+
+Your task is to rate the comment on one metric.
+Finally return the rate answer (Score only) in json format.
+
+Please make sure you read and understand these instructions carefully. Please keep this Code open while reviewing, and refer to it as needed.
+
+Evaluation Criteria:
+Comprehensiveness (1-5) - This is a quality that the comment can be easily and correctly understood by developers without burdening them with reading.
+A comprehensive comment should be:
+1. Correct: Accurately summarizes what the code mainly does without logical error.
+2. Concise: ONLY Focus on functional purpose in a high-level, avoid process details.
+3. Clear: Enable the reader to quickly grasp the overall intent of the code.
+
+Evaluation Steps:
+1. Read the code carefully and identify the main function.
+2. Read the comment and compare it to the code. Check if the comment meets the criteria for comprehensiveness.
+3. Assign a reasonable score for Comprehensiveness on a scale of 1 to 5, where 1 is the lowest and 5 is the highest based on the Evaluation Criteria.
+
+
+Example:
+
+
+Code:
+
+{Code}
+
+Comment:
+
+{Comment}
+
+
+Evaluation Form:
+
+{"Comprehensiveness":""}
+
