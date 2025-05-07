@@ -1,12 +1,11 @@
-import json
 from langchain_core.tools import StructuredTool
-from rag1 import CodeRetriever
-from score import llm_score
+from rag import CodeRetriever
+from validation import llm_score
 
 
 class CodeTools:
-    def __init__(self):
-        self.retriever = CodeRetriever(3)
+    def __init__(self, k, lang):
+        self.retriever = CodeRetriever(k, lang)
         self.tools = [
             StructuredTool.from_function(
                 name="retrieve_similar_code",
@@ -14,16 +13,17 @@ class CodeTools:
                 description="Retrieve similar code-comment pairs from database"
             ),
             StructuredTool.from_function(
-                name="evaluate_comment",
-                func=self.evaluate_comment,
+                name="valid_comment",
+                func=self.valid_comment,
                 description="Evaluate the quality of generated comment"
             ),
         ]
 
-    def retrieve_samples(self, code:str, lang:str):
+    def retrieve_samples(self, data: dict, method: str):
         """Retrieve similar code-comment pairs from database"""
-        return self.retriever.query_samples(code, lang)
+        return self.retriever.query_samples(data, method)
 
-    def evaluate_comment(self, code:str,comment:str):
+    def valid_comment(self, code: str, comment: str, prompt_file: str):
         """Evaluate the quality of generated comment"""
-        return json.loads(llm_score(code, comment))
+        return llm_score(code, comment, prompt_file)
+

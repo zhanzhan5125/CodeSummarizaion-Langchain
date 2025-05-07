@@ -2,15 +2,9 @@ import re
 from io import StringIO
 import tokenize
 
-single = {'java': '//', 'python': '#', 'c': '//',
-          'ruby': '#', 'javascript': '//', 'go': '//',
-          'php': ['#', '//'],
-          'erlang': '%', 'haskell': '--', 'prolog': '%'}
+single = {'java': '//', 'python': '#', 'c': '//'}
 
-multi = {'java': ['/*', '*/'], 'python': ['"""', '"""', '/*', '*/'], 'c': ['/*', '*/'],
-         'ruby': ['=begin', '=end'], 'javascript': ['/*', '*/'], 'go': ['/*', '*/'],
-         'php': ['/*', '*/'],
-         'erlang': [], 'haskell': ['{-', '-}'], 'prolog': []}
+multi = {'java': ['/*', '*/'], 'python': ['"""', '"""', '/*', '*/'], 'c': ['/*', '*/']}
 
 
 def remove_comments_and_docstrings(source, lang):
@@ -53,80 +47,13 @@ def remove_comments_and_docstrings(source, lang):
             if x.strip() != "":
                 temp.append(x)
         return '\n'.join(temp)
-    elif lang in ['ruby']:
-        def replacer(match):
-            s = match.group(0)
-            if s.startswith('#') or s.startswith('=begin'):
-                return " "  # note: a space and not an empty string
-            else:
-                return s
-
-        pattern = re.compile(
-            r'#.*?$|=begin.*?=end|\'(?:\\.|[^\\\'])*\'|"(?:\\.|[^\\"])*"',
-            re.DOTALL | re.MULTILINE
-        )
-        temp = []
-        for x in re.sub(pattern, replacer, source).split('\n'):
-            if x.strip() != "":
-                temp.append(x)
-        return '\n'.join(temp)
-    elif lang in ['erlang', 'prolog']:
-        def replacer(match):
-            s = match.group(0)
-            if s.startswith('%'):
-                return " "  # note: a space and not an empty string
-            else:
-                return s
-
-        pattern = re.compile(r'%.*?$|\'(?:\\.|[^\\\'])*\'|"(?:\\.|[^\\"])*"', re.DOTALL | re.MULTILINE)
-        temp = []
-        for x in re.sub(pattern, replacer, source).split('\n'):
-            if x.strip() != "":
-                temp.append(x)
-        return '\n'.join(temp)
-    elif lang in ['haskell']:
-        def replacer(match):
-            s = match.group(0)
-            if s.startswith('--') or s.startswith('{-'):
-                return " "  # note: a space and not an empty string
-            else:
-                return s
-
-        pattern = re.compile(
-            r'--.*?$|\{-.*?-}|\'(?:\\.|[^\\\'])*\'|"(?:\\.|[^\\"])*"',
-            re.DOTALL | re.MULTILINE
-        )
-        temp = []
-        for x in re.sub(pattern, replacer, source).split('\n'):
-            if x.strip() != "":
-                temp.append(x)
-        return '\n'.join(temp)
-    elif lang in ['php']:
-        def replacer(match):
-            s = match.group(0)
-            if s.startswith('#') or s.startswith('//') or s.startswith('/*'):
-                return " "  # note: a space and not an empty string
-            else:
-                return s
-
-        pattern = re.compile(
-            r'#.*?$|//.*?$|/\*.*?\*/|\'(?:\\.|[^\\\'])*\'|"(?:\\.|[^\\"])*"',
-            re.DOTALL | re.MULTILINE
-        )
-        temp = []
-        for x in re.sub(pattern, replacer, source).split('\n'):
-            if x.strip() != "":
-                temp.append(x)
-        return '\n'.join(temp)
-
-    elif lang in ['java', 'go', 'javascript', 'c']:
+    elif lang in ['java','c']:
         def replacer(match):
             s = match.group(0)
             if s.startswith('//') or s.startswith('/*'):
                 return " "  # note: a space and not an empty string
             else:
                 return s
-
         pattern = re.compile(
             r'//.*?$|/\*.*?\*/|\'(?:\\.|[^\\\'])*\'|"(?:\\.|[^\\"])*"',
             re.DOTALL | re.MULTILINE
@@ -143,14 +70,9 @@ def remove_comments_and_docstrings(source, lang):
 
 
 if __name__ == '__main__':
-    code = '''
-          end
-      # NOTE this is required, since repaint will just not happen otherwise
-      # Some components are erroneously repainting all, after setting this to true so it is 
-      # working there. 
-      @current_component.repaint_required true
-      $log.debug " after on_leave STACKFLOW XXX #{@current_component.focussed}   #{@current_component.name}"
-      @current_component.repaint
-    end
-    '''
-    print(remove_comments_and_docstrings(code, 'php'))
+    code = ("def _get_command_by_name(self, blueprint, name):\n        \"\"\"\n        Get the primary key command it it exists.\n        \"\"\"\n        commands = self._get_commands_by_name(blueprint, name)\n\n        if len(commands):\n            return commands[0]")
+    print(code)
+    print(remove_comments_and_docstrings(code, 'python'))
+    code2=("def valid(self, name):\n    \"\"\"Ensure a variable name is valid.\n\n    Note: Assumes variable names are ASCII, which isn't necessarily true in\n    Python 3.\n\n    Args:\n      name: A proposed variable name.\n\n    Returns:\n      A valid version of the name.\n    \"\"\"\n    name = re.sub('[^0-9a-zA-Z_]', '', name)\n    if re.match('[0-9]', name):\n      name = '_' + name\n    return name")
+    print(code2)
+    print(remove_comments_and_docstrings(code2, 'python'))
