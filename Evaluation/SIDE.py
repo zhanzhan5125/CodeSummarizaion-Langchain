@@ -43,8 +43,6 @@ def side_score(code, summary, model_path, device=DEVICE):
 
 
 if __name__ == '__main__':
-    text = "Checks if the 'child' node is a direct or indirect child of 'parent', and if so, collects XML namespace attributes from the 'child' node's ancestors into the 'namespaces' dictionary ."
-    text1 = "Recursively find child node and collect XML namespaces."
     print(side_score('''public Object pop() throws EmptyStackException {
   	    try {
   	      Object aObject = this.stackElements.get(stackElements.size() - 1);
@@ -54,4 +52,4 @@ if __name__ == '__main__':
   	    catch (Exception e) {
   	      throw new EmptyStackException(e);
   	    }
-		}''', "pop the top of the stack", './SIDE-Models/hard-negatives/141205'))
+		}''', "Returns a string consisting of the first n bytes from the queue without removing them.", './SIDE-Models/hard-negatives/141205'))

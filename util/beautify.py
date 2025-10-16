@@ -1,88 +1,193 @@
 import csv
-import re
-import string
-import warnings
-from nltk.tokenize import word_tokenize
 
-warnings.filterwarnings('ignore')
+def beautify(FILE='', PROMPT='chain_of_thought'):
+    files_1 = [
+        'cot',
+        'critique',
+        'expert'
+    ]
+    if PROMPT in files_1:
+        updated_rows = []
+        with open(FILE, 'r', encoding='utf-8') as f:
+            reader = csv.reader(f)
+            for line in reader:
+                idx = line[0]
+                paragraph = line[1].strip().split('\n')
+                paragraph = [p for p in paragraph if len(p.strip()) > 0 and not p.strip().endswith(':')]
+                comment = ''
+                if len(paragraph) > 0:
+                    p = paragraph[0].strip()
+                    if p.startswith('/*'):
+                        if len(p) <= 3:
+                            final_lines = []
+                            for k in range(len(paragraph)):
+                                if paragraph[k].strip().startswith('*/'):
+                                    break
+                                elif paragraph[k].strip().startswith('*'):
+                                    final_lines.append(paragraph[k].strip()[2:])
+                                elif paragraph[k].strip().startswith('/*'):
+                                    final_lines.append(paragraph[k].strip()[2:])
+                                else:
+                                    final_lines.append(paragraph[k].strip())
+                            sentence = ' '.join(final_lines).split('. ')
+                            sentence = [c for c in sentence if len(c.strip()) > 1]
+                            comment = sentence[0] if sentence else ''
+                        else:
+                            comment = p[2:].strip()
+                            if comment.endswith('*/'):
+                                comment = comment[:-2]
+                    elif p.startswith('```'):
+                        comment = paragraph[1] if len(paragraph) > 1 else ''
+                        flg = False
+                        for i in range(1, len(paragraph)):
+                            p = paragraph[i].strip()
+                            if not flg and (p.startswith('//') or p.startswith('# ')):
+                                comment = p
+                                break
+                            if not flg and p.startswith('"""'):
+                                if len(p) == 3:
+                                    final_lines = []
+                                    for j in range(i + 1, len(paragraph)):
+                                        if paragraph[j].strip().startswith('"""'):
+                                            break
+                                        final_lines.append(paragraph[j].strip())
+                                    sentence = ' '.join(final_lines).split('. ')
+                                    sentence = [c for c in sentence if len(c.strip()) > 1]
+                                    comment = sentence[0] if sentence else ''
+                                    break
+                                else:
+                                    comment = p[3:]
+                                    if comment.endswith('"""'):
+                                        comment = comment[:-3]
+                                    break
+                            if not flg and p.startswith('/*'):
+                                if len(p) <= 3:
+                                    final_lines = []
+                                    for j in range(i + 1, len(paragraph)):
+                                        if paragraph[j].strip().startswith('*/'):
+                                            break
+                                        elif paragraph[j].strip().startswith('*'):
+                                            final_lines.append(paragraph[j].strip()[2:])
+                                        elif paragraph[j].strip().startswith('/*'):
+                                            final_lines.append(paragraph[j].strip()[2:])
+                                        else:
+                                            final_lines.append(paragraph[j].strip())
+                                    sentence = ' '.join(final_lines).split('. ')
+                                    sentence = [c for c in sentence if len(c.strip()) > 1]
+                                    comment = sentence[0] if sentence else ''
+                                    break
+                                else:
+                                    comment = p[2:].strip()
+                                    if comment.endswith('*/'):
+                                        comment = comment[:-2]
+                                    break
+                            if flg and len(p.strip()) > 0:
+                                sentence = p.strip().split('. ')
+                                sentence = [c for c in sentence if len(c.strip()) > 1]
+                                comment = sentence[0] if sentence else ''
+                                break
+                            if p.startswith('```'):
+                                flg = True
+                    elif p.startswith('"""'):
+                        if len(p) == 3:
+                            final_lines = []
+                            for j in range(1, len(paragraph)):
+                                if paragraph[j].strip().startswith('"""'):
+                                    break
+                                final_lines.append(paragraph[j].strip())
+                            sentence = ' '.join(final_lines).split('. ')
+                            sentence = [c for c in sentence if len(c.strip()) > 1]
+                            comment = sentence[0] if sentence else ''
+                        else:
+                            comment = p[3:]
+                            if comment.endswith('"""'):
+                                comment = comment[:-3]
+                    else:
+                        sentence = p.split('. ')
+                        sentence = [c for c in sentence if len(c.strip()) > 1]
+                        if PROMPT == 'critique':
+                            sentence = [c for c in sentence if 'apologies' not in c.lower()]
+                        comment = sentence[0] if sentence else ''
 
+                    comment = comment.strip()
+                    if comment.startswith(('"', '`', '-', '#', '*')):
+                        comment = comment[1:].strip()
+                    if comment.endswith('"'):
+                        comment = comment[:-1].strip()
+                    if comment.startswith('//') or comment.startswith('""') or comment.startswith('/*'):
+                        comment = comment[2:].strip()
+                    if comment.endswith('*/'):
+                        comment = comment[:-2].strip()
+                    if comment.endswith('.'):
+                        comment = comment[:-1].strip()
+                    comment = comment.replace('\t', ' ')
 
-def process_text_to_comment(text: str) -> str:
-    # 按照原 logic 对单段文本提取首句或注释
-    paragraph = text.strip().split('\n')
-    paragraph = [p for p in paragraph if p.strip()]
+                updated_rows.append([idx, comment])
 
-    # 如果是 /* ... */ 格式
-    if paragraph and paragraph[0].strip().startswith('/*'):
-        first = paragraph[0].strip()
-        # 多行注释
-        if len(first) <= 3:
-            final_lines = []
-            for line in paragraph:
-                s = line.strip()
-                if s.startswith('*/'):
-                    break
-                if s.startswith('*') or s.startswith('/*'):
-                    final_lines.append(s.lstrip('/*').lstrip('*').strip())
-                else:
-                    final_lines.append(s)
-            new_paragraph = ' '.join(final_lines)
-            sentences = [s for s in new_paragraph.split('. ') if len(s.strip()) > 1]
-            comment = sentences[0] if sentences else new_paragraph
-        else:
-            # 单行注释
-            comment = first.lstrip('/*').rstrip('*/').strip()
-    else:
-        # 普通文本或 // 注释
-        first_para = paragraph[0] if paragraph else ''
-        sentences = [s for s in first_para.split('. ') if len(s.strip()) > 1]
-        comment = sentences[0] if sentences else first_para
+        # 覆盖写回CSV
+        with open(FILE, 'w', encoding='utf-8', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerows(updated_rows)
 
-        # 去除首尾特殊符号
-        comment = comment.strip()
-        if comment and comment[0] in '“`-#*"':
-            comment = comment[1:].strip()
-        if comment.endswith('"') or comment.endswith('*/'):
-            comment = re.sub(r'"$|\*/$', '', comment).strip()
-        if comment.startswith('//') or comment.startswith('""'):
-            comment = comment.lstrip('/"')
-        if comment.endswith('.'):
-            comment = comment[:-1].strip()
-        comment = comment.replace('\t', ' ')
-    return comment + ' .'
+    files_2 = ['zero', 'few']
+    if PROMPT in files_2:
+        updated_rows = []
+        with open(FILE, 'r', encoding='utf-8') as f:
+            reader = csv.reader(f)
+            for line in reader:
+                idx = line[0]
+                paragraph = line[1].strip().split('\n')
+                paragraph = [p for p in paragraph if len(p.strip()) > 0]
+                comment = ''
+                if paragraph:
+                    p = paragraph[0].strip()
+                    if p.startswith('/*'):
+                        if len(p) <= 3:
+                            final_lines = []
+                            for k in range(len(paragraph)):
+                                if paragraph[k].strip().startswith('*/'):
+                                    break
+                                elif paragraph[k].strip().startswith('*'):
+                                    final_lines.append(paragraph[k].strip()[2:])
+                                elif paragraph[k].strip().startswith('/*'):
+                                    final_lines.append(paragraph[k].strip()[2:])
+                                else:
+                                    final_lines.append(paragraph[k].strip())
+                            sentence = ' '.join(final_lines).split('. ')
+                            sentence = [c for c in sentence if len(c.strip()) > 1]
+                            comment = sentence[0] if sentence else ''
+                        else:
+                            comment = p[2:].strip()
+                            if comment.endswith('*/'):
+                                comment = comment[:-2]
+                    else:
+                        sentence = p.split('. ')
+                        sentence = [c for c in sentence if len(c.strip()) > 1]
+                        comment = sentence[0] if sentence else ''
+                        comment = comment.strip()
+                        if comment.startswith(('"', '`', '-', '#', '*')):
+                            comment = comment[1:].strip()
+                        if comment.endswith('"'):
+                            comment = comment[:-1].strip()
+                        if comment.startswith('//') or comment.startswith('""') or comment.startswith('/*'):
+                            comment = comment[2:].strip()
+                        if comment.endswith('*/'):
+                            comment = comment[:-2].strip()
+                        if comment.endswith('.'):
+                            comment = comment[:-1].strip()
+                        comment = comment.replace('\t', ' ')
 
+                updated_rows.append([idx, comment])
 
-def beautify_csv(input_csv: str):
-    """
-    读取 CSV 文件，对第二列（Summary）应用 beautify 逻辑并覆盖原列。
-    会在原文件写回。
-    """
-    tmp_file = input_csv + '.tmp'
-    with open(input_csv, 'r', encoding='utf-8', newline='') as rf, \
-         open(tmp_file, 'w', encoding='utf-8', newline='') as wf:
-        reader = csv.reader(rf)
-        writer = csv.writer(wf)
+        # 覆盖写回CSV
+        with open(FILE, 'w', encoding='utf-8', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerows(updated_rows)
 
-        # 读取并写入表头
-        header = next(reader)
-        writer.writerow(header)
-
-        for row in reader:
-            if len(row) < 2:
-                writer.writerow(row)
-                continue
-            idx = row[0]
-            summary = row[1]
-            comment = process_text_to_comment(summary)
-            # 覆盖第二列
-            row[1] = comment
-            writer.writerow(row)
-
-    # 用临时文件替换原文件
-    import os
-    os.replace(tmp_file, input_csv)
 
 
 if __name__ == '__main__':
     # 示例用法
-    beautify_csv('../Result/generation/python/SCSL/zero_shot.csv')
+    beautify('../Result/RQ1/java/SCSL/gpt-4-turbo/critique/valid.csv', 'critique')
+    beautify('../Result/RQ1/java/SCSL/gpt-4-turbo/expert/valid.csv', 'expert')
+

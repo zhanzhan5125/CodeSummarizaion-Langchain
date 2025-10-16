@@ -14,6 +14,38 @@ def low_score(csv_file, score, is_delete=False):
     return row_indices
 
 
+def delete_multiple_jsonl_lines(filepath, line_numbers_to_delete):
+    """
+    删除 JSONL 文件中从 1 开始计数的多行数据。
+    :param filepath: JSONL 文件路径
+    :param line_numbers_to_delete: 要删除的行号列表（从1开始计数）
+    """
+    if not line_numbers_to_delete:
+        return
+
+    # 将行号转为 set 并转换为从 0 开始的索引
+    target_indices = set([i - 1 for i in line_numbers_to_delete if i >= 1])
+
+    with open(filepath, 'r', encoding='utf-8') as f:
+        lines = f.readlines()
+
+    # 检查是否越界
+    max_line = len(lines)
+    for i in target_indices:
+        if i >= max_line:
+            raise IndexError(f"文件只有 {max_line} 行，不能删除第 {i + 1} 行")
+
+    # 删除指定行
+    new_lines = [line for idx, line in enumerate(lines) if idx not in target_indices]
+
+    with open(filepath, 'w', encoding='utf-8') as f:
+        f.writelines(new_lines)
+
+    print(f"已成功删除 {len(target_indices)} 行：{sorted(line_numbers_to_delete)}")
+
+
+
+
 def calculate_average(csv_file, column_n, ignore_indices=None):
     if ignore_indices is None:
         ignore_indices = []
@@ -79,4 +111,24 @@ def extract_origin(input_file,csv_file):
 
 
 if __name__ == '__main__':
-    extract_origin("./generation/python/codeSummary/valid_ai2.txt","./generation/python/codeSummary/valid2_ai2.csv")
+    # low = [127,129,130,133,136,137,138,143,146,148,149,197]
+    # delete_multiple_jsonl_lines("../Dataset/java/test/main_java_test.jsonl", low)
+    low = low_score("../Result/trainset_validation/2000_java_valid.csv", 1, True)
+    print(len(low))
+    delete_multiple_jsonl_lines("../Dataset/java/train/2000_java_train.jsonl", low)
+    # 31, 32, 34, 35, 36, 38, 39, 40, 41, 45
+    # 2,3,4,7,8,10,11,12
+    # testfile = "../Dataset/python/test/222_python_test.jsonl"
+    # with open(testfile, "r", encoding="utf-8") as f:
+    #     print("opening file ", testfile)
+    #     cnt = 0
+    #     for line in f:
+    #         cnt += 1
+    #         if cnt < 0: continue
+    #         print(f"=============={cnt}================")
+    #         line = line.strip()
+    #         js = json.loads(line)
+    #         comment = ' '.join(js['docstring_tokens'])
+    #         print(comment)
+    #         if cnt >= 15: break
+

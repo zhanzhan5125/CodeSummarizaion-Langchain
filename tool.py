@@ -1,7 +1,7 @@
 from langchain_core.tools import StructuredTool
 from rag import CodeRetriever
 from validation import llm_score
-from simplification import simplify
+from extract_context import get_file_content
 
 
 class CodeTools:
@@ -19,20 +19,21 @@ class CodeTools:
                 description="Evaluate the quality of generated comment"
             ),
             StructuredTool.from_function(
-                name="simplify_code",
-                func=self.simplify_code,
-                description="Simplify the comment"
-            ),
+                name="extract_context",
+                func=self.extract_context,
+                description="Extract the context from source file"
+            )
         ]
     def retrieve_samples(self, data: dict, method: str):
         """Retrieve similar code-comment pairs from database"""
         return self.retriever.query_samples(data, method)
 
-    def valid_comment(self, code: str, comment: str, prompt_file: str):
+    def valid_comment(self, code: str, comment: str, model_v: str, prompt_file: str, s_min:int, s_max:int):
         """Evaluate the quality of generated comment"""
-        return llm_score(code, comment, prompt_file)
+        return llm_score(code, comment, model_v, prompt_file, s_min, s_max)
 
-    def simplify_code(self, comment:str):
-        """Simplify the comment"""
-        return simplify(comment)
+    def extract_context(self, lang:str, repo: str, path: str, sha: str = None):
+        """Extract the context from source file"""
+        return get_file_content(lang, repo, path, sha)
+
 

@@ -605,29 +605,3 @@ FINAL {'Comprehensiveness': '4', 'Thought process': "Comment summarizes code wel
 ------------------[200]--------------------
 TOP_LOGPROBS [{'token': '2', 'bytes': [50], 'logprob': -0.83184546}, {'token': '3', 'bytes': [51], 'logprob': -0.9318134}, {'token': '4', 'bytes': [52], 'logprob': -2.0926507}, {'token': '1', 'bytes': [49], 'logprob': -3.1265118}, {'token': '5', 'bytes': [53], 'logprob': -5.607383}]
 FINAL {'Comprehensiveness': '2', 'Thought process': "Comment mentions 'descriptor' and 'getter', but not clear about 'class wide' or returning self. Lacks clarity and precision.", 'weighted': 2.6076699832385213}[Validation] ---- [188_python_test.jsonl]
-------------------[91]--------------------
-[Validation] ---- [188_python_test.jsonl]
-------------------[91]--------------------
-[Validation] ---- [188_python_test.jsonl]
-------------------[91]--------------------
-[Validation] ---- [188_python_test.jsonl]
-------------------[91]--------------------
-[Validation] ---- [188_python_test.jsonl]
-------------------[91]--------------------
-[Validation] ---- [188_python_test.jsonl]
-------------------[91]--------------------
-[Validation] ---- [188_python_test.jsonl]
-------------------[91]--------------------
-[Validation] ---- [188_python_test.jsonl]
-------------------[91]--------------------
-[Validation] ---- [188_python_test.jsonl]
-------------------[91]--------------------
-[Validation] ---- [188_python_test.jsonl]
-------------------[91]--------------------
-[Validation] ---- [188_python_test.jsonl]
-------------------[91]--------------------
-------------------[92]--------------------
-[Validation] ---- [188_python_test.jsonl]
-------------------[91]--------------------
-[Validation] ---- [188_python_test.jsonl]
-------------------[91]--------------------

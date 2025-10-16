@@ -4277,3 +4277,26 @@ def plot_rb_data(xdata, ydatas, yavg, yerr, fit, survival_prob, ax=None,
 *** Final Comment ***: Plots randomized benchmarking data and error bars.
 
 
+===============================[ 3 ]===============================
+def CovInv(self):
+        self.recurse(full_matrix=True)
+        return self.tree.root.cinv
+*** Original Comment ***: Calculates the inverse covariance matrix by first recursively computing a full matrix and then accessing the 'cinv' attribute from the root of the tree.
+*** Validation Score ***: 4
+*** Validation Suggestion ***: Be more concise by removing 'by first' and 'then' to streamline the description: 'Calculates the inverse covariance matrix by recursively computing a full matrix and accessing the 'cinv' attribute from the tree root.'
+----------------Refine 1----------------
+*** Refine comment ***: Calculates the inverse covariance matrix by recursively computing a full matrix and accessing the 'cinv' attribute from the tree root.
+*** Validation Score ***: 4
+*** Validation Suggestion ***: Be more concise by removing 'by recursively computing a full matrix and'.
+----------------Refine 2----------------
+*** Refine comment ***: Calculates the inverse covariance matrix and accesses the 'cinv' attribute from the tree root.
+*** Validation Score ***: 4
+*** Validation Suggestion ***: Be more concise by removing 'and accesses the 'cinv' attribute from the tree root' as it is implied by the return statement.
+----------------Refine 3----------------
+*** Refine comment ***: Calculates the inverse covariance matrix.
+*** Validation Score ***: 5
+*** Validation Suggestion ***: No suggestion needed.
+*** Final Score ***: 5
+*** Final Comment ***: Calculates the inverse covariance matrix.
+
+
