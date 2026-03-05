@@ -14,7 +14,7 @@ from nltk.translate.meteor_score import meteor_score
 from rouge_score import rouge_scorer
 from metric.codenn_bleu import codenn_smooth_bleu
 from bert_score import score as bert_score
-from validation import llm_score
+from validator import llm_score
 from SIDE import side_score
 from util.remove_comments import remove_comments_and_docstrings
 

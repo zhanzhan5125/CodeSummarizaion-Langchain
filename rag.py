@@ -36,10 +36,10 @@ def add_data(data_file, lang, ignore):
     vector_db = create_db_langchain(lang)
     documents = []
 
-    # language = ['java', 'python']
-    language = ['java']
+    language = ['java', 'python']
+    # language = ['java']
 
-    for lang in language:
+    if lang in language:
         data_dir = f"./Dataset/{lang}/train"
         data_file_path = os.path.join(data_dir, data_file)
         with open(data_file_path, "r", encoding="utf-8") as f:
@@ -48,7 +48,7 @@ def add_data(data_file, lang, ignore):
                 if idx in ignore: continue
                 js = json.loads(line.strip())
                 code = remove_comments_and_docstrings(source=js['code'], lang=lang)
-                comment = ' '.join(js['docstring_tokens'])
+                comment = ' '.join(js['cleaned_docstring_tokens'])
                 data = {'code': code, 'comment': comment, 'repo': js['repo'], 'path': js['path'],
                         'func': js['func_name']}
                 # 构建 LangChain Document 对象
@@ -60,8 +60,14 @@ def add_data(data_file, lang, ignore):
                 )
                 documents.append(doc)
 
-    print("Starting embedding")
-    vector_db.add_documents(documents=documents)
+    print(f"Starting embedding for {len(documents)} documents...")
+
+    batch_size = 10000
+    for i in range(0, len(documents), batch_size):
+        batch_docs = documents[i: i + batch_size]
+        print(f"Adding batch {i // batch_size + 1} (From {i} to {i + len(batch_docs)})...")
+        vector_db.add_documents(documents=batch_docs)
+
     print("Finished embedding")
 
 
@@ -152,24 +158,11 @@ class CodeRetriever:
 
 
 if __name__ == "__main__":
-    # create_db_langchain('java')
-    # low = low_score("./Result/trainset_validation/10000_java_valid.csv", 1)
-    # print(len(low))
-    # add_data("2000_java_train.jsonl", 'java', [])
-    # testfile = "./Dataset/python/train/10000_python_train.jsonl"
-    # with open(testfile, "r", encoding="utf-8") as f:
-    #     print("opening file ", testfile)
-    #     cnt = 0
-    #     for line in f:
-    #         cnt += 1
-    #         if cnt < 0: continue
-    #         line = line.strip()
-    #         js = json.loads(line)
-    #         code = remove_comments_and_docstrings(source=js['code'], lang='python')
-    #         if cnt in low:
-    #             low_code.append(code)
-    #     print(len(low_code))
-    # delete_by_content_and_metadata(low_code, 'python')
-    print(chroma_size('java'))
-    # add_data('1000_python_train.jsonl', 'python',ignore=[])
+    # add_data('python_train.jsonl', 'python', ignore=[])
+    # # 如果你要增加新的 java_train.jsonl
+    add_data('java_train.jsonl', 'java', ignore=[])
+
+    # 打印检查当前数据库大小
+    chroma_size('python')
+    chroma_size('java')
 

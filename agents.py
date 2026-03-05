@@ -4,8 +4,10 @@ import logging
 import os
 import warnings
 from langchain.agents.agent import BaseSingleActionAgent
-from model import CommentGenerator
+from generator import CommentGenerator
 from tool import CodeTools
+from validator import llm_score
+from prompts.llms import VALIDATE_PROMPT
 import pandas as pd
 
 
@@ -52,12 +54,12 @@ class CommentAgent(BaseSingleActionAgent):
                 'Origin': original}
 
         print('[Validating...]')
-        score_data = tools[1].run({"code": code,
-                                   "comment": comment,
-                                   "model_v": model_v,
-                                   "prompt_file": "./vaild_prompt/Conciseness.txt",
-                                   "s_max": s_max,
-                                   "s_min": s_min})
+        score_data = llm_score( code = code,
+                                comment = comment,
+                                model = model_v,
+                                prompt_file = VALIDATE_PROMPT,
+                                s_max = s_max,
+                                s_min = s_min)
         # score_data = json.loads(generator.validate(code, comment))
         # result['Score'] = score_data['Conciseness']
         result['Conciseness'] = score_data['Conciseness']
@@ -84,12 +86,12 @@ class CommentAgent(BaseSingleActionAgent):
             comment = rf_result['Comment']
             logger.info(f"*** Refine comment ***: {comment}")
 
-            score_data = tools[1].run({"code": code,
-                                       "comment": comment,
-                                       "model_v": model_v,
-                                       "prompt_file": "./vaild_prompt/Conciseness.txt",
-                                       "s_max": s_max,
-                                       "s_min": s_min})
+            score_data = llm_score(code=code,
+                                   comment=comment,
+                                   model=model_v,
+                                   prompt_file=VALIDATE_PROMPT,
+                                   s_max=s_max,
+                                   s_min=s_min)
 
             logger.info(f"*** Conciseness Score ***: {score_data['Conciseness']}")
             # logger.info(f"*** Weighted Score ***: {score_data['Weighted']}")

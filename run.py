@@ -5,7 +5,7 @@ import logging
 import os
 import time
 import warnings
-from agent import AgentRunner
+from agents import AgentRunner
 from util.remove_comments import remove_comments_and_docstrings
 
 
